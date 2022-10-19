@@ -2,5 +2,6 @@
 int main()
 {
 std::cout<<"Siema";
+    return 0;
 }
 
