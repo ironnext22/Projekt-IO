@@ -1,7 +1,7 @@
 #include <iostream>
 int main()
 {
-std::cout<<"Siema";
+std::cout<<"Siema mati lubi natalke";
     return 0;
 }
 
