@@ -1,2 +1,2 @@
-# Projekt-Gabiet-Dentystyczny
+# Projekt-Gabinet-Dentystyczny
 # siema czy cos
