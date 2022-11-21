@@ -1,31 +1,54 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
+#include "MENU.h"
 using namespace sf;
 int main()
 {
-    sf::Font font;
-    font.loadFromFile("arial.ttf");
-    sf::Text text;
-    text.setFont(font);
-    text.setString("Siema mati lubi natalke");   ////XDDDDDDDDDDDDD
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::Black);
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-    text.setPosition(250,270);
-    sf::RenderWindow oknoAplikacji( sf::VideoMode( 800, 600, 32 ), "Kurs SFML - http://cpp0x.pl" );
-    oknoAplikacji.setVerticalSyncEnabled(true);
-    while( oknoAplikacji.isOpen())
-    {
-        oknoAplikacji.clear(sf::Color(sf::Color::White));
-        oknoAplikacji.draw(text);
-        oknoAplikacji.display();
-        sf::Event event;
-        while (oknoAplikacji.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
-                oknoAplikacji.close();
+    sf::RenderWindow window_menu( sf::VideoMode( 800, 600, 32 ), "NIE DLACZEGO" );
+    MENU menu(window_menu.getSize().x, window_menu.getSize().y);
+    window_menu.setFramerateLimit(60);
+
+    View view(FloatRect (0.0f, 0.0f, 800, 600)); //view_size.x view_size.y
+
+    while( window_menu.isOpen()) {
+        Event ev{};
+
+        while (window_menu.pollEvent(ev)) {
+            switch (ev.type) {
+                case Event::KeyReleased:
+                    switch (ev.key.code) {
+                        case Keyboard::Up:
+                            menu.MoveUp();
+                            break;
+
+                        case Keyboard::W:
+                            menu.MoveUp();
+                            break;
+
+                        case Keyboard::Down:
+                            menu.MoveDown();
+                            break;
+
+                        case Keyboard::S:
+                            menu.MoveDown();
+                            break;
+                        case Keyboard::Return:
+                            window_menu.close();
+                            break;
+                    }
+                    break;
+                case Event::Closed:
+                    window_menu.close();
+                    return 0;
+
+                case Event::Resized:
+                   // resize_view(window_menu, view);
+                    break;
+            }
         }
+        window_menu.clear();
+        menu.draw(window_menu);
+        window_menu.display();
+
     }
     return 0;
 }
