@@ -7,7 +7,7 @@ int main()
     font.loadFromFile("arial.ttf");
     sf::Text text;
     text.setFont(font);
-    text.setString("Siema mati lubi natalke");
+    text.setString("Siema mati lubi natalke");   ////XDDDDDDDDDDDDD
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::Black);
     text.setStyle(sf::Text::Bold | sf::Text::Underlined);
