@@ -4,6 +4,8 @@ project(Projekt-IO)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Projekt-IO main.cpp)
+
+
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR ./SFML-2.5.1/lib/cmake/SFML)
 find_package(SFML COMPONENTS system window graphics audio network REQUIRED)
