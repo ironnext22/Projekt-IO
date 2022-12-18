@@ -8,7 +8,7 @@ int main()
     window_menu.setFramerateLimit(60);
 
     View view(FloatRect (0.0f, 0.0f, 800, 600)); //view_size.x view_size.y
-
+//
     while( window_menu.isOpen()) {
         Event ev{};
 
