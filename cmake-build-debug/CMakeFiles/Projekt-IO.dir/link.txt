@@ -1,0 +1,3 @@
+"D:\Programy\CLion\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Projekt-IO.dir/objects.a
+C:\MINGW-~1\mingw64\bin\ar.exe cr CMakeFiles\Projekt-IO.dir/objects.a @CMakeFiles\Projekt-IO.dir\objects1.rsp
+C:\MINGW-~1\mingw64\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\Projekt-IO.dir/objects.a -Wl,--no-whole-archive -o Projekt-IO.exe -Wl,--out-implib,libProjekt-IO.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Projekt-IO.dir\linklibs.rsp
