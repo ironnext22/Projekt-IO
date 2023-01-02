@@ -1,29 +1,48 @@
-//
 // Created by Mateusz on 21.11.2022.
-//
+/*
+ * Class acts like an engine.
+ */
 
+#pragma once
 #ifndef PROJEKT_IO_MENU_H
 #define PROJEKT_IO_MENU_H
 #include "SFML/Graphics.hpp"
-
-
-#pragma once
 #include <SFML/Graphics.hpp>
-#define MAX_NUMBER_OF_ITEM 3
+#include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/System.hpp>
+#include "Button.h"
 
+using namespace sf;
 class MENU {
 public:
-    MENU(float width, float height);
-    ~MENU();
 
-    void draw(sf::RenderWindow &window);
-    void MoveUp();
-    void MoveDown();
-    int GetPressedItem(){return selectedItemIndex;}
 private:
-    int selectedItemIndex;
-    sf::Font font;
-    sf::Text Menu[MAX_NUMBER_OF_ITEM];
+    void initialize_variables();
+    void initialize_window();
+    RenderWindow* window;
+    Event ev;
+    VideoMode video_mode;
+
+    sf::Vector2i MousePosWindow;
+
+public:
+
+    /// Contructor / destructor
+    MENU();
+    virtual ~MENU();
+    /// accessors
+    const bool get_window_is_open() const;
+
+    ///functions
+    void update_mouse_position();
+    void poll_events();
+    void update();
+    void render();
+    void updateMousePos();
+
+
+
 };
 
-#endif //PROJEKT_IO_MENU_H
+#endif
