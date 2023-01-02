@@ -13,6 +13,7 @@
 #include <SFML/System.hpp>
 #include "Button.h"
 
+
 using namespace sf;
 class MENU {
 public:
@@ -20,11 +21,17 @@ public:
 private:
     void initialize_variables();
     void initialize_window();
+    void initialize_texts();
     RenderWindow* window;
     Event ev;
     VideoMode video_mode;
-
     sf::Vector2i MousePosWindow;
+    sf::Font font1;
+    /// window objects test
+    sf::Text text1;
+    sf::RectangleShape test;
+
+
 
 public:
 
@@ -39,7 +46,8 @@ public:
     void poll_events();
     void update();
     void render();
-    void updateMousePos();
+    void update_texts();
+    void render_texts();
 
 
 
