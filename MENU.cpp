@@ -13,7 +13,7 @@ MENU::MENU(float width, float height)
 
     Menu[0].setFont(font);
     Menu[0].setFillColor(sf::Color::Red);
-    Menu[0].setString("siema");
+    Menu[0].setString("siema_PROBA CZY DZIALA");
     Menu[0].setPosition(sf::Vector2f(width/2,height/(MAX_NUMBER_OF_ITEM+1)*1));
 
     Menu[1].setFont(font);
