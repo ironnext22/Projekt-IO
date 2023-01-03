@@ -13,6 +13,8 @@ void Textline::Textline_set(float x, float y, std::string text, int Charakter_si
     this->text_to_be_displayed.setCharacterSize(Charakter_size);
     this->text_to_be_displayed.setPosition(x,y);
     this->text_to_be_displayed.setScale(sf::Vector2f(0.5f ,0.5f));
+    this->text_to_be_displayed.setOutlineColor(sf::Color::Black);
+    this->text_to_be_displayed.setOutlineThickness(10);
 
 
 }
