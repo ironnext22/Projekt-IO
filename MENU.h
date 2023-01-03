@@ -2,7 +2,7 @@
 /*
  * Class acts like an engine.
  */
-
+#define Background_color color(240,246,235,255)
 #pragma once
 #ifndef PROJEKT_IO_MENU_H
 #define PROJEKT_IO_MENU_H
