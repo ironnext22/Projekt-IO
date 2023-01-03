@@ -8,6 +8,7 @@ MENU::MENU() {  /// initializes on the start
     this->initialize_variables();
     this->initialize_window();
     this->initialize_texts();
+    this->initialize_buttons();
     font1.loadFromFile("../arial.ttf");
 }
 MENU::~MENU() {
@@ -17,7 +18,7 @@ MENU::~MENU() {
 
 /// public functions
 void MENU::update_mouse_position() { /// updates mouse position to vector2i
-    this->MousePosWindow = sf::Mouse::getPosition();
+    this->MousePosWindow = sf::Mouse::getPosition(*this->window);
 }
 void MENU::poll_events() { // checks if something was done eg. key pressed
 
@@ -70,6 +71,9 @@ const bool MENU::get_window_is_open() const
 void MENU::initialize_variables() {
     this->window = nullptr;
 }
+void MENU::initialize_buttons(){
+    b1.button_set(250,100,100,300,&font1,"button 1",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+}
 /// initialize texts, to do: class to automatically creates text to display
 void MENU::initialize_texts(){
     text1.Textline_set(100,100,"LOL",50,&font1,sf::Color::Cyan);
@@ -80,7 +84,7 @@ void MENU::initialize_texts(){
 /// initializes the window
 void MENU::initialize_window() {
     this->video_mode.height = 800;
-    this->video_mode.width = 600;
+    this->video_mode.width = 1400;
 
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
     this->window = new RenderWindow(this->video_mode,"Proba nr 1.",Style::Titlebar | Style::Close);
@@ -112,7 +116,7 @@ b1.render(this->window);
 
 void MENU::update_button()
 {
-    b1.button_set(250,100,100,300,&font1,"button 1",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+
     b1.update(get_mous_pos());
 }
 

@@ -51,6 +51,7 @@ public:
     void render_texts();
     void render_button();
     void update_button();
+    void initialize_buttons();
     sf::Vector2f get_mous_pos();
 };
 
