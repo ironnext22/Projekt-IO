@@ -12,6 +12,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
 #include "Button.h"
+#include "Textline.h"
 
 
 using namespace sf;
@@ -28,7 +29,7 @@ private:
     sf::Vector2i MousePosWindow;
     sf::Font font1;
     /// window objects test
-    sf::Text text1;
+    Textline text1;
     sf::RectangleShape test;
     Button b1;
 

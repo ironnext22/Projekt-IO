@@ -4,10 +4,11 @@
 #include "MENU.h"
 
 /// cosntr / destr
-MENU::MENU() {
+MENU::MENU() {  /// initializes on the start
     this->initialize_variables();
     this->initialize_window();
     this->initialize_texts();
+    font1.loadFromFile("../arial.ttf");
 }
 MENU::~MENU() {
     delete this->window;
@@ -15,7 +16,7 @@ MENU::~MENU() {
 }
 
 /// public functions
-void MENU::update_mouse_position() {
+void MENU::update_mouse_position() { /// updates mouse position to vector2i
     this->MousePosWindow = sf::Mouse::getPosition();
 }
 void MENU::poll_events() { // checks if something was done eg. key pressed
@@ -71,25 +72,11 @@ void MENU::initialize_variables() {
 }
 /// initialize texts, to do: class to automatically creates text to display
 void MENU::initialize_texts(){
-    this->text1.setString("X5555555555555555555555555555D");
-    this->text1.setFillColor(sf::Color::Cyan);
-    this->text1.setCharacterSize(50);
-    this->text1.setPosition(100.f,100.f);
-    this->text1.setScale(sf::Vector2f(0.5f ,0.5f));
-
-    font1.loadFromFile("../arial.ttf");
-    this->text1.setFont(font1);
-
-    this->test.setPosition(10.f,10.f);
-    this->test.setSize(sf::Vector2f(100.f,100.f));
-    this->test.setScale(sf::Vector2f(0.5f ,0.5f));
-    this->test.setFillColor(sf::Color::Cyan);
-
-
-
+    text1.Textline_set(100,100,"LOL",50,&font1,sf::Color::Cyan);
 
 
 }
+
 /// initializes the window
 void MENU::initialize_window() {
     this->video_mode.height = 800;
@@ -104,22 +91,32 @@ void MENU::initialize_window() {
 
 /// text based things
 void MENU::update_texts() {
-    this->text1.setString(std::to_string(MousePosWindow.y));
+
+    text1.Textline_set(100,100,std::to_string(MousePosWindow.y),50,&font1,sf::Color::Cyan);
+
+
 
 }
 void MENU::render_texts(){
-    this->window->draw(text1);
-    this->window->draw(test);
+
+    text1.render(this->window);
+
 }
+
+
 void MENU::render_button()
 {
 b1.render(this->window);
 }
+
+
 void MENU::update_button()
 {
     b1.button_set(250,100,100,300,&font1,"button 1",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
     b1.update(get_mous_pos());
 }
+
+
 sf::Vector2f MENU::get_mous_pos()
 {
     return sf::Vector2f(static_cast<float>(this->MousePosWindow.x), static_cast<float>(this->MousePosWindow.y));
