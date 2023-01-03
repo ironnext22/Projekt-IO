@@ -43,6 +43,7 @@ void MENU::render() { // renders things
     this->window->clear(Color::Red);
     this->render_texts();
     this->window->display();
+    render_button();
 }
 
 void MENU::update() { // checks for changes
@@ -109,6 +110,9 @@ void MENU::update_texts() {
 void MENU::render_texts(){
     this->window->draw(text1);
     this->window->draw(test);
-
 }
-
+void MENU::render_button()
+{
+b1.button_set(500,0,100,300,&font1,"button 1",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+b1.render(this->window);
+}

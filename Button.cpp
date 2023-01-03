@@ -4,7 +4,7 @@
 
 #include "Button.h"
 /// constr / destr
-Button::Button(float x, float y, float height, float width, sf::Font* font,std::string text,
+void Button::button_set(float x, float y, float height, float width, sf::Font* font,std::string text,
                sf::Color idle_color,sf::Color hover_color,sf::Color active_color){
     this->button_state = BUTTON_IDLE;
     this->shape.setPosition(sf::Vector2f(x,y));

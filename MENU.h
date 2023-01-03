@@ -30,7 +30,7 @@ private:
     /// window objects test
     sf::Text text1;
     sf::RectangleShape test;
-
+    Button b1;
 
 
 public:
@@ -48,7 +48,7 @@ public:
     void render();
     void update_texts();
     void render_texts();
-
+    void render_button();
 
 
 };
