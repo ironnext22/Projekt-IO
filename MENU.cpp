@@ -18,11 +18,13 @@ MENU::~MENU() {
 
 /// initializes the window
 void MENU::initialize_window() {
+
     this->video_mode.height = 800;
     this->video_mode.width = 1400;
+    background_photo.loadFromFile("../stuff/background.png");
 
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
-    this->window = new RenderWindow(this->video_mode,"Proba nr 1.",Style::Titlebar | Style::Close);
+    this->window = new RenderWindow(this->video_mode,"Aplication for professional people with degree",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
 }
 
@@ -53,6 +55,7 @@ void MENU::poll_events() { /// checks if something was done eg. key pressed
 
 void MENU::render() { // renders things
     this->window->clear(Color::White);
+    this->window->draw(sf::Sprite(background_photo));
     this->render_texts();
     this->render_button();
     this->window->display();

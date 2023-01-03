@@ -32,6 +32,8 @@ private:
     Textline text1;
     sf::RectangleShape test;
     Button b1;
+    sf::Texture background_photo;
+
 
 
 public:

@@ -5,9 +5,12 @@
 #include "Button.h"
 /// constr / destr
 void Button::button_set(float x, float y, float height, float width, sf::Font* font,std::string text,sf::Color idle_color,sf::Color hover_color,sf::Color active_color){
+    button_photo.loadFromFile("../stuff/button.png");
+
     this->button_state = BUTTON_IDLE;
     this->shape.setPosition(sf::Vector2f(x,y));
     this->shape.setSize(sf::Vector2f(width,height));
+    this->shape.setTexture(&button_photo);
     this->font = font;
     this->text.setFont(*this->font);
     this->text.setString(text);

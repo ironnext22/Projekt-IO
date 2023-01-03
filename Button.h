@@ -28,6 +28,7 @@ private:
     sf::Color hover_color;
     sf::Color active_color;
 
+    sf::Texture button_photo;
 public:
     /// contr / destr
     void button_set(float x, float y, float height, float width, sf::Font* font,std::string text,
