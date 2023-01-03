@@ -40,17 +40,17 @@ void MENU::poll_events() { // checks if something was done eg. key pressed
 
 
 void MENU::render() { // renders things
-    this->window->clear(Color::Red);
+    this->window->clear(Color::White);
     this->render_texts();
+    this->render_button();
     this->window->display();
-    render_button();
 }
 
 void MENU::update() { // checks for changes
     this->poll_events();
     this->update_mouse_position();
     this->update_texts();
-
+    this->update_button();
 }
 
 
@@ -113,6 +113,15 @@ void MENU::render_texts(){
 }
 void MENU::render_button()
 {
-b1.button_set(500,0,100,300,&font1,"button 1",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
 b1.render(this->window);
+}
+void MENU::update_button()
+{
+    b1.button_set(250,100,100,300,&font1,"button 1",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+    b1.update(get_mous_pos());
+}
+sf::Vector2f MENU::get_mous_pos()
+{
+    return sf::Vector2f(static_cast<float>(this->MousePosWindow.x), static_cast<float>(this->MousePosWindow.y));
+
 }

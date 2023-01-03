@@ -4,20 +4,19 @@
 
 #include "Button.h"
 /// constr / destr
-void Button::button_set(float x, float y, float height, float width, sf::Font* font,std::string text,
-               sf::Color idle_color,sf::Color hover_color,sf::Color active_color){
+void Button::button_set(float x, float y, float height, float width, sf::Font* font,std::string text,sf::Color idle_color,sf::Color hover_color,sf::Color active_color){
     this->button_state = BUTTON_IDLE;
     this->shape.setPosition(sf::Vector2f(x,y));
     this->shape.setSize(sf::Vector2f(width,height));
     this->font = font;
     this->text.setFont(*this->font);
     this->text.setString(text);
-    this->text.setFillColor(sf::Color::White);
-    this->text.setCharacterSize(12);
+    this->text.setFillColor(sf::Color::Black);
+    this->text.setCharacterSize(40);
 
     this->text.setPosition( // sets the position of TEXT into the button
-            this->shape.getPosition().x/2.f - this->text.getGlobalBounds().width/2.f,
-            this->shape.getPosition().y/2.f - this->text.getGlobalBounds().height/2.f
+            this->shape.getPosition().x + this->shape.getSize().x/1.8- this->text.getCharacterSize()*text.length()/4,
+            this->shape.getPosition().y + (this->shape.getSize().y/1.5) - this->text.getCharacterSize()
     );
 
     this->idle_color = idle_color;
@@ -43,7 +42,7 @@ const bool Button::is_pressed() const{
 
 void Button::render(sf::RenderTarget *target) {
     target->draw(this->shape);
-
+    target->draw(this->text);
 }
 
 void Button::update(const sf::Vector2f mousePos){
