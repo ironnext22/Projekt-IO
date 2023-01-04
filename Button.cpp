@@ -18,7 +18,7 @@ void Button::button_set(float x, float y, float height, float width, sf::Font* f
     this->text.setCharacterSize(40);
 
     this->text.setPosition( // sets the position of TEXT into the button
-            this->shape.getPosition().x + this->shape.getSize().x/1.8- this->text.getCharacterSize()*text.length()/4,
+            this->shape.getPosition().x + this->shape.getSize().x/1.8- this->text.getCharacterSize()*text.length()/2.8,
             this->shape.getPosition().y + (this->shape.getSize().y/1.5) - this->text.getCharacterSize()
     );
 

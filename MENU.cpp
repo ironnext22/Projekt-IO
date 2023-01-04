@@ -10,6 +10,8 @@ MENU::MENU() {  /// initializes on the start
     this->initialize_texts();
     this->initialize_buttons();
     font1.loadFromFile("../arial.ttf");
+    background_photo.loadFromFile("../stuff/background.png");
+    sprite.setTexture(background_photo);
 }
 MENU::~MENU() {
     delete this->window;
@@ -18,13 +20,11 @@ MENU::~MENU() {
 
 /// initializes the window
 void MENU::initialize_window() {
-
     this->video_mode.height = 800;
     this->video_mode.width = 1400;
-    background_photo.loadFromFile("../stuff/background.png");
 
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
-    this->window = new RenderWindow(this->video_mode,"Aplication for professional people with degree",Style::Titlebar | Style::Close);
+    this->window = new RenderWindow(this->video_mode,"Proba nr 1.",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
 }
 
@@ -55,7 +55,7 @@ void MENU::poll_events() { /// checks if something was done eg. key pressed
 
 void MENU::render() { // renders things
     this->window->clear(Color::White);
-    this->window->draw(sf::Sprite(background_photo));
+    this->window->draw(sprite);
     this->render_texts();
     this->render_button();
     this->window->display();
@@ -85,7 +85,10 @@ void MENU::initialize_variables() {
     this->window = nullptr;
 }
 void MENU::initialize_buttons(){
-    b1.button_set(250,100,100,300,&font1,"button 1",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+    b1.button_set(550,600,100,300,&font1,"EXIT",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+    b2.button_set(550,500,100,300,&font1,"Archiwum",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+    b3.button_set(550,400,100,300,&font1,"Magazyn",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+    b4.button_set(550,300,100,300,&font1,"Wizyty",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
 }
 void MENU::initialize_texts(){
     text1.Textline_set(100,100,"LOL",50,&font1,sf::Color::Cyan);
@@ -110,11 +113,18 @@ void MENU::update_button()
 {
 
     b1.update(get_mous_pos());
+    if(b1.is_pressed())this->window->close();
+    b2.update(get_mous_pos());
+    b3.update(get_mous_pos());
+    b4.update(get_mous_pos());
 }
 
 void MENU::render_button()
 {
 b1.render(this->window);
+b2.render(this->window);
+b3.render(this->window);
+b4.render(this->window);
 }
 
 

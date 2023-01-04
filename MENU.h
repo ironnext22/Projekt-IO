@@ -31,8 +31,9 @@ private:
     /// window objects test
     Textline text1;
     sf::RectangleShape test;
-    Button b1;
+    Button b1,b2,b3,b4;
     sf::Texture background_photo;
+    sf::Sprite sprite;
 
 
 
