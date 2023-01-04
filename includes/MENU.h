@@ -13,7 +13,7 @@
 #include <SFML/System.hpp>
 #include "Button.h"
 #include "Textline.h"
-
+#include "Input_bar.h"
 
 using namespace sf;
 class MENU {
@@ -23,6 +23,7 @@ private:
     void initialize_variables();
     void initialize_window();
     void initialize_texts();
+    void initialize_input_bar();
     RenderWindow* window;
     Event ev;
     VideoMode video_mode;
@@ -34,7 +35,7 @@ private:
     Button b1,b2,b3,b4;
     sf::Texture background_photo;
     sf::Sprite sprite;
-
+    Input_bar input_bar1;
 
 
 public:
@@ -56,6 +57,9 @@ public:
     void update_button();
     void initialize_buttons();
     sf::Vector2f get_mous_pos();
+
+    void update_input_bar();
+    void render_input_bar();
 };
 
 #endif

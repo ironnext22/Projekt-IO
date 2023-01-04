@@ -9,6 +9,7 @@ MENU::MENU() {  /// initializes on the start
     this->initialize_window();
     this->initialize_texts();
     this->initialize_buttons();
+    this->initialize_input_bar();
     font1.loadFromFile("../arial.ttf");
     background_photo.loadFromFile("../stuff/background.png");
     sprite.setTexture(background_photo);
@@ -41,9 +42,15 @@ void MENU::poll_events() { /// checks if something was done eg. key pressed
             case Event::Closed:
                 this->window->close();
                 break;
-            case Event::KeyPressed:
+            case Event::TextEntered:
                 if(this->ev.key.code == Keyboard::Escape) {
                     this->window->close();
+                    break;
+                }
+                else if(input_bar1.get_is_selected())
+                {
+
+                    input_bar1.typed_on(ev);
                     break;
                 }
         }
@@ -58,7 +65,9 @@ void MENU::render() { // renders things
     this->window->draw(sprite);
     this->render_texts();
     this->render_button();
+    this->render_input_bar();
     this->window->display();
+
 }
 
 void MENU::update() { // checks for changes
@@ -66,6 +75,7 @@ void MENU::update() { // checks for changes
     this->update_mouse_position();
     this->update_texts();
     this->update_button();
+    this->update_input_bar();
 }
 
 
@@ -92,8 +102,10 @@ void MENU::initialize_buttons(){
 }
 void MENU::initialize_texts(){
     text1.Textline_set(100,100,"LOL",50,&font1,sf::Color::Cyan);
-
-
+}
+void MENU::initialize_input_bar() {
+    input_bar1.set_Input_bar(200,200,50,sf::Color::Magenta,true,&font1);
+    input_bar1.set_limit(true,10);
 }
 
 /// Texts
@@ -126,7 +138,17 @@ b2.render(this->window);
 b3.render(this->window);
 b4.render(this->window);
 }
+/// Input bar
 
+void MENU::render_input_bar() {
+    input_bar1.render(this->window);
+
+}
+
+void MENU::update_input_bar() {
+
+
+}
 
 
 /// Other staff
