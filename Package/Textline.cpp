@@ -2,7 +2,7 @@
 // Created by Mateusz on 03.01.2023.
 //
 
-#include "Textline.h"
+#include "../includes/Textline.h"
 
 
 void Textline::Textline_set(float x, float y, std::string text, int Charakter_size, sf::Font *font, sf::Color text_color) {

@@ -3,7 +3,7 @@ project(Projekt-IO)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Projekt-IO main.cpp MENU.cpp MENU.h Button.cpp Button.h Textline.cpp Textline.h)
+add_executable(Projekt-IO main.cpp Package/MENU.cpp includes/MENU.h Package/Button.cpp includes/Button.h Package/Textline.cpp includes/Textline.h)
 
 
 set(SFML_STATIC_LIBRARIES TRUE)

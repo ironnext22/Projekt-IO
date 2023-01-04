@@ -1,7 +1,7 @@
 //
 // Created by Mateusz on 21.11.2022.
 //
-#include "MENU.h"
+#include "../includes/MENU.h"
 
 /// cosntr / destr
 MENU::MENU() {  /// initializes on the start

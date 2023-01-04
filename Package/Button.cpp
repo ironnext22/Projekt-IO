@@ -2,7 +2,7 @@
 // Created by Mateusz on 02.01.2023.
 //
 
-#include "Button.h"
+#include "../includes/Button.h"
 /// constr / destr
 void Button::button_set(float x, float y, float height, float width, sf::Font* font,std::string text,sf::Color idle_color,sf::Color hover_color,sf::Color active_color){
     button_photo.loadFromFile("../stuff/button.png");

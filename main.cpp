@@ -1,6 +1,6 @@
 #include <iostream>
-#include "MENU.h"
-#include "Button.h"
+#include "includes/MENU.h"
+#include "includes/Button.h"
 using namespace sf;
 int main()
 {
