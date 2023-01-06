@@ -6,7 +6,7 @@
 #define PROJEKT_IO_LOGING_H
 #include <iostream>
 #include "../includes/Pracownicy.h"
-#endif //PROJEKT_IO_LOGING_H
+
 
 
 class Loging{
@@ -24,4 +24,4 @@ public:
 };
 
 
-
+#endif //PROJEKT_IO_LOGING_H

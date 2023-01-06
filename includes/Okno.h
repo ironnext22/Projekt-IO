@@ -5,7 +5,6 @@
 #define Background_color color(240,246,235,255)
 #pragma once
 #ifndef PROJEKT_IO_MENU_H
-#define PROJEKT_IO_MENU_H
 #include "SFML/Graphics.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -14,6 +13,8 @@
 #include "Button.h"
 #include "Textline.h"
 #include "Input_bar.h"
+#include "Loging.h"
+#define PROJEKT_IO_MENU_H
 enum class sites{
     start_site = 0,
     login_screen_site = 1,
@@ -28,6 +29,7 @@ enum class sites{
 
 
 };
+
 using namespace sf;
 class Okno {
 public:
@@ -39,8 +41,7 @@ private:
     void clear_site();
     sf::Vector2f get_mous_pos();
 
-
-
+    Loging logging_menu;
     RenderWindow* window;
     Event ev;
     VideoMode video_mode;
