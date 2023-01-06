@@ -3,8 +3,7 @@ project(Projekt-IO)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Projekt-IO main.cpp Package/MENU.cpp includes/MENU.h Package/Button.cpp includes/Button.h Package/Textline.cpp includes/Textline.h Package/Input_bar.cpp includes/Input_bar.h includes/Pracownik.h includes/Osoba.h includes/Pracownicy.h Package/Pracownicy.cpp)
-
+#add_executable(Projekt-IO main.cpp Package/MENU.cpp includes/MENU.h Package/Button.cpp includes/Button.h Package/Textline.cpp includes/Textline.h Package/Input_bar.cpp includes/Input_bar.h includes/Pracownik.h includes/Osoba.h includes/Pracownicy.h Package/Pracownicy.cpp)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR ./SFML-2.5.1/lib/cmake/SFML)
