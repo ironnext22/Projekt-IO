@@ -1,13 +1,14 @@
 #include <iostream>
 #include "includes/Okno.h"
 #include "includes/Pracownicy.h"
+#include "includes/Loging.h"
 using namespace sf;
-Pracownicy test;
+Loging login;
 int main()
 {
-    
     //test.dodaj_pracownika("Wiktor","Kowalski","X123Y","W123","Administrator","admin@exemp.pl");
-    test.disp();
+    //test.disp();
+    std::cout<<login.log_in("X123Y","W123");
     // initializiing the game
 
     Okno menu;

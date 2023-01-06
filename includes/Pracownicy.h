@@ -7,8 +7,8 @@
 using namespace OpenXLSX;
 class Pracownicy
 {
-std::vector<Pracownik> pracownicy;
 public:
+std::vector<Pracownik> pracownicy;
     Pracownicy();
     ~Pracownicy();
     void disp()
