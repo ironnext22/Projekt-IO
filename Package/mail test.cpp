@@ -110,3 +110,28 @@ catch (System::Exception& ex)
 {
 // catch exception
 }
+
+// Create SmtpClient as client and specify server, port, user name and password
+System::SharedPtr<SmtpClient> client = System::MakeObject<SmtpClient>(u"mail.server.com", 25, u"Username", u"Password");
+
+// Create instances of MailMessage class and Specify To, From, Subject and Message
+System::SharedPtr<MailMessage> message1 = System::MakeObject<MailMessage>(u"msg1@from.com", u"msg1@to.com", u"Subject1", u"message1, how are you?");
+System::SharedPtr<MailMessage> message2 = System::MakeObject<MailMessage>(u"msg1@from.com", u"msg2@to.com", u"Subject2", u"message2, how are you?");
+System::SharedPtr<MailMessage> message3 = System::MakeObject<MailMessage>(u"msg1@from.com", u"msg3@to.com", u"Subject3", u"message3, how are you?");
+
+// Create an instance of MailMessageCollection class
+System::SharedPtr<MailMessageCollection> manyMsg = System::MakeObject<MailMessageCollection>();
+manyMsg->Add(message1);
+manyMsg->Add(message2);
+manyMsg->Add(message3);
+
+// Bulk send
+try
+{
+// Send Messages
+client->Send(manyMsg);
+}
+catch (System::Exception& ex)
+{
+System::Diagnostics::Trace::WriteLine(System::ObjectExt::ToString(ex));
+}
