@@ -14,7 +14,17 @@
 #include "Button.h"
 #include "Textline.h"
 #include "Input_bar.h"
+enum class sites{
+    start_site = 0,
+    login_screen_site = 1,
+    credits_site = 2,
+    register_site = 3,
+    logged_in_site = 4,
+    calendar_site =5,
+    magazine_site=6,
+    password_reset_site =7
 
+};
 using namespace sf;
 class Okno {
 public:
@@ -22,6 +32,8 @@ public:
 private:
     void initialize_variables();
     void initialize_window();
+    void change_site(sites sites);
+
 
     RenderWindow* window;
     Event ev;
@@ -35,7 +47,7 @@ private:
     sf::Texture background_photo;
     sf::Sprite sprite;
     Input_bar input_bar1,input_bar2,input_bar3,input_bar4;
-    int site;
+    sites site;
     std::string login,password,password_confirm;
 
 public:
