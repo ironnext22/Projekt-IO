@@ -32,3 +32,7 @@ bool Loging::log_in(std::string login,std::string password)
 {
     return check_if_password_is_correct(login,password);
 }
+bool Loging::register_new_user(std::string imie,std::string nazwisko,std::string mail,std::string login, std::string haslo)
+{
+
+}

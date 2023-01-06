@@ -347,7 +347,7 @@ void Okno::render() { // renders things
             b1.button_set(600,700,100,700,&font1,"Send verification email");
             b1.update(get_mous_pos());
             if(b1.is_pressed()){
-            /// SEND EMAIL TO THIS EMAIL and display input_bar to write a verification key.
+                /// SEND EMAIL TO THIS EMAIL and display input_bar to write a verification key.
             }
             b1.render(this->window);
 
@@ -429,8 +429,3 @@ void Okno::clear_site(){
 
 
 }
-
-
-
-
-
