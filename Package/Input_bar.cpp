@@ -25,6 +25,25 @@ void Input_bar::set_Input_bar(float posX,float posY,int size, sf::Color color, b
 
 }
 
+void Input_bar::set_Input_bar(float posX,float posY,int size, sf::Color color,sf::Font *font){
+    sf_text_inputed.setCharacterSize(size);
+    sf_text_inputed.setFillColor(color);
+
+    this->font = font;
+    sf_text_inputed.setFont(*this->font);
+    sf_text_inputed.setPosition(static_cast<float>(posX),static_cast<float>(posY));
+
+
+    if(is_selected){
+        sf_text_inputed.setString("_");
+    }
+    else{
+        sf_text_inputed.setString("");
+    }
+
+
+}
+
 void Input_bar::input_logic(int char_typed) {
     if (char_typed != DELETE_KEY && char_typed != ESCAPE_KEY && char_typed != ENTER_KEY) {
         text << static_cast<char>(char_typed);
@@ -34,13 +53,16 @@ void Input_bar::input_logic(int char_typed) {
             delete_last_letter();
         }
     }
+    else if (char_typed == ENTER_KEY) {
+        set_selected(false);
+    }
     sf_text_inputed.setString(text.str() +"_");
 }
 
 void Input_bar::delete_last_letter(){
     std::string t = text.str();
     std::string new_string = "";
-    for(int i = 0; i <t.length()-1;i++){
+    for(int i = 0; i <t.length();i++){
         new_string+=t[i];
     }
     text.str("");

@@ -21,6 +21,7 @@ public:
     Input_bar();
 
     void set_Input_bar(float posX,float posY,int size, sf::Color color, bool selected,sf::Font *font);
+    void set_Input_bar(float posX,float posY,int size, sf::Color color,sf::Font *font);
     void set_limit(bool has_limit);
     void set_limit(bool has_limit, int limit);
     void set_selected(bool selected);
