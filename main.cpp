@@ -5,7 +5,7 @@ using namespace sf;
 Pracownicy test;
 int main()
 {
-    //test.dodaj_pracownika("Wiktor","Kowalski","X123Y","W123","Administrator");
+    //test.dodaj_pracownika("Wiktor","Kowalski","X123Y","W123","Administrator","admin@exemp.pl");
     test.disp();
     // initializiing the game
     int current = 0;

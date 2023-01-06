@@ -10,7 +10,7 @@ Pracownicy::Pracownicy() {
         {
             pomocniczy.push_back(static_cast<std::string>((cell.value())));
         }
-        Pracownik* pom = new Pracownik(pomocniczy[0],pomocniczy[1],pomocniczy[2],pomocniczy[3],pomocniczy[4]);
+        Pracownik* pom = new Pracownik(pomocniczy[0],pomocniczy[1],pomocniczy[2],pomocniczy[3],pomocniczy[4],pomocniczy[5]);
         pracownicy.push_back(*pom);
         pomocniczy.clear();
         delete pom;
@@ -21,15 +21,15 @@ Pracownicy::~Pracownicy()
 {
 
 }
-void Pracownicy::dodaj_pracownika(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja)
+void Pracownicy::dodaj_pracownika(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja,std::string mail)
 {
     XLDocument doc;
     doc.open("loginy.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
     int count = 0;
     count=wks.rowCount();
-    wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,login,haslo,funkcja};
-    Pracownik* pom = new Pracownik(imie,nazwisko,login,haslo,funkcja);
+    wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,login,haslo,funkcja,mail};
+    Pracownik* pom = new Pracownik(imie,nazwisko,login,haslo,funkcja,mail);
     pracownicy.push_back(*pom);
     delete pom;
     doc.save();

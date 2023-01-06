@@ -10,11 +10,12 @@ public:
     std::string haslo;
     Funkcje funkcja;
 public:
-    Pracownik(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja)
+    Pracownik(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja,std::string mail)
     {
         this->imie=imie;
         this->nazwisko=nazwisko;
         this->login=login;
+        this->mail=mail;
         this->haslo=haslo;
             if(funkcja=="Asystentka")this->funkcja=Funkcje::Asystentka;
             else if(funkcja=="Dentysta")this->funkcja=Funkcje::Dentysta;

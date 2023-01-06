@@ -7,5 +7,6 @@ protected:
 public:
     std::string imie;
     std::string nazwisko;
+    std::string mail;
 };
 #endif //PROJEKT_IO_OSOBA_H
