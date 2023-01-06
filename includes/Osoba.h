@@ -4,6 +4,7 @@
 class Osoba
 {
 protected:
+public:
     std::string imie;
     std::string nazwisko;
 };
