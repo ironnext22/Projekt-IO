@@ -6,7 +6,7 @@
 #ifndef PROJEKT_IO_INPUT_BAR_H
 #define PROJEKT_IO_INPUT_BAR_H
 
-#include "../SFML/Graphics.hpp"
+#include "SFML/Graphics.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>

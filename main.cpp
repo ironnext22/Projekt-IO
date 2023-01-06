@@ -1,7 +1,8 @@
 #include <iostream>
 #include "includes/MENU.h"
+#include "includes/Pracownicy.h"
 using namespace sf;
-
+Pracownicy test;
 int main()
 {
     // initializiing the game
