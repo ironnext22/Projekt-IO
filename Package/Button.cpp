@@ -1,10 +1,16 @@
 //
 // Created by Mateusz on 02.01.2023.
 //
+#define     idle_color       0xB8D8D8FF
+#define     hover_color      0x7A9E9FFF
+#define     active_color     0x4F6467FF
+#define     text_color       0xFFFFFFFF
+#define     out_line_color   0x000000FF
+
 
 #include "../includes/Button.h"
 /// constr / destr
-void Button::button_set(float x, float y, float height, float width, sf::Font* font,std::string text,sf::Color idle_color,sf::Color hover_color,sf::Color active_color){
+void Button::button_set(float x, float y, float height, float width, sf::Font* font,std::string text){
     button_photo.loadFromFile("../stuff/button.png");
 
     this->button_state = BUTTON_IDLE;
@@ -14,19 +20,19 @@ void Button::button_set(float x, float y, float height, float width, sf::Font* f
     this->font = font;
     this->text.setFont(*this->font);
     this->text.setString(text);
-    this->text.setFillColor(sf::Color::Black);
+    this->text.setFillColor(sf::Color{text_color});
+    this->text.setOutlineThickness(4);
+    this->text.setOutlineColor(sf::Color{out_line_color});
     this->text.setCharacterSize(40);
 
     this->text.setPosition( // sets the position of TEXT into the button
-            this->shape.getPosition().x + this->shape.getSize().x/1.8- this->text.getCharacterSize()*text.length()/2.8,
+            this->shape.getPosition().x + this->shape.getSize().x/1.8- this->text.getCharacterSize()*text.length()/3.0,
             this->shape.getPosition().y + (this->shape.getSize().y/1.5) - this->text.getCharacterSize()
     );
 
-    this->idle_color = idle_color;
-    this->hover_color = hover_color;
-    this->active_color = active_color;
 
-    this->shape.setFillColor(this->idle_color);
+
+    this->shape.setFillColor(sf::Color{idle_color});
 }
 Button::~Button(){
 
@@ -67,16 +73,16 @@ void Button::update(const sf::Vector2f mousePos){
     }
     switch(this->button_state){ // changes the colour of the button in case of the state of  mouse
         case BUTTON_IDLE:
-            this->shape.setFillColor(this->idle_color);
+            this->shape.setFillColor(sf::Color{idle_color});
             break;
         case BUTTON_ACTIVE:
-            this->shape.setFillColor(this->active_color);
+            this->shape.setFillColor(sf::Color{active_color});
             break;
         case BUTTON_HOVER:
-            this->shape.setFillColor(this->hover_color);
+            this->shape.setFillColor(sf::Color{hover_color});
             break;
         default:
-            this->shape.setFillColor(sf::Color::Red); // If somethings goes wrong it goes red
+            this->shape.setFillColor(sf::Color::Red);
             break;
     }
 

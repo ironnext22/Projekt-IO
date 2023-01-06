@@ -33,6 +33,9 @@ private:
     void initialize_variables();
     void initialize_window();
     void change_site(sites sites);
+    void clear_site();
+    sf::Vector2f get_mous_pos();
+
 
 
     RenderWindow* window;
@@ -65,9 +68,6 @@ public:
     void render();
 
 
-
-    void clear_site();
-    sf::Vector2f get_mous_pos();
 
 
 };

@@ -18,21 +18,7 @@ Okno::~Okno() {
     delete this->window;
 
 }
-void Okno::clear_site(){
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
-    b1.button_set(0,0,0,0,&font1,"",sf::Color::White,sf::Color::White,sf::Color::White);
-    b2.button_set(0,0,0,0,&font1,"",sf::Color::White,sf::Color::White,sf::Color::White);
-    b3.button_set(0,0,0,0,&font1,"",sf::Color::White,sf::Color::White,sf::Color::White);
-    b4.button_set(0,0,0,0,&font1,"",sf::Color::White,sf::Color::White,sf::Color::White);
-    b5.button_set(0,0,0,0,&font1,"",sf::Color::White,sf::Color::White,sf::Color::White);
-    text1.Textline_set(0,0,"",0,&font1,sf::Color::White);
-    text2.Textline_set(0,0,"",0,&font1,sf::Color::White);
-    text3.Textline_set(0,0,"",0,&font1,sf::Color::White);
-    text4.Textline_set(0,0,"",0,&font1,sf::Color::White);
-    text5.Textline_set(0,0,"",0,&font1,sf::Color::White);
-    input_bar1.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
-    input_bar2.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
-}
+
 
 void Okno::change_site(sites sites){
     clear_site();
@@ -89,7 +75,7 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
 }
 
 
-/// First: updates the values, then renders them.
+
 
 void Okno::render() { // renders things
     this->window->clear(Color::White);
@@ -97,21 +83,21 @@ void Okno::render() { // renders things
 
 
     switch(site) {
-        case sites::start_site: /// start
+        case sites::start_site:
         {
 
-            b1.button_set(600,600,100,300,&font1,"EXIT",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b1.button_set(600,600,100,300,&font1,"Exit");
             b1.update(get_mous_pos());
             if(b1.is_pressed()){this->window->close();}
             b1.render(this->window);
 
-            b1.button_set(600,400,100,300,&font1,"Log in",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b1.button_set(600,400,100,300,&font1,"Log in");
             b1.update(get_mous_pos());
             if(b1.is_pressed()){ change_site(sites::login_screen_site);}
             b1.render(this->window);
 
 
-            b1.button_set(600,500,100,300,&font1,"Credits",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b1.button_set(600,500,100,300,&font1,"Credits");
             b1.update(get_mous_pos());
             if(b1.is_pressed()){change_site(sites::credits_site);}
             b1.render(this->window);
@@ -126,7 +112,7 @@ void Okno::render() { // renders things
 
 
 
-            b1.button_set(600,400,100,700,&font1,"Login: " + input_bar1.get_text(),sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b1.button_set(600,400,100,700,&font1,"Login: " + input_bar1.get_text());
             b1.update(get_mous_pos());
             if(b1.is_pressed()){input_bar1.set_selected(true); input_bar2.set_selected(false); }
             b1.render(this->window);
@@ -135,28 +121,28 @@ void Okno::render() { // renders things
             for (int i =0; i<input_bar2.get_text().length();i++){
                 password+="*";
             }
-            b2.button_set(600,500,100,700,&font1,"Password: " + password,sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b2.button_set(600,500,100,700,&font1,"Password: " + password);
             b2.update(get_mous_pos());
             if(b2.is_pressed()){input_bar2.set_selected(true); input_bar1.set_selected(false); }
             b2.render(this->window);
 
-            b3.button_set(600,600,100,350,&font1,"Log in",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b3.button_set(600,600,100,350,&font1,"Log in");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::logged_in_site);}
             b3.render(this->window);
 
 
-            b4.button_set(20, 20, 100, 150, &font1, "BACK", sf::Color::Magenta, sf::Color::Cyan, sf::Color::Blue);
+            b4.button_set(20, 20, 100, 150, &font1, "Back");
             b4.update(get_mous_pos());
             if (b4.is_pressed()){change_site(sites::start_site);}
             b4.render(this->window);
 
-            b5.button_set(950,600,100,350,&font1,"Register",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b5.button_set(950,600,100,350,&font1,"Register");
             b5.update(get_mous_pos());
             if(b5.is_pressed()){change_site(sites::register_site);}
             b5.render(this->window);
 
-            b5.button_set(600,700,100,700,&font1,"Forgot Password",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b5.button_set(600,700,100,700,&font1,"Forgot Password");
             b5.update(get_mous_pos());
             if(b5.is_pressed()){change_site(sites::password_reset_site);}
             b5.render(this->window);
@@ -165,14 +151,14 @@ void Okno::render() { // renders things
 
         }
 
-        case sites::credits_site: /// Credits
+        case sites::credits_site:
         {
             clear_site();
-            text1.Textline_set(200,200,"Wykonali:",40,&font1,sf::Color::White);
-            text2.Textline_set(200,250,"Mateusz Kuzera",40,&font1,sf::Color::White);
-            text3.Textline_set(200,300,"Wiktor Kowalski:",40,&font1,sf::Color::White);
-            text4.Textline_set(200,350,"Mateusz Lugowski",40,&font1,sf::Color::White);
-            text5.Textline_set(200,400,"Projekt Gabinetu Dentystycznego, grupa labolatoryjna 3.",40,&font1,sf::Color::White);
+            text1.Textline_set(200,200,"Wykonali:",40,&font1);
+            text2.Textline_set(200,250,"Mateusz Kuzera",40,&font1);
+            text3.Textline_set(200,300,"Wiktor Kowalski:",40,&font1);
+            text4.Textline_set(200,350,"Mateusz Lugowski",40,&font1);
+            text5.Textline_set(200,400,"Projekt Gabinetu Dentystycznego, grupa labolatoryjna 3.",40,&font1);
 
             text1.render(this->window);
             text2.render(this->window);
@@ -180,7 +166,7 @@ void Okno::render() { // renders things
             text4.render(this->window);
             text5.render(this->window);
 
-            b1.button_set(20, 20, 100, 150, &font1, "BACK", sf::Color::Magenta, sf::Color::Cyan, sf::Color::Blue);
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::start_site); }
             b1.render(this->window);
@@ -194,12 +180,12 @@ void Okno::render() { // renders things
             input_bar2.set_limit(true,15);
             input_bar3.set_limit(true,25);
 
-            b1.button_set(20, 20, 100, 150, &font1, "BACK", sf::Color::Magenta, sf::Color::Cyan, sf::Color::Blue);
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::login_screen_site);}
             b1.render(this->window);
 
-            b1.button_set(600,200,100,700,&font1,"Login: " + input_bar1.get_text(),sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b1.button_set(600,200,100,700,&font1,"Login: " + input_bar1.get_text());
             b1.update(get_mous_pos());
             if(b1.is_pressed()){input_bar3.set_selected(false); input_bar2.set_selected(false);input_bar1.set_selected(true);input_bar4.set_selected(false); }
             b1.render(this->window);
@@ -208,7 +194,7 @@ void Okno::render() { // renders things
             for (int i =0; i<input_bar2.get_text().length();i++){
                 password+="*";
             }
-            b2.button_set(600,300,100,700,&font1,"Password: " + password,sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b2.button_set(600,300,100,700,&font1,"Password: " + password);
             b2.update(get_mous_pos());
             if(b2.is_pressed()){input_bar2.set_selected(true); input_bar1.set_selected(false);input_bar3.set_selected(false);input_bar4.set_selected(false); }
             b2.render(this->window);
@@ -216,17 +202,17 @@ void Okno::render() { // renders things
             for (int i =0; i<input_bar3.get_text().length();i++){
                 password_confirm+="*";
             }
-            b3.button_set(600,400,100,700,&font1,"Repeat Password: " + password_confirm,sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b3.button_set(600,400,100,700,&font1,"Repeat Password: " + password_confirm);
             b3.update(get_mous_pos());
             if(b3.is_pressed()){input_bar3.set_selected(true); input_bar2.set_selected(false);input_bar1.set_selected(false);input_bar4.set_selected(false); }
             b3.render(this->window);
 
-            b4.button_set(600,500,100,700,&font1,"Email: " + input_bar4.get_text(),sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b4.button_set(600,500,100,700,&font1,"Email: " + input_bar4.get_text());
             b4.update(get_mous_pos());
             if(b4.is_pressed()){input_bar3.set_selected(false); input_bar1.set_selected(false);input_bar2.set_selected(false); input_bar4.set_selected(true);}
             b4.render(this->window);
 
-            b5.button_set(600,600,100,700,&font1,"Register",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b5.button_set(600,600,100,700,&font1,"Register");
             b5.update(get_mous_pos());
             if(b5.is_pressed()){/// TO DO SEND COMUNICAT IF ALL IS CORECT//
 
@@ -243,17 +229,17 @@ void Okno::render() { // renders things
         case sites::logged_in_site: /// Logged in menu
         {
 
-            b2.button_set(600,400,100,300,&font1,"Calendar",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b2.button_set(600,400,100,300,&font1,"Calendar");
             b2.update(get_mous_pos());
             if(b2.is_pressed()){change_site(sites::calendar_site);}
             b2.render(this->window);
 
-            b3.button_set(600,300,100,300,&font1,"Magazine",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b3.button_set(600,300,100,300,&font1,"Magazine");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::magazine_site);}
             b3.render(this->window);
 
-            b2.button_set(600,500,100,300,&font1,"Log out",sf::Color::Magenta,sf::Color::Cyan,sf::Color::Blue);
+            b2.button_set(600,500,100,300,&font1,"Log out");
             b2.update(get_mous_pos());
             if(b2.is_pressed()){change_site(sites::start_site);}
             b2.render(this->window);
@@ -264,7 +250,7 @@ void Okno::render() { // renders things
         }
         case sites::calendar_site: /// Calendar
         {
-            b1.button_set(20, 20, 100, 150, &font1, "BACK", sf::Color::Magenta, sf::Color::Cyan, sf::Color::Blue);
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);};
             b1.render(this->window);
@@ -273,7 +259,7 @@ void Okno::render() { // renders things
 
         case sites::magazine_site: /// Magazine
         {
-            b1.button_set(20, 20, 100, 150, &font1, "BACK", sf::Color::Magenta, sf::Color::Cyan, sf::Color::Blue);
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);}
             b1.render(this->window);
@@ -281,7 +267,7 @@ void Okno::render() { // renders things
         }
         case sites::password_reset_site: /// Password reset
         {
-            b1.button_set(20, 20, 100, 150, &font1, "BACK", sf::Color::Magenta, sf::Color::Cyan, sf::Color::Blue);
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::login_screen_site);}
             b1.render(this->window);
@@ -291,10 +277,7 @@ void Okno::render() { // renders things
     }
 
 
-
-
     this->window->display();
-
 }
 
 void Okno::update() { // checks for changes
@@ -320,9 +303,6 @@ void Okno::initialize_variables() {
 }
 
 
-
-
-
 /// Other staff
 
 sf::Vector2f Okno::get_mous_pos()
@@ -330,3 +310,26 @@ sf::Vector2f Okno::get_mous_pos()
     return sf::Vector2f(static_cast<float>(this->MousePosWindow.x), static_cast<float>(this->MousePosWindow.y));
 
 }
+
+void Okno::clear_site(){
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    b1.button_set(0,0,0,0,&font1,"");
+    b2.button_set(0,0,0,0,&font1,"");
+    b3.button_set(0,0,0,0,&font1,"");
+    b4.button_set(0,0,0,0,&font1,"");
+    b5.button_set(0,0,0,0,&font1,"");
+    text1.Textline_set(0,0,"",0,&font1);
+    text2.Textline_set(0,0,"",0,&font1);
+    text3.Textline_set(0,0,"",0,&font1);
+    text4.Textline_set(0,0,"",0,&font1);
+    text5.Textline_set(0,0,"",0,&font1);
+    input_bar1.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
+    input_bar2.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
+    input_bar3.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
+
+}
+
+
+
+
+
