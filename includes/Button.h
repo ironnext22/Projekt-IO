@@ -24,9 +24,7 @@ private:
     sf::Font* font;
     sf::Text text;
 
-  // sf::Color idle_color;
-  //  sf::Color hover_color;
- //   sf::Color active_color;
+
 
     sf::Texture button_photo;
 public:

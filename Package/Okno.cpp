@@ -199,14 +199,17 @@ void Okno::render() { // renders things
             for (int i =0; i<input_bar2.get_text().length();i++){
                 password+="*";
             }
+
             b2.button_set(600,300,100,700,&font1,"Password: " + password);
             b2.update(get_mous_pos());
             if(b2.is_pressed()){input_bar2.set_selected(true); input_bar1.set_selected(false);input_bar3.set_selected(false);input_bar4.set_selected(false); }
             b2.render(this->window);
+
             password_confirm="";
             for (int i =0; i<input_bar3.get_text().length();i++){
                 password_confirm+="*";
             }
+
             b3.button_set(600,400,100,700,&font1,"Repeat Password: " + password_confirm);
             b3.update(get_mous_pos());
             if(b3.is_pressed()){input_bar3.set_selected(true); input_bar2.set_selected(false);input_bar1.set_selected(false);input_bar4.set_selected(false); }
