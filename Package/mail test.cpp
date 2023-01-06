@@ -29,3 +29,36 @@ catch (System::Exception& ex)
 
 }
 
+// Create an instance of MailMessage class
+System::SharedPtr<MailMessage> message = System::MakeObject<MailMessage>();
+
+// From and To field
+message->set_From(u"sender@sender.com");
+message->get_To()->Add(u"receiver@receiver.com");
+
+System::SharedPtr<AlternateView> alternate;
+
+// Create an instance of AlternateView to view an email message using the content specified in the string
+alternate = AlternateView::CreateAlternateViewFromString(u"This is the alternate Text");
+
+// Add alternate text
+message->get_AlternateViews()->Add(alternate);
+
+// Create an instance of SmtpClient Class
+System::SharedPtr<SmtpClient> client = System::MakeObject<SmtpClient>();
+
+// Specify your mailing host server, user name, mail password and Port #
+client->set_Host(u"smtp.server.com");
+client->set_Username(u"Username");
+client->set_Password(u"Password");
+client->set_Port(25);
+try
+{
+// Client->Send will send this message
+client->Send(message);
+}
+catch (System::Exception& ex)
+{
+System::Diagnostics::Trace::WriteLine(System::ObjectExt::ToString(ex));
+}
+
