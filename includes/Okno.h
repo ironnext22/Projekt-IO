@@ -22,7 +22,10 @@ enum class sites{
     logged_in_site = 4,
     calendar_site =5,
     magazine_site=6,
-    password_reset_site =7
+    password_reset_site =7,
+    calendar_display_site=8,
+    account_management_site =9
+
 
 };
 using namespace sf;

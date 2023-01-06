@@ -44,6 +44,13 @@ void Input_bar::set_Input_bar(float posX,float posY,int size, sf::Color color,sf
 
 }
 
+void Input_bar::clear(){
+    sf_text_inputed.setString("");
+    text.str("");
+
+
+}
+
 void Input_bar::input_logic(int char_typed) {
     if (char_typed != DELETE_KEY && char_typed != ESCAPE_KEY && char_typed != ENTER_KEY) {
         text << static_cast<char>(char_typed);

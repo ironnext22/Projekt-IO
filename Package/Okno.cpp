@@ -4,7 +4,7 @@
 #include "../includes/Okno.h"
 #include <thread>
 #include <chrono>
-/// cosntr / destr
+
 
 Okno::Okno() {  /// initializes on the start
     this->initialize_variables();
@@ -131,6 +131,11 @@ void Okno::render() { // renders things
             if(b3.is_pressed()){change_site(sites::logged_in_site);}
             b3.render(this->window);
 
+            /// LOGGING IN PROCEDURE:
+            /// check if email exists in data base
+            /// if doesnt exists display communicat invalid email
+            /// check if password is invalid comunicat and try again.
+
 
             b4.button_set(20, 20, 100, 150, &font1, "Back");
             b4.update(get_mous_pos());
@@ -173,7 +178,7 @@ void Okno::render() { // renders things
             break;
 
         }
-        case sites::register_site: /// Register
+        case sites::register_site:
         {
 
             input_bar1.set_limit(true,15);
@@ -214,7 +219,16 @@ void Okno::render() { // renders things
 
             b5.button_set(600,600,100,700,&font1,"Register");
             b5.update(get_mous_pos());
-            if(b5.is_pressed()){/// TO DO SEND COMUNICAT IF ALL IS CORECT//
+            if(b5.is_pressed()){
+
+                /// HERE ADD REGISTRATION PROCEDURE :
+                /// CHECK - if adres email is valid (is added to the data base)
+                /// CHECK - if password is correct
+                /// if failure : display communicat about failing,
+                /// if positive : display comunicat and display input source for activation key.
+                /// sent by email
+                /// if activation key is good -> go to logging site
+                /// if invalid -> try again or leave
 
             }
             b5.render(this->window);
@@ -226,52 +240,94 @@ void Okno::render() { // renders things
 
 
         }
-        case sites::logged_in_site: /// Logged in menu
+        case sites::logged_in_site:
         {
 
-            b2.button_set(600,400,100,300,&font1,"Calendar");
+            b2.button_set(1000,400,100,400,&font1,"Calendar");
             b2.update(get_mous_pos());
             if(b2.is_pressed()){change_site(sites::calendar_site);}
             b2.render(this->window);
 
-            b3.button_set(600,300,100,300,&font1,"Magazine");
+            b3.button_set(1000,300,100,400,&font1,"Magazine");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::magazine_site);}
             b3.render(this->window);
 
-            b2.button_set(600,500,100,300,&font1,"Log out");
+            b2.button_set(1000,600,100,400,&font1,"Log out");
             b2.update(get_mous_pos());
             if(b2.is_pressed()){change_site(sites::start_site);}
             b2.render(this->window);
+
+            b3.button_set(1000,500,100,400,&font1,"My account");
+            b3.update(get_mous_pos());
+            if(b3.is_pressed()){change_site(sites::account_management_site);}
+            b3.render(this->window);
+
+            text1.Textline_set(100,100,"Logged as:",50,&font1);
+            text1.render(this->window);
+
+            /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
 
 
 
             break;
         }
-        case sites::calendar_site: /// Calendar
+        case sites::calendar_site:
         {
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);};
             b1.render(this->window);
+            break;
 
         }
 
-        case sites::magazine_site: /// Magazine
+        case sites::magazine_site:
         {
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);}
             b1.render(this->window);
+            break;
 
         }
-        case sites::password_reset_site: /// Password reset
+        case sites::password_reset_site:
         {
+            input_bar1.set_limit(true,15);
+
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::login_screen_site);}
             b1.render(this->window);
 
+            b1.button_set(600,600,100,700,&font1,"Email: " + input_bar1.get_text());
+            b1.update(get_mous_pos());
+            if(b1.is_pressed()){input_bar1.set_selected(true); }
+            b1.render(this->window);
+
+            b1.button_set(600,700,100,700,&font1,"Send verification email");
+            b1.update(get_mous_pos());
+            if(b1.is_pressed()){
+            /// SEND EMAIL TO THIS EMAIL and display input_bar to write a verification key.
+            }
+            b1.render(this->window);
+
+            text1.Textline_set(650,550,"Enter email. Verification key will be sent on this address",50,&font1);
+            text1.render(this->window);
+            break;
+
+
+
+        }
+        case sites::account_management_site:
+        {
+
+            break;
+        }
+        case sites::calendar_display_site:
+        {
+
+            break;
         }
 
     }
@@ -313,6 +369,7 @@ sf::Vector2f Okno::get_mous_pos()
 
 void Okno::clear_site(){
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
+
     b1.button_set(0,0,0,0,&font1,"");
     b2.button_set(0,0,0,0,&font1,"");
     b3.button_set(0,0,0,0,&font1,"");
@@ -326,6 +383,11 @@ void Okno::clear_site(){
     input_bar1.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
     input_bar2.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
     input_bar3.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
+    input_bar1.clear();
+    input_bar2.clear();
+    input_bar3.clear();
+
+
 
 }
 
