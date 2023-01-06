@@ -86,3 +86,27 @@ catch (System::Exception& ex)
 {
 System::Diagnostics::Trace::WriteLine(System::ObjectExt::ToString(ex));
 }
+
+try
+{
+// Email file path
+System::String emlFileName = u"Message.eml";
+// A TNEF Email
+
+// Load from eml
+System::SharedPtr<MailMessage> eml1 = MailMessage::Load(emlFileName, System::MakeObject<EmlLoadOptions>());
+eml1->set_From(u"somename@gmail.com");
+eml1->get_To()->Clear();
+eml1->get_To()->Add(System::MakeObject<MailAddress>(u"first.last@test.com"));
+eml1->set_Subject(u"With PreserveTnef flag during loading");
+eml1->set_Date(System::DateTime::get_Now());
+System::SharedPtr<SmtpClient> client = System::MakeObject<SmtpClient>(u"smtp.gmail.com", 587, u"somename", u"password");
+client->set_SecurityOptions(Aspose::Email::Clients::SecurityOptions::Auto);
+client->set_UseTnef(true);
+// Use this flag to send as TNEF
+client->Send(eml1);
+}
+catch (System::Exception& ex)
+{
+// catch exception
+}
