@@ -113,3 +113,9 @@ void Pracownicy::zmien_nazwisko(std::string login, std::string nowe_nazwisko)
     doc.save();
     doc.close();
 }
+
+Pracownik Pracownicy::create_pracownik(Pracownik& prac)
+{
+    auto pracownik = prac;
+    return prac;
+}
