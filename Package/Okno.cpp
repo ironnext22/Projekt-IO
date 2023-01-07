@@ -25,7 +25,7 @@ Okno::~Okno() {
 }
 
 void Okno::change_site(sites sites){ /// changes sites , also cleaning up staff before changing.
-    clear_site();
+    clear_site_and_wait();
     site = sites;
 }
 /// initializes the window
@@ -167,7 +167,7 @@ void Okno::render() { // renders things
 
         }
         case sites::credits_site: {
-            clear_site();
+            clear_site_and_wait();
             text1.Textline_set(200, 200, "Wykonali:", 40, &font1);
             text2.Textline_set(200, 250, "Mateusz Kuzera", 40, &font1);
             text3.Textline_set(200, 300, "Wiktor Kowalski:", 40, &font1);
@@ -310,6 +310,7 @@ void Okno::render() { // renders things
     }
         case sites::logged_in_site:
         {
+            if(admin){change_site(sites::admin_start_site);}
 
             b2.button_set(1000,400,100,400,&font1,"Calendar");
             b2.update(get_mous_pos());
@@ -329,12 +330,12 @@ void Okno::render() { // renders things
                 change_site(sites::start_site);}
             b2.render(this->window);
 
-            b3.button_set(1000,500,100,400,&font1,"My account");
+            b3.button_set(1000,500,100,400,&font1,"My account:");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::account_management_site);}
             b3.render(this->window);
 
-            text1.Textline_set(100,100,"Logged as: " + logged_as,50,&font1);
+            text1.Textline_set(100,100,"Logged as: " + logged_as+ "\n\n" +"XD",50,&font1);
             text1.render(this->window);
 
             /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
@@ -571,6 +572,45 @@ void Okno::render() { // renders things
 
             break;
         }
+        case sites::admin_start_site:{
+
+            b1.button_set(1000,600,100,400,&font1,"Log out");
+            b1.update(get_mous_pos());
+            if(b1.is_pressed()){
+                is_logged = false;
+                logged_as = "";
+                change_site(sites::start_site);}
+            b1.render(this->window);
+
+            b2.button_set(1000,500,100,400,&font1,"Employees");
+            b2.update(get_mous_pos());
+            if(b2.is_pressed()){change_site(sites::admin_site_employee_managent_site);}
+            b2.render(this->window);
+
+            b3.button_set(1000,400,100,400,&font1,"Magazine");
+            b3.update(get_mous_pos());
+            if(b3.is_pressed()){change_site(sites::admin_site_employee_managent_site);}
+            b3.render(this->window);
+
+            b4.button_set(1000,400,100,400,&font1,"Calendar");
+            b4.update(get_mous_pos());
+            if(b4.is_pressed()){change_site(sites::admin_site_employee_managent_site);}
+            b4.render(this->window);
+            break;
+        }
+        case sites::admin_site_employee_managent_site:{
+
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()) { change_site(sites::admin_start_site); }
+            b1.render(this->window);
+
+
+
+
+            break;
+
+        }
     }
     this->window->display();
 }
@@ -598,7 +638,7 @@ sf::Vector2f Okno::get_mous_pos()
 
 }
 
-void Okno::clear_site(){ /// Makes breaks between jumping through sites and clears all drawable variables
+void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites and clears all drawable variables
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
     b1.button_set(0,0,0,0,&font1,"");

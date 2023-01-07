@@ -27,6 +27,10 @@ enum class sites{
     calendar_display_site=8,
     account_management_site =9,
     password_changing_site=10,
+    admin_start_site = 11,
+    admin_site_employee_managent_site = 12,
+    admin_magazine_site = 13,
+
 
 
 
@@ -40,7 +44,7 @@ private:
     void initialize_variables();
     void initialize_window();
     void change_site(sites sites);
-    void clear_site();
+    void clear_site_and_wait();
     void generate_code();
     sf::Vector2f get_mous_pos();
     void make_input_bar_active(int which_one);
@@ -68,6 +72,10 @@ private:
     bool is_currently_changing_password = false;
     bool is_logged = false;
     std::string logged_as = "";
+    /// debug and bugfixing
+    bool admin = true;
+
+
     ///
 
 public:
