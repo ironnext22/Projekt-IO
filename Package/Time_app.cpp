@@ -1,0 +1,20 @@
+//
+// Created by Mateusz on 07.01.2023.
+//
+#include "../includes/Time_app.h"
+
+
+
+std::string Time_app::currentDateTime() {
+
+    auto start = std::chrono::system_clock::now();
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+    std::string new_string = std::ctime(&end_time);
+    return new_string;
+};
+
+Time_app::Time_app() {
+
+}

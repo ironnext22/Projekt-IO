@@ -15,6 +15,7 @@
 #include "Input_bar.h"
 #include "Loging.h"
 #include "Pracownik.h"
+#include "Time_app.h"
 #define PROJEKT_IO_MENU_H
 enum class sites{
     start_site = 0,
@@ -73,6 +74,7 @@ private:
     bool created_ac = false;
     bool is_currently_changing_password = false;
     bool is_logged = false;
+    Time_app timer;
     /// debug and bugfixing
     bool admin = true;
 
