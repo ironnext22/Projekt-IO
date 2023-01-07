@@ -73,7 +73,6 @@ private:
     bool created_ac = false;
     bool is_currently_changing_password = false;
     bool is_logged = false;
-    std::string logged_as = "";
     /// debug and bugfixing
     bool admin = true;
 
