@@ -57,10 +57,10 @@ private:
     Button b1,b2,b3,b4,b5,b6,b7;
     sf::Texture background_photo;
     sf::Sprite sprite;
-    Input_bar input_bar1,input_bar2,input_bar3,input_bar4;
+    Input_bar input_bar1,input_bar2,input_bar3,input_bar4,input_bar5;
     sites site;
     std::string login,password,password_confirm;
-    std::string verification_code;
+    std::string verification_code = "000000";
 
     /// auxiliary variables
     bool email_sent = false;

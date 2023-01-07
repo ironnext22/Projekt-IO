@@ -8,12 +8,7 @@
 #define MAX_LOGIN_CHARACTERS 20
 #define MAX_EMAIL_CHARACTERS 25
 
-///    To do here
-///
-///
-///
-///
-///
+
 
 
 Okno::Okno() {  /// initializes on the start
@@ -72,6 +67,9 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
                 }
                 else if(input_bar4.get_is_selected()){
                     input_bar4.typed_on(ev);
+                }
+                else if(input_bar5.get_is_selected()){
+                    input_bar5.typed_on(ev);
                 }
 
 
@@ -191,6 +189,7 @@ void Okno::render() { // renders things
         }
         case sites::register_site: {
             if (!email_sent) {
+
                 input_bar1.set_limit(true, MAX_LOGIN_CHARACTERS);
                 input_bar2.set_limit(true, MAX_PASSWORD_CHARACTERS);
                 input_bar3.set_limit(true, MAX_PASSWORD_CHARACTERS);
@@ -249,57 +248,66 @@ void Okno::render() { // renders things
                         ///   }
                     else if (/*logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())*/ !email_sent) {
                         /// SEND EMAIL with code //////////////////////////////////
+
                         generate_code();
+                        std::cout << std::endl << verification_code << " -ver code"<< std::endl;
                         email_sent = true;
                         text1.Textline_set(650, 150, "Verification code has been sent", 50, &font1);
 
                     }
 
 
-                    text1.render(this->window);
-                    b5.render(this->window);
+
                     break;
                 }
+                text1.render(this->window);
+                b5.render(this->window);
 
             }
             else if(email_sent) {
-                input_bar3.clear();
 
-                text1.Textline_set(650,150,"Enter verification code - sent on email "+input_bar4.get_text(),50,&font1);
+
+                text1.Textline_set(650,150,"Enter verification code - sent on email "+ input_bar4.get_text(),50,&font1);
                 b1.button_set(20, 20, 100, 150, &font1, "Back");
                 b1.update(get_mous_pos());
                 if (b1.is_pressed()) { change_site(sites::login_screen_site); }
                 b1.render(this->window);
 
-                b3.button_set(600, 200, 100, 700, &font1, "Ver. code: " );
-                b3.update(get_mous_pos());
-                if (b3.is_pressed()) { make_input_bar_active(3); }
-                b3.render(this->window);
 
-                b4.button_set(600, 200, 100, 700, &font1, "Check" );
+                b3.button_set(600, 200, 100, 700, &font1, "Ver. code: "+input_bar5.get_text());
+                b3.update(get_mous_pos());
+                if (b3.is_pressed()) { make_input_bar_active(5); }
+
+
+                b4.button_set(600, 300, 100, 700, &font1, "Check" );
                 b4.update(get_mous_pos());
+
                 if (b4.is_pressed() && created_ac==false) {
-                    if(verification_code == input_bar3.get_text()){
+                    if(verification_code == input_bar5.get_text()){
                         logging_menu.register_new_user(input_bar4.get_text(),input_bar1.get_text(),input_bar2.get_text());
-                        text1.Textline_set(650,150,"Created account",50,&font1);
+                        text2.Textline_set(650,120,"Created account",50,&font1);
                         created_ac = true;
 
                     }
                     else if(created_ac){
                         text1.Textline_set(650,150,"Account is created",50,&font1);
                     }
-                    else if(!(verification_code == input_bar3.get_text())){
+                    else if(verification_code != input_bar5.get_text()){
 
                         text1.Textline_set(650,150,"Invalid code",50,&font1);
                     }
 
+
                 }
+                b3.render(this->window);
                 b4.render(this->window);
                 text1.render(this->window);
+                text2.render(this->window);
 
             }
-    }
 
+            break;
+    }
         case sites::logged_in_site:
         {
 
@@ -504,7 +512,7 @@ void Okno::render() { // renders things
                 }
                 else{
 
-                    /// CHANGE NAME METHOD
+                    /// Name googogogogog
 
                 }
             }
@@ -615,9 +623,11 @@ void Okno::clear_site(){ /// Makes breaks between jumping through sites and clea
     input_bar1.clear();
     input_bar2.clear();
     input_bar3.clear();
+    input_bar4.clear();
     /// also changes some staff to be reseted
     verification_code = "000000";
     email_sent =false;
+    created_ac = false;
 
 }
 
@@ -633,6 +643,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar2.set_selected(false);
             input_bar3.set_selected(false);
             input_bar4.set_selected(false);
+            input_bar5.set_selected(false);
             break;
         }
         case 2:{
@@ -640,6 +651,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar2.set_selected(true);
             input_bar3.set_selected(false);
             input_bar4.set_selected(false);
+            input_bar5.set_selected(false);
             break;
         }
         case 3:{
@@ -647,6 +659,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar2.set_selected(false);
             input_bar3.set_selected(true);
             input_bar4.set_selected(false);
+            input_bar5.set_selected(false);
             break;
         }
         case 4:{
@@ -654,7 +667,19 @@ void Okno::make_input_bar_active(int which_one){
             input_bar2.set_selected(false);
             input_bar3.set_selected(false);
             input_bar4.set_selected(true);
+            input_bar5.set_selected(false);
             break;
+
+        }
+
+        case 5:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(false);
+            input_bar5.set_selected(true);
+            break;
+
         }
        default:{
             input_bar1.set_selected(false);
