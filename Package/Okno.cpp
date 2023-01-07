@@ -8,6 +8,18 @@
 #define MAX_LOGIN_CHARACTERS 20
 #define MAX_EMAIL_CHARACTERS 25
 
+///    To do here
+///
+///
+///
+///
+///
+
+
+
+
+
+
 Okno::Okno() {  /// initializes on the start
     this->initialize_variables();
     this->initialize_window();
@@ -137,6 +149,8 @@ void Okno::render() { // renders things
 
                 }
                 else if(logging_menu.log_in(input_bar1.get_text(),input_bar2.get_text())){
+                    logged_as = input_bar1.get_text();
+                    is_logged = true;
                     change_site(sites::logged_in_site);
 
                 }
@@ -291,7 +305,10 @@ void Okno::render() { // renders things
 
             b2.button_set(1000,600,100,400,&font1,"Log out");
             b2.update(get_mous_pos());
-            if(b2.is_pressed()){change_site(sites::start_site);}
+            if(b2.is_pressed()){
+                is_logged = false;
+                logged_as = "";
+                change_site(sites::start_site);}
             b2.render(this->window);
 
             b3.button_set(1000,500,100,400,&font1,"My account");
@@ -299,7 +316,7 @@ void Okno::render() { // renders things
             if(b3.is_pressed()){change_site(sites::account_management_site);}
             b3.render(this->window);
 
-            text1.Textline_set(100,100,"Logged as:",50,&font1);
+            text1.Textline_set(100,100,"Logged as: " + logged_as,50,&font1);
             text1.render(this->window);
 
             /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
