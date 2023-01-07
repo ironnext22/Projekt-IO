@@ -69,7 +69,7 @@ void Input_bar::input_logic(int char_typed) {
 void Input_bar::delete_last_letter(){
     std::string t = text.str();
     std::string new_string = "";
-    for(int i = 0; i <t.length();i++){
+    for(int i = 0; i <t.length()-1;i++){
         new_string+=t[i];
     }
     text.str("");
