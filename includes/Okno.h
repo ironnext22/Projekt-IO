@@ -43,6 +43,7 @@ private:
     void clear_site();
     void generate_code();
     sf::Vector2f get_mous_pos();
+    void make_input_bar_active(int which_one);
 
     Loging logging_menu;
     RenderWindow* window;

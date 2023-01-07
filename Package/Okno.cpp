@@ -120,7 +120,7 @@ void Okno::render() { // renders things
 
             b1.button_set(600,400,100,700,&font1,"Login: " + input_bar1.get_text());
             b1.update(get_mous_pos());
-            if(b1.is_pressed()){input_bar1.set_selected(true); input_bar2.set_selected(false); }
+            if(b1.is_pressed()){make_input_bar_active(1); }
             b1.render(this->window);
 
             password="";
@@ -129,7 +129,7 @@ void Okno::render() { // renders things
             }
             b2.button_set(600,500,100,700,&font1,"Password: " + password);
             b2.update(get_mous_pos());
-            if(b2.is_pressed()){input_bar2.set_selected(true); input_bar1.set_selected(false); }
+            if(b2.is_pressed()){make_input_bar_active(2); }
             b2.render(this->window);
 
             b3.button_set(600,600,100,350,&font1,"Log in");
@@ -211,7 +211,7 @@ void Okno::render() { // renders things
 
             b1.button_set(600,200,100,700,&font1,"Login: " + input_bar1.get_text());
             b1.update(get_mous_pos());
-            if(b1.is_pressed()){input_bar3.set_selected(false); input_bar2.set_selected(false);input_bar1.set_selected(true);input_bar4.set_selected(false); }
+            if(b1.is_pressed()){make_input_bar_active(1); }
             b1.render(this->window);
 
             password="";
@@ -221,7 +221,7 @@ void Okno::render() { // renders things
 
             b2.button_set(600,300,100,700,&font1,"Password: " + password);
             b2.update(get_mous_pos());
-            if(b2.is_pressed()){input_bar2.set_selected(true); input_bar1.set_selected(false);input_bar3.set_selected(false);input_bar4.set_selected(false); }
+            if(b2.is_pressed()){make_input_bar_active(2);}
             b2.render(this->window);
 
 
@@ -233,13 +233,13 @@ void Okno::render() { // renders things
 
             b3.button_set(600,400,100,700,&font1,"Repeat Password: " + password_confirm);
             b3.update(get_mous_pos());
-            if(b3.is_pressed()){input_bar3.set_selected(true); input_bar2.set_selected(false);input_bar1.set_selected(false);input_bar4.set_selected(false); }
+            if(b3.is_pressed()){make_input_bar_active(3); }
             b3.render(this->window);
 
 
             b4.button_set(600,500,100,700,&font1,"Email: " + input_bar4.get_text());
             b4.update(get_mous_pos());
-            if(b4.is_pressed()){input_bar3.set_selected(false); input_bar1.set_selected(false);input_bar2.set_selected(false); input_bar4.set_selected(true);}
+            if(b4.is_pressed()){make_input_bar_active(4);}
             b4.render(this->window);
 
             b5.button_set(600,600,100,700,&font1,"Register");
@@ -340,7 +340,7 @@ void Okno::render() { // renders things
             if(!is_currently_changing_password) {
 
 
-                email_sent = true;
+
                 input_bar1.set_limit(true, 15);
 
                 text1.Textline_set(650, 550, "Enter email. Verification key will be sent on this address", 50, &font1);
@@ -351,12 +351,7 @@ void Okno::render() { // renders things
 
                 b1.button_set(600, 600, 100, 700, &font1, "Email: " + input_bar1.get_text());
                 b1.update(get_mous_pos());
-                if (b1.is_pressed()) {
-                    input_bar1.set_selected(true);
-                    input_bar2.set_selected(false);
-                    input_bar3.set_selected(false);
-                    input_bar4.set_selected(false);
-                }
+                if (b1.is_pressed()) {make_input_bar_active(1);}
                 b1.render(this->window);
 
                 b4.button_set(600, 700, 100, 700, &font1, "Send verification email");
@@ -379,12 +374,7 @@ void Okno::render() { // renders things
 
                     b2.button_set(600, 300, 100, 700, &font1, "Ver. code: " + input_bar2.get_text());
                     b2.update(get_mous_pos());
-                    if (b2.is_pressed()) {
-                        input_bar1.set_selected(false);
-                        input_bar2.set_selected(true);
-                        input_bar3.set_selected(false);
-                        input_bar4.set_selected(false);
-                    }
+                    if (b2.is_pressed()) {make_input_bar_active(2);}
                     b2.render(this->window);
 
 
@@ -427,11 +417,7 @@ void Okno::render() { // renders things
 
                 b4.button_set(600,300,100,700,&font1,"Password: " + password);
                 b4.update(get_mous_pos());
-                if(b4.is_pressed()){
-                    input_bar1.set_selected(false);
-                    input_bar2.set_selected(false);
-                    input_bar3.set_selected(false);
-                    input_bar4.set_selected(true); }
+                if(b4.is_pressed()){make_input_bar_active(4);}
 
 
                 password_confirm="";
@@ -441,12 +427,7 @@ void Okno::render() { // renders things
 
                 b3.button_set(600,400,100,700,&font1,"Repeat Password: " + password_confirm);
                 b3.update(get_mous_pos());
-                if(b3.is_pressed()){
-                    input_bar1.set_selected(false);
-                    input_bar2.set_selected(false);
-                    input_bar3.set_selected(true);
-                    input_bar4.set_selected(false);
-                }
+                if(b3.is_pressed()){make_input_bar_active(3);}
 
 
 
@@ -496,12 +477,7 @@ void Okno::render() { // renders things
             b2.update(get_mous_pos());
             b3.button_set(600,300,100,750,&font1,"New Name:" + input_bar1.get_text());
             b3.update(get_mous_pos());
-            if(b3.is_pressed()){
-                input_bar1.set_selected(true);
-                input_bar2.set_selected(false);
-                input_bar3.set_selected(false);
-                input_bar4.set_selected(false);
-            }
+            if(b3.is_pressed()){make_input_bar_active(1);}
             if(b2.is_pressed()){
                 if(input_bar1.get_text() == "")
                 {
@@ -520,10 +496,7 @@ void Okno::render() { // renders things
             b5.button_set(600,400,100,750,&font1,"New Last Name:" + input_bar2.get_text());
             b5.update(get_mous_pos());
             if(b5.is_pressed()){
-                input_bar1.set_selected(false);
-                input_bar2.set_selected(true);
-                input_bar3.set_selected(false);
-                input_bar4.set_selected(false);
+                make_input_bar_active(2);
             }
             if(b4.is_pressed()){
                 if(input_bar2.get_text() == "")
@@ -543,12 +516,7 @@ void Okno::render() { // renders things
             b6.update(get_mous_pos());
             b7.button_set(600,500,100,750,&font1,"New Password:" + password);
             b7.update(get_mous_pos());
-            if(b7.is_pressed()){
-                input_bar1.set_selected(false);
-                input_bar2.set_selected(false);
-                input_bar3.set_selected(true);
-                input_bar4.set_selected(false);
-            }
+            if(b7.is_pressed()){make_input_bar_active(3);}
             if(b6.is_pressed()){
                 if(input_bar3.get_text() == "")
                 {
@@ -635,5 +603,50 @@ void Okno::clear_site(){ /// Makes breaks between jumping through sites and clea
 }
 
 void Okno::generate_code() { /// generates verification code
-    verification_code = std::to_string(1*rand()%10 + 10*rand()%10 + 100*rand()%10 + 100*rand()%10);
+    verification_code = std::to_string( rand()%10000);
+}
+
+void Okno::make_input_bar_active(int which_one){
+    switch (which_one){
+
+        case 1:{
+            input_bar1.set_selected(true);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(false);
+            break;
+        }
+        case 2:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(true);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(false);
+            break;
+        }
+        case 3:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(true);
+            input_bar4.set_selected(false);
+            break;
+        }
+        case 4:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(true);
+            break;
+        }
+       default:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(false);
+            break;
+        }
+
+    }
+
+
+
 }
