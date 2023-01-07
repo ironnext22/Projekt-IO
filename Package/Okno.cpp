@@ -335,7 +335,7 @@ void Okno::render() { // renders things
             if(b3.is_pressed()){change_site(sites::account_management_site);}
             b3.render(this->window);
 
-            text1.Textline_set(100,100,"Logged as: "+ "\n\n"+logged_user->get_imie()+
+            text1.Textline_set(100,100,"Logged as:  \n\n"+logged_user->get_imie()+
             " "+logged_user->get_nazwisko()+"\n\nPosition: "+logged_user->get_funkcja()+"\n\nEmail: "+logged_user->get_mail(),50,&font1);
             text1.render(this->window);
 
