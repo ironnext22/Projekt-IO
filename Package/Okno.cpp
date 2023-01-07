@@ -16,10 +16,6 @@
 ///
 
 
-
-
-
-
 Okno::Okno() {  /// initializes on the start
     this->initialize_variables();
     this->initialize_window();
@@ -33,8 +29,7 @@ Okno::~Okno() {
 
 }
 
-
-void Okno::change_site(sites sites){
+void Okno::change_site(sites sites){ /// changes sites , also cleaning up staff before changing.
     clear_site();
     site = sites;
 }
@@ -52,8 +47,6 @@ void Okno::initialize_window() {
 void Okno::update_mouse_position() { /// updates mouse position to vector2i
     this->MousePosWindow = sf::Mouse::getPosition(*this->window);
 }
-
-
 
 void Okno::poll_events() { /// checks if something was done eg. key pressed
 
@@ -90,11 +83,10 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
 
 
 
-
+/// renders
 void Okno::render() { // renders things
     this->window->clear(Color::White);
     this->window->draw(sprite);
-
 
     switch(site) {
         case sites::start_site:
@@ -182,7 +174,6 @@ void Okno::render() { // renders things
             break;
 
         }
-
         case sites::credits_site:
         {
             clear_site();
@@ -334,7 +325,6 @@ void Okno::render() { // renders things
             break;
 
         }
-
         case sites::magazine_site:
         {
             b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -586,38 +576,26 @@ void Okno::render() { // renders things
 
             break;
         }
-
-
     }
-
-
     this->window->display();
 }
+
+
+
 
 void Okno::update() { // checks for changes
     this->poll_events();
     this->update_mouse_position();
 }
 
-
-
-
-/// accessors
-
 const bool Okno::get_window_is_open() const
 {
     return this->window->isOpen();
 }
 
-
-/// Inirializing some staff like texts, buttons.
-
 void Okno::initialize_variables() {
     this->window = nullptr;
 }
-
-
-/// Other staff
 
 sf::Vector2f Okno::get_mous_pos()
 {
@@ -625,7 +603,7 @@ sf::Vector2f Okno::get_mous_pos()
 
 }
 
-void Okno::clear_site(){
+void Okno::clear_site(){ /// Makes breaks between jumping through sites and clears all drawable variables
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
     b1.button_set(0,0,0,0,&font1,"");
@@ -650,13 +628,12 @@ void Okno::clear_site(){
     input_bar1.clear();
     input_bar2.clear();
     input_bar3.clear();
+    /// also changes some staff to be reseted
     verification_code = "0";
     email_sent =false;
 
-
-
 }
 
-void Okno::generate_code() {
+void Okno::generate_code() { /// generates verification code
     verification_code = std::to_string(1*rand()%10 + 10*rand()%10 + 100*rand()%10 + 100*rand()%10);
 }
