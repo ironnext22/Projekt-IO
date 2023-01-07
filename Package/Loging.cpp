@@ -22,9 +22,15 @@ bool Loging::check_if_password_is_correct(std::string login,std::string password
     Pracownik* konto;
     for(auto a : login_list.pracownicy)
     {
-        if(a.login==login)konto = &a;
+        std::cout<<a.login<<" "<<login<<std::endl;
+        if(a.login==login)
+        {
+            konto = &a;
+            break;
+        }
     }
     if(konto== nullptr)return false;
+    //std::cout<<konto->login<<" "<<password<<std::endl;
     if(konto->haslo==password)return true;
     else return false;
 }
