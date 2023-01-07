@@ -60,12 +60,15 @@ private:
     Input_bar input_bar1,input_bar2,input_bar3,input_bar4;
     sites site;
     std::string login,password,password_confirm;
-
     std::string verification_code;
-    bool email_sent;
+
+    /// auxiliary variables
+    bool email_sent = false;
+    bool created_ac = false;
     bool is_currently_changing_password = false;
     bool is_logged = false;
     std::string logged_as = "";
+    ///
 
 public:
 

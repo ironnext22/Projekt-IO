@@ -89,65 +89,60 @@ void Okno::render() { // renders things
     this->window->draw(sprite);
 
     switch(site) {
-        case sites::start_site:
-        {
+        case sites::start_site: {
 
-            b1.button_set(600,600,100,300,&font1,"Exit");
+            b1.button_set(600, 600, 100, 300, &font1, "Exit");
             b1.update(get_mous_pos());
-            if(b1.is_pressed()){this->window->close();}
+            if (b1.is_pressed()) { this->window->close(); }
             b1.render(this->window);
 
-            b1.button_set(600,400,100,300,&font1,"Log in");
+            b1.button_set(600, 400, 100, 300, &font1, "Log in");
             b1.update(get_mous_pos());
-            if(b1.is_pressed()){ change_site(sites::login_screen_site);}
+            if (b1.is_pressed()) { change_site(sites::login_screen_site); }
             b1.render(this->window);
 
 
-            b1.button_set(600,500,100,300,&font1,"Credits");
+            b1.button_set(600, 500, 100, 300, &font1, "Credits");
             b1.update(get_mous_pos());
-            if(b1.is_pressed()){change_site(sites::credits_site);}
+            if (b1.is_pressed()) { change_site(sites::credits_site); }
             b1.render(this->window);
 
             break;
         }
-        case sites::login_screen_site:
-        {
+        case sites::login_screen_site: {
 
-            input_bar1.set_limit(true,MAX_LOGIN_CHARACTERS);
-            input_bar2.set_limit(true,MAX_PASSWORD_CHARACTERS);
-
+            input_bar1.set_limit(true, MAX_LOGIN_CHARACTERS);
+            input_bar2.set_limit(true, MAX_PASSWORD_CHARACTERS);
 
 
-            b1.button_set(600,400,100,700,&font1,"Login: " + input_bar1.get_text());
+            b1.button_set(600, 400, 100, 700, &font1, "Login: " + input_bar1.get_text());
             b1.update(get_mous_pos());
-            if(b1.is_pressed()){make_input_bar_active(1); }
+            if (b1.is_pressed()) { make_input_bar_active(1); }
             b1.render(this->window);
 
-            password="";
-            for (int i =0; i<input_bar2.get_text().length();i++){
-                password+="*";
+            password = "";
+            for (int i = 0; i < input_bar2.get_text().length(); i++) {
+                password += "*";
             }
-            b2.button_set(600,500,100,700,&font1,"Password: " + password);
+            b2.button_set(600, 500, 100, 700, &font1, "Password: " + password);
             b2.update(get_mous_pos());
-            if(b2.is_pressed()){make_input_bar_active(2); }
+            if (b2.is_pressed()) { make_input_bar_active(2); }
             b2.render(this->window);
 
-            b3.button_set(600,600,100,350,&font1,"Log in");
+            b3.button_set(600, 600, 100, 350, &font1, "Log in");
             b3.update(get_mous_pos());
-            if(b3.is_pressed()){
+            if (b3.is_pressed()) {
 
-                if(input_bar1.get_text() == "" || input_bar2.get_text() == ""){
-                    text1.Textline_set(650,350,"No login or password entered!",50,&font1);
+                if (input_bar1.get_text() == "" || input_bar2.get_text() == "") {
+                    text1.Textline_set(650, 350, "No login or password entered!", 50, &font1);
 
-                }
-                else if(logging_menu.log_in(input_bar1.get_text(),input_bar2.get_text())){
+                } else if (logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
                     logged_as = input_bar1.get_text();
                     is_logged = true;
                     change_site(sites::logged_in_site);
 
-                }
-                else if(!logging_menu.log_in(input_bar1.get_text(),input_bar2.get_text())) {
-                    text1.Textline_set(650,350,"Invalid login or password!",50,&font1);
+                } else if (!logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
+                    text1.Textline_set(650, 350, "Invalid login or password!", 50, &font1);
                 }
 
             }
@@ -155,33 +150,31 @@ void Okno::render() { // renders things
             b3.render(this->window);
 
 
-
             b4.button_set(20, 20, 100, 150, &font1, "Back");
             b4.update(get_mous_pos());
-            if (b4.is_pressed()){change_site(sites::start_site);}
+            if (b4.is_pressed()) { change_site(sites::start_site); }
             b4.render(this->window);
 
-            b5.button_set(950,600,100,350,&font1,"Register");
+            b5.button_set(950, 600, 100, 350, &font1, "Register");
             b5.update(get_mous_pos());
-            if(b5.is_pressed()){change_site(sites::register_site);}
+            if (b5.is_pressed()) { change_site(sites::register_site); }
             b5.render(this->window);
 
-            b5.button_set(600,700,100,700,&font1,"Forgot Password");
+            b5.button_set(600, 700, 100, 700, &font1, "Forgot Password");
             b5.update(get_mous_pos());
-            if(b5.is_pressed()){change_site(sites::password_reset_site);}
+            if (b5.is_pressed()) { change_site(sites::password_reset_site); }
             b5.render(this->window);
 
             break;
 
         }
-        case sites::credits_site:
-        {
+        case sites::credits_site: {
             clear_site();
-            text1.Textline_set(200,200,"Wykonali:",40,&font1);
-            text2.Textline_set(200,250,"Mateusz Kuzera",40,&font1);
-            text3.Textline_set(200,300,"Wiktor Kowalski:",40,&font1);
-            text4.Textline_set(200,350,"Mateusz Lugowski",40,&font1);
-            text5.Textline_set(200,400,"Projekt Gabinetu Dentystycznego, grupa labolatoryjna 3.",40,&font1);
+            text1.Textline_set(200, 200, "Wykonali:", 40, &font1);
+            text2.Textline_set(200, 250, "Mateusz Kuzera", 40, &font1);
+            text3.Textline_set(200, 300, "Wiktor Kowalski:", 40, &font1);
+            text4.Textline_set(200, 350, "Mateusz Lugowski", 40, &font1);
+            text5.Textline_set(200, 400, "Projekt Gabinetu Dentystycznego, grupa labolatoryjna 3.", 40, &font1);
 
             text1.render(this->window);
             text2.render(this->window);
@@ -191,96 +184,122 @@ void Okno::render() { // renders things
 
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
-            if (b1.is_pressed()){change_site(sites::start_site); }
+            if (b1.is_pressed()) { change_site(sites::start_site); }
             b1.render(this->window);
             break;
 
         }
-        case sites::register_site:
-        {
+        case sites::register_site: {
+            if (!email_sent) {
+                input_bar1.set_limit(true, MAX_LOGIN_CHARACTERS);
+                input_bar2.set_limit(true, MAX_PASSWORD_CHARACTERS);
+                input_bar3.set_limit(true, MAX_PASSWORD_CHARACTERS);
+                input_bar3.set_limit(true, MAX_EMAIL_CHARACTERS);
 
-            input_bar1.set_limit(true,MAX_LOGIN_CHARACTERS);
-            input_bar2.set_limit(true,MAX_PASSWORD_CHARACTERS);
-            input_bar3.set_limit(true,MAX_PASSWORD_CHARACTERS);
-            input_bar3.set_limit(true,MAX_EMAIL_CHARACTERS);
+                b1.button_set(20, 20, 100, 150, &font1, "Back");
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) { change_site(sites::login_screen_site); }
+                b1.render(this->window);
 
-            b1.button_set(20, 20, 100, 150, &font1, "Back");
-            b1.update(get_mous_pos());
-            if (b1.is_pressed()){change_site(sites::login_screen_site);}
-            b1.render(this->window);
+                b1.button_set(600, 200, 100, 700, &font1, "Login: " + input_bar1.get_text());
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) { make_input_bar_active(1); }
+                b1.render(this->window);
 
-            b1.button_set(600,200,100,700,&font1,"Login: " + input_bar1.get_text());
-            b1.update(get_mous_pos());
-            if(b1.is_pressed()){make_input_bar_active(1); }
-            b1.render(this->window);
-
-            password="";
-            for (int i =0; i<input_bar2.get_text().length();i++){
-                password+="*";
-            }
-
-            b2.button_set(600,300,100,700,&font1,"Password: " + password);
-            b2.update(get_mous_pos());
-            if(b2.is_pressed()){make_input_bar_active(2);}
-            b2.render(this->window);
-
-
-
-            password_confirm="";
-            for (int i =0; i<input_bar3.get_text().length();i++){
-                password_confirm+="*";
-            }
-
-            b3.button_set(600,400,100,700,&font1,"Repeat Password: " + password_confirm);
-            b3.update(get_mous_pos());
-            if(b3.is_pressed()){make_input_bar_active(3); }
-            b3.render(this->window);
-
-
-            b4.button_set(600,500,100,700,&font1,"Email: " + input_bar4.get_text());
-            b4.update(get_mous_pos());
-            if(b4.is_pressed()){make_input_bar_active(4);}
-            b4.render(this->window);
-
-            b5.button_set(600,600,100,700,&font1,"Register");
-            b5.update(get_mous_pos());
-            if(b5.is_pressed()){
-                if(input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == "" ||input_bar4.get_text() == ""){
-                    text1.Textline_set(650,150,"All tiles need to be filled",50,&font1);
-
-                }
-                else if(input_bar2.get_text() != input_bar3.get_text()){
-                    text1.Textline_set(650,150,"Passwords aren't the same",50,&font1);
-                }
-                else if(!logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())){
-                    text1.Textline_set(650,150,"There are no accounts with this email.",50,&font1);
-
-                }
-                else if(logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())){
-                    /// SEND EMAIL with code
-
+                password = "";
+                for (int i = 0; i < input_bar2.get_text().length(); i++) {
+                    password += "*";
                 }
 
+                b2.button_set(600, 300, 100, 700, &font1, "Password: " + password);
+                b2.update(get_mous_pos());
+                if (b2.is_pressed()) { make_input_bar_active(2); }
+                b2.render(this->window);
 
 
+                password_confirm = "";
+                for (int i = 0; i < input_bar3.get_text().length(); i++) {
+                    password_confirm += "*";
+                }
+
+                b3.button_set(600, 400, 100, 700, &font1, "Repeat Password: " + password_confirm);
+                b3.update(get_mous_pos());
+                if (b3.is_pressed()) { make_input_bar_active(3); }
+                b3.render(this->window);
 
 
-                /// if positive : display comunicat and display input source for activation key.
-                /// sent by email
-                /// if activation key is good -> go to logging site
-                /// if invalid -> try again or leave
+                b4.button_set(600, 500, 100, 700, &font1, "Email: " + input_bar4.get_text());
+                b4.update(get_mous_pos());
+                if (b4.is_pressed()) { make_input_bar_active(4); }
+                b4.render(this->window);
+
+                b5.button_set(600, 600, 100, 700, &font1, "Register");
+                b5.update(get_mous_pos());
+                if (b5.is_pressed()) {
+                    if (input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == "" ||
+                        input_bar4.get_text() == "") {
+                        text1.Textline_set(650, 150, "All tiles need to be filled", 50, &font1);
+
+                    } else if (input_bar2.get_text() != input_bar3.get_text()) {
+                        text1.Textline_set(650, 150, "Passwords aren't the same", 50, &font1);
+                    }
+                        ///  else if(!logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())){
+                        ///      text1.Textline_set(650,150,"There are no accounts with this email.",50,&font1);
+                        ///
+                        ///   }
+                    else if (/*logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())*/ !email_sent) {
+                        /// SEND EMAIL with code //////////////////////////////////
+                        generate_code();
+                        email_sent = true;
+                        text1.Textline_set(650, 150, "Verification code has been sent", 50, &font1);
+
+                    }
+
+
+                    text1.render(this->window);
+                    b5.render(this->window);
+                    break;
+                }
 
             }
-            text1.render(this->window);
-            b5.render(this->window);
-            break;
+            else if(email_sent) {
+                input_bar3.clear();
 
+                text1.Textline_set(650,150,"Enter verification code - sent on email "+input_bar4.get_text(),50,&font1);
+                b1.button_set(20, 20, 100, 150, &font1, "Back");
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) { change_site(sites::login_screen_site); }
+                b1.render(this->window);
 
+                b3.button_set(600, 200, 100, 700, &font1, "Ver. code: " );
+                b3.update(get_mous_pos());
+                if (b3.is_pressed()) { make_input_bar_active(3); }
+                b3.render(this->window);
 
+                b4.button_set(600, 200, 100, 700, &font1, "Check" );
+                b4.update(get_mous_pos());
+                if (b4.is_pressed() && created_ac==false) {
+                    if(verification_code == input_bar3.get_text()){
+                        logging_menu.register_new_user(input_bar4.get_text(),input_bar1.get_text(),input_bar2.get_text());
+                        text1.Textline_set(650,150,"Created account",50,&font1);
+                        created_ac = true;
 
+                    }
+                    else if(created_ac){
+                        text1.Textline_set(650,150,"Account is created",50,&font1);
+                    }
+                    else if(!(verification_code == input_bar3.get_text())){
 
+                        text1.Textline_set(650,150,"Invalid code",50,&font1);
+                    }
 
-        }
+                }
+                b4.render(this->window);
+                text1.render(this->window);
+
+            }
+    }
+
         case sites::logged_in_site:
         {
 
@@ -597,7 +616,7 @@ void Okno::clear_site(){ /// Makes breaks between jumping through sites and clea
     input_bar2.clear();
     input_bar3.clear();
     /// also changes some staff to be reseted
-    verification_code = "0";
+    verification_code = "000000";
     email_sent =false;
 
 }
