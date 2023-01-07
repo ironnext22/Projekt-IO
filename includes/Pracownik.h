@@ -22,5 +22,9 @@ public:
             else if(funkcja=="Administrator")this->funkcja=Funkcje::Administrator;
             else this->funkcja=Funkcje::Error;
     }
+    std::string get_imie();
+    std::string get_nazwisko();
+    std::string get_mail();
+    std::string get_funkcja();
 };
 #endif //PROJEKT_IO_PRACOWNIK_H
