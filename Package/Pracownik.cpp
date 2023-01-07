@@ -2,6 +2,7 @@
 std::string Pracownik::get_imie(){return imie;}
 std::string Pracownik::get_nazwisko(){return nazwisko;}
 std::string Pracownik::get_mail() {return mail;}
+std::string Pracownik::get_login() {return login;}
 std::string Pracownik::get_funkcja() {
     std::string fun;
     if(funkcja==Funkcje::Asystentka)fun="Asysystentka";

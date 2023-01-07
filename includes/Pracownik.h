@@ -29,5 +29,6 @@ public:
     std::string get_nazwisko();
     std::string get_mail();
     std::string get_funkcja();
+    std::string  get_login();
 };
 #endif //PROJEKT_IO_PRACOWNIK_H
