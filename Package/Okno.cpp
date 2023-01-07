@@ -135,7 +135,8 @@ void Okno::render() { // renders things
                     text1.Textline_set(650, 350, "No login or password entered!", 50, &font1);
 
                 } else if (logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
-                    logged_as = input_bar1.get_text();
+                    logged_user= new Pracownik(input_bar1.get_text(),input_bar2.get_text());
+
                     is_logged = true;
                     change_site(sites::logged_in_site);
 
@@ -310,7 +311,7 @@ void Okno::render() { // renders things
     }
         case sites::logged_in_site:
         {
-            if(admin){change_site(sites::admin_start_site);}
+           // if(admin){change_site(sites::admin_start_site);}
 
             b2.button_set(1000,400,100,400,&font1,"Calendar");
             b2.update(get_mous_pos());
@@ -326,7 +327,6 @@ void Okno::render() { // renders things
             b2.update(get_mous_pos());
             if(b2.is_pressed()){
                 is_logged = false;
-                logged_as = "";
                 change_site(sites::start_site);}
             b2.render(this->window);
 
@@ -335,7 +335,8 @@ void Okno::render() { // renders things
             if(b3.is_pressed()){change_site(sites::account_management_site);}
             b3.render(this->window);
 
-            text1.Textline_set(100,100,"Logged as: " + logged_as+ "\n\n" +"XD",50,&font1);
+            text1.Textline_set(100,100,"Logged as: "+ "\n\n"+logged_user->get_imie()+
+            " "+logged_user->get_nazwisko()+"\n\nPosition: "+logged_user->get_funkcja()+"\n\nEmail: "+logged_user->get_mail(),50,&font1);
             text1.render(this->window);
 
             /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
@@ -578,7 +579,6 @@ void Okno::render() { // renders things
             b1.update(get_mous_pos());
             if(b1.is_pressed()){
                 is_logged = false;
-                logged_as = "";
                 change_site(sites::start_site);}
             b1.render(this->window);
 

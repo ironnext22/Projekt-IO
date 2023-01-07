@@ -14,6 +14,7 @@
 #include "Textline.h"
 #include "Input_bar.h"
 #include "Loging.h"
+#include "Pracownik.h"
 #define PROJEKT_IO_MENU_H
 enum class sites{
     start_site = 0,
@@ -65,13 +66,13 @@ private:
     sites site;
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
+    Pracownik* logged_user = nullptr;
 
     /// auxiliary variables
     bool email_sent = false;
     bool created_ac = false;
     bool is_currently_changing_password = false;
     bool is_logged = false;
-    std::string logged_as = "";
     /// debug and bugfixing
     bool admin = true;
 
