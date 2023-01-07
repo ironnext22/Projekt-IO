@@ -16,26 +16,17 @@ Pracownik::Pracownik(std::string login, std::string haslo)
     XLDocument doc;
     doc.open("loginy.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
-    bool br = false;
-    int c1=0,c2 = 0;
+    int count = 1;
+    std::vector<std::string> v;
     for(auto a : wks.rows())
     {
-        c1++;
-         for(auto b : a.cells())
-         {
-             c2++;
-             if(c2==3)
-             {
-                if(static_cast<std::string>(b.value())==login)br= true;
-                 break;
-             }
-         }
-         if(br)break;
-    }
-    std::vector<std::string> v;
-    for(auto a : wks.row(c1).cells())
-    {
-        v.push_back(static_cast<std::string>(a.value()));
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==login and v[3]==haslo)break;
+        count++;
+        v.clear();
     }
     this->imie = v[0];
     this->nazwisko = v[1];
