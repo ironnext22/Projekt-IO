@@ -32,7 +32,11 @@ bool Loging::log_in(std::string login,std::string password)
 {
     return check_if_password_is_correct(login,password);
 }
-bool Loging::register_new_user(std::string imie,std::string nazwisko,std::string mail,std::string login, std::string haslo)
+bool Loging::register_new_user(std::string mail,std::string login, std::string haslo1,std::string haslo2)
 {
-
+    if(check_if_email_is_in_data_base(mail))return false;
+    if(check_if_login_exists(login))return false;
+    if(haslo1!=haslo2)return false;
+    login_list.dodaj_pracownika("unknown","unknown",login,haslo1,"brak",mail);
+return true;
 }
