@@ -658,6 +658,11 @@ void Okno::render() { // renders things
                     selected_string = "Password";
                     input_bar2.set_limit(true,MAX_PASSWORD_CHARACTERS);
                     break;
+                case 5:
+                    selected_string = "Remove";
+                    input_bar2.set_limit(true,MAX_PASSWORD_CHARACTERS);
+                    break;
+
             };
 
 
@@ -679,7 +684,7 @@ void Okno::render() { // renders things
             }
             input_bar1.set_limit(true,MAX_LOGIN_CHARACTERS);
 
-            text1.Textline_set(180, 50, "Select employee by nickname and change values", 50, &font1);
+            text1.Textline_set(180, 50, "Select employee by nickname, choose type and enter value to change", 50, &font1);
 
 
             b2.button_set(900,300,100,500,&font1,"Enter login:" + input_bar1.get_text());
@@ -691,7 +696,7 @@ void Okno::render() { // renders things
             if(b3.is_pressed()){
                 std::this_thread::sleep_for(std::chrono::milliseconds(50));
                 selected++;
-                if(selected > 4){selected = 0;}
+                if(selected > 5){selected = 0;}
 
             }
 
@@ -702,7 +707,11 @@ void Okno::render() { // renders things
             b5.button_set(900,600,100,500,&font1,"Change!");
             b5.update(get_mous_pos());
             if(b5.is_pressed()){
-                if(input_bar2.get_text() == "" || input_bar1.get_text() == "" )
+                if(selected == 5 && input_bar1.get_text() == "" ){
+                    /// REMOVE PERSON
+                    text1.Textline_set(920, 220, "Removed!", 50, &font1);
+                }
+                else if(input_bar2.get_text() == "" || input_bar1.get_text() == "" )
                 {
                     text2.Textline_set(920, 260, "Data or Login cannot be empty", 50, &font1);
                 }
@@ -724,15 +733,18 @@ void Okno::render() { // renders things
                         case 4:
                             /// CHANGE PASSWORD
                             break;
+                        case 5:
+                            break;
                     }
 
-                    text1.Textline_set(920, 260, "Changed!", 50, &font1);
+                    text3.Textline_set(920, 220, "Changed: " + selected_string + " to " + input_bar2.get_text(), 50, &font1);
 
 
                 }
             }
             text1.render(this->window);
             text2.render(this->window);
+            text3.render(this->window);
             b1.render(this->window);
             b2.render(this->window);
             b3.render(this->window);
