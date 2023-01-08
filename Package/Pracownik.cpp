@@ -16,7 +16,6 @@ Pracownik::Pracownik(std::string login, std::string haslo)
     XLDocument doc;
     doc.open("loginy.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
-    int count = 1;
     std::vector<std::string> v;
     for(auto a : wks.rows())
     {
@@ -25,7 +24,6 @@ Pracownik::Pracownik(std::string login, std::string haslo)
             v.push_back(static_cast<std::string>(b.value()));
         }
         if(v[2]==login and v[3]==haslo)break;
-        count++;
         v.clear();
     }
     this->imie = v[0];
@@ -37,4 +35,76 @@ Pracownik::Pracownik(std::string login, std::string haslo)
     else if(v[4]=="Dentysta")this->funkcja=Funkcje::Dentysta;
     else if(v[4]=="Administrator")this->funkcja=Funkcje::Administrator;
     else this->funkcja=Funkcje::Error;
+}
+void Pracownik::set_imie(std::string imie)
+{
+    this->imie=imie;
+    XLDocument doc;
+    doc.open("loginy.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==login and v[3]==haslo)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[0]=imie;
+    wks.row(count).values() = v;
+}
+void Pracownik::set_nazwisko(std::string nazwisko)
+{
+    this->nazwisko=nazwisko;
+    XLDocument doc;
+    doc.open("loginy.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==login and v[3]==haslo)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[1]= this->nazwisko;
+    wks.row(count).values() = v;
+}
+void Pracownik::set_mail(std::string mail)
+{
+    this->mail=mail;
+    XLDocument doc;
+    doc.open("loginy.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==login and v[3]==haslo)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[5]=this->mail;
+    wks.row(count).values() = v;
 }
