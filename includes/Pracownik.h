@@ -11,7 +11,6 @@ public:
     std::string login;
     std::string haslo;
     Funkcje funkcja;
-public:
     Pracownik(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja,std::string mail)
     {
         this->imie=imie;
