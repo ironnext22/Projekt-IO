@@ -139,4 +139,5 @@ void Pracownik::set_haslo(std::string haslo)
     wks.row(count).values() = v;
     doc.save();
     doc.close();
+
 }
