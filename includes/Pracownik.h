@@ -7,10 +7,11 @@ using namespace OpenXLSX;
 enum class Funkcje {Asystentka=0,Dentysta=1,Administrator=2,No_function=3};
 class Pracownik:public Osoba
 {
-public:
+protected:
     std::string login;
     std::string haslo;
     Funkcje funkcja;
+public:
     Pracownik(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja,std::string mail)
     {
         this->imie=imie;
@@ -28,7 +29,8 @@ public:
     std::string get_surname();
     std::string get_mail();
     std::string get_function();
-    std::string  get_login();
+    std::string get_login();
+    std::string get_password();
     void set_name(std::string imie);
     void set_surname(std::string nazwisko);
     void set_mail(std::string mail);

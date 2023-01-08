@@ -68,6 +68,7 @@ private:
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
     Pracownik* logged_user = nullptr;
+    Pracownicy worker_list;
 
     /// auxiliary variables
     bool email_sent = false;

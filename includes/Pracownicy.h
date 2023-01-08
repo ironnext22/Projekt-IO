@@ -7,17 +7,11 @@
 using namespace OpenXLSX;
 class Pracownicy
 {
-public:
+private:
 std::vector<Pracownik> pracownicy;
+public:
     Pracownicy();
     ~Pracownicy();
-    void disp()
-    {
-        for(auto a : pracownicy)
-        {
-            std::cout<<a.imie<<" "<<a.nazwisko<<" "<<a.login<<" "<<a.haslo<<" "<<static_cast<int>(a.funkcja)<<" "<<a.mail<<std::endl;
-        }
-    }
     void dodaj_pracownika(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja,std::string mail);
     std::vector<Pracownik> get_worker();
 
