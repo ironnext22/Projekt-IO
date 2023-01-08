@@ -1,10 +1,6 @@
 #include "../includes/Admin.h"
 void Admin::set_function(std::string login,std::string funkcja)
 {
-    if(funkcja=="Asystentka")this->funkcja==Funkcje::Asystentka;
-    else if(funkcja=="Dentysta")this->funkcja==Funkcje::Dentysta;
-    else if(funkcja=="Administrator")this->funkcja==Funkcje::Administrator;
-    else this->funkcja==Funkcje::No_function;
     XLDocument doc;
     doc.open("loginy.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
