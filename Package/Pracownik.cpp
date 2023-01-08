@@ -8,7 +8,7 @@
     if(funkcja==Funkcje::Asystentka)fun="Asysystentka";
     if(funkcja==Funkcje::Dentysta)fun="Dentysta";
     if(funkcja==Funkcje::Administrator)fun="Administrator";
-    if(funkcja==Funkcje::Error)fun="Error";
+    if(funkcja==Funkcje::No_function)fun="No Function";
     return fun;
 }
 Pracownik::Pracownik(std::string login, std::string haslo)
@@ -34,7 +34,7 @@ Pracownik::Pracownik(std::string login, std::string haslo)
     if(v[4]=="Asystentka")this->funkcja=Funkcje::Asystentka;
     else if(v[4]=="Dentysta")this->funkcja=Funkcje::Dentysta;
     else if(v[4]=="Administrator")this->funkcja=Funkcje::Administrator;
-    else this->funkcja=Funkcje::Error;
+    else this->funkcja=Funkcje::No_function;
 }
 void Pracownik::set_name(std::string imie)
 {

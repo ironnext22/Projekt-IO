@@ -4,7 +4,7 @@
 #include <OpenXLSX.hpp>
 #include "Osoba.h"
 using namespace OpenXLSX;
-enum class Funkcje {Asystentka=0,Dentysta=1,Administrator=2,Error=3};
+enum class Funkcje {Asystentka=0,Dentysta=1,Administrator=2,No_function=3};
 class Pracownik:public Osoba
 {
 public:
@@ -22,7 +22,7 @@ public:
             if(funkcja=="Asystentka")this->funkcja=Funkcje::Asystentka;
             else if(funkcja=="Dentysta")this->funkcja=Funkcje::Dentysta;
             else if(funkcja=="Administrator")this->funkcja=Funkcje::Administrator;
-            else this->funkcja=Funkcje::Error;
+            else this->funkcja=Funkcje::No_function;
     }
     Pracownik(std::string login,std::string haslo);
     std::string get_name();
