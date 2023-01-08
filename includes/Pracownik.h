@@ -25,13 +25,14 @@ public:
             else this->funkcja=Funkcje::Error;
     }
     Pracownik(std::string login,std::string haslo);
-    std::string get_imie();
-    std::string get_nazwisko();
-    std::string get_mail();
-    std::string get_funkcja();
-    std::string  get_login();
+    const std::string get_imie();
+    const std::string get_nazwisko();
+    const std::string get_mail();
+    const std::string get_funkcja();
+    const std::string  get_login();
     void set_imie(std::string imie);
     void set_nazwisko(std::string nazwisko);
     void set_mail(std::string mail);
+    void set_haslo(std::string haslo);
 };
 #endif //PROJEKT_IO_PRACOWNIK_H

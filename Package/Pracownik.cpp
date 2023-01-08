@@ -1,9 +1,9 @@
 #include "../includes/Pracownik.h"
-std::string Pracownik::get_imie(){return imie;}
-std::string Pracownik::get_nazwisko(){return nazwisko;}
-std::string Pracownik::get_mail() {return mail;}
-std::string Pracownik::get_login() {return login;}
-std::string Pracownik::get_funkcja() {
+const std::string Pracownik::get_imie(){return imie;}
+const std::string Pracownik::get_nazwisko(){return nazwisko;}
+const std::string Pracownik::get_mail() {return mail;}
+const std::string Pracownik::get_login() {return login;}
+const std::string Pracownik::get_funkcja() {
     std::string fun;
     if(funkcja==Funkcje::Asystentka)fun="Asysystentka";
     if(funkcja==Funkcje::Dentysta)fun="Dentysta";
@@ -106,5 +106,29 @@ void Pracownik::set_mail(std::string mail)
         v.clear();
     }
     v[5]=this->mail;
+    wks.row(count).values() = v;
+}
+void Pracownik::set_haslo(std::string haslo)
+{
+    this->haslo=haslo;
+    XLDocument doc;
+    doc.open("loginy.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==login)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[3]=this->mail;
     wks.row(count).values() = v;
 }
