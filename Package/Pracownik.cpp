@@ -1,9 +1,9 @@
 #include "../includes/Pracownik.h"
-const std::string Pracownik::get_imie(){return imie;}
-const std::string Pracownik::get_nazwisko(){return nazwisko;}
-const std::string Pracownik::get_mail() {return mail;}
-const std::string Pracownik::get_login() {return login;}
-const std::string Pracownik::get_funkcja() {
+ std::string Pracownik::get_imie(){return imie;}
+ std::string Pracownik::get_nazwisko(){return nazwisko;}
+ std::string Pracownik::get_mail() {return mail;}
+ std::string Pracownik::get_login() {return login;}
+ std::string Pracownik::get_funkcja() {
     std::string fun;
     if(funkcja==Funkcje::Asystentka)fun="Asysystentka";
     if(funkcja==Funkcje::Dentysta)fun="Dentysta";
