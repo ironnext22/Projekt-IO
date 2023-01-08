@@ -335,8 +335,8 @@ void Okno::render() { // renders things
             if(b3.is_pressed()){change_site(sites::account_management_site);}
             b3.render(this->window);
 
-            text1.Textline_set(100,100,"Logged as: " +logged_user->get_login() + "\n\n"+logged_user->get_imie()+
-            " "+logged_user->get_nazwisko()+"\n\nPosition: "+logged_user->get_funkcja()+"\n\nEmail: "+logged_user->get_mail()
+            text1.Textline_set(100,100,"Logged as: " +logged_user->get_login() + "\n\n"+logged_user->get_name()+
+            " "+logged_user->get_surname()+"\n\nPosition: "+logged_user->get_function()+"\n\nEmail: "+logged_user->get_mail()
             +"\n\nToday is: "+timer.currentDateTime()+"\n\nHave a good day",50,&font1);
             text1.render(this->window);
 
@@ -515,7 +515,7 @@ void Okno::render() { // renders things
                 }
                 else{
 
-                    logged_user->set_imie(input_bar1.get_text());
+                    logged_user->set_name(input_bar1.get_text());
                     text1.Textline_set(400, 200, "Name changed", 50, &font1);
 
                 }
@@ -535,7 +535,7 @@ void Okno::render() { // renders things
                     text1.Textline_set(400, 200, "Last Name cannot be empty", 50, &font1);
                 }
                 else{
-                    logged_user->set_nazwisko(input_bar2.get_text());
+                    logged_user->set_surname(input_bar2.get_text());
                     text1.Textline_set(400, 200, "Last Name changed", 50, &font1);
                 }
             }
@@ -555,6 +555,8 @@ void Okno::render() { // renders things
                     text1.Textline_set(400, 200, "Password cannot be empty", 50, &font1);
                 }
                 else{
+                    text1.Textline_set(400, 200, "Password changed", 50, &font1);
+                    logged_user->set_password(input_bar3.get_text());
 
                 }
             }
@@ -587,8 +589,6 @@ void Okno::render() { // renders things
             b7.render(this->window);
             b8.render(this->window);
             b9.render(this->window);
-
-
 
 
 
