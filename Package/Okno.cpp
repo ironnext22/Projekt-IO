@@ -336,7 +336,8 @@ void Okno::render() { // renders things
             b3.render(this->window);
 
             text1.Textline_set(100,100,"Logged as: " +logged_user->get_login() + "\n\n"+logged_user->get_imie()+
-            " "+logged_user->get_nazwisko()+"\n\nPosition: "+logged_user->get_funkcja()+"\n\nEmail: "+logged_user->get_mail(),50,&font1);
+            " "+logged_user->get_nazwisko()+"\n\nPosition: "+logged_user->get_funkcja()+"\n\nEmail: "+logged_user->get_mail()
+            +"\n\nToday is: "+timer.currentDateTime()+"\n\nHave a good day",50,&font1);
             text1.render(this->window);
 
             /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
