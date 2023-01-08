@@ -515,7 +515,8 @@ void Okno::render() { // renders things
                 }
                 else{
 
-                    /// Name googogogogog
+                    logged_user->set_imie(input_bar1.get_text());
+                    text1.Textline_set(400, 200, "Name changed", 50, &font1);
 
                 }
             }
@@ -534,7 +535,8 @@ void Okno::render() { // renders things
                     text1.Textline_set(400, 200, "Last Name cannot be empty", 50, &font1);
                 }
                 else{
-                    /// CHANGE LAST NAME METHOD
+                    logged_user->set_nazwisko(input_bar2.get_text());
+                    text1.Textline_set(400, 200, "Last Name changed", 50, &font1);
                 }
             }
             password="";
@@ -553,7 +555,7 @@ void Okno::render() { // renders things
                     text1.Textline_set(400, 200, "Password cannot be empty", 50, &font1);
                 }
                 else{
-                    /// CHANGE PASSWORD METHOD
+
                 }
             }
             text1.render(this->window);
