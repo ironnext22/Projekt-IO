@@ -558,6 +558,25 @@ void Okno::render() { // renders things
 
                 }
             }
+
+            b8.button_set(100,600,100,500,&font1,"Change Email");
+            b8.update(get_mous_pos());
+            b9.button_set(600,600,100,750,&font1,"New Email:" + input_bar4.get_text());
+            b9.update(get_mous_pos());
+            if(b9.is_pressed()){make_input_bar_active(4);}
+            if(b8.is_pressed()){
+                if(input_bar4.get_text() == "")
+                {
+                    text1.Textline_set(400, 200, "Email cannot be empty", 50, &font1);
+                }
+                else{
+                    text1.Textline_set(400, 200, "Email changed", 50, &font1);
+                    logged_user->set_mail(input_bar4.get_text());
+
+                }
+            }
+
+
             text1.render(this->window);
             b1.render(this->window);
             b2.render(this->window);
@@ -566,6 +585,10 @@ void Okno::render() { // renders things
             b5.render(this->window);
             b6.render(this->window);
             b7.render(this->window);
+            b8.render(this->window);
+            b9.render(this->window);
+
+
 
 
 
@@ -651,6 +674,8 @@ void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites
     b5.button_set(0,0,0,0,&font1,"");
     b6.button_set(0,0,0,0,&font1,"");
     b7.button_set(0,0,0,0,&font1,"");
+    b8.button_set(0,0,0,0,&font1,"");
+    b9.button_set(0,0,0,0,&font1,"");
 
     text1.Textline_set(0,0,"",0,&font1);
     text2.Textline_set(0,0,"",0,&font1);
