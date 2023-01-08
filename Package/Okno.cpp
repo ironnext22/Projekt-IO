@@ -7,6 +7,7 @@
 #define MAX_PASSWORD_CHARACTERS 20
 #define MAX_LOGIN_CHARACTERS 20
 #define MAX_EMAIL_CHARACTERS 25
+#define MAX_NAME_SURNAME_CHARACTERS 20
 
 
 
@@ -36,6 +37,7 @@ void Okno::initialize_window() {
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
     this->window = new RenderWindow(this->video_mode,"Proba nr 1.",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
+
 }
 
 /// public functions
@@ -138,7 +140,10 @@ void Okno::render() { // renders things
                     logged_user= new Pracownik(input_bar1.get_text(),input_bar2.get_text());
 
                     is_logged = true;
-                    change_site(sites::logged_in_site);
+                    if(logged_user->get_function() == "Administrator"){change_site(sites::admin_start_site);}
+                    else {
+                        change_site(sites::logged_in_site);
+                    }
 
                 } else if (!logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
                     text1.Textline_set(650, 350, "Invalid login or password!", 50, &font1);
@@ -311,7 +316,7 @@ void Okno::render() { // renders things
     }
         case sites::logged_in_site:
         {
-           // if(admin){change_site(sites::admin_start_site);}
+
 
             b2.button_set(1000,400,100,400,&font1,"Calendar");
             b2.update(get_mous_pos());
@@ -371,7 +376,7 @@ void Okno::render() { // renders things
 
 
 
-                input_bar1.set_limit(true, 15);
+                input_bar1.set_limit(true, MAX_EMAIL_CHARACTERS);
 
                 text1.Textline_set(650, 550, "Enter email. Verification key will be sent on this address", 50, &font1);
                 b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -399,7 +404,7 @@ void Okno::render() { // renders things
 
                 }
                 if (email_sent == true && is_currently_changing_password == false) {
-                    input_bar2.set_limit(true, 3);
+                    input_bar2.set_limit(true, 3); // () ver code is 4 long
                     text1.Textline_set(650, 550, "Verification code is sent to this address", 50, &font1);
 
                     b2.button_set(600, 300, 100, 700, &font1, "Ver. code: " + input_bar2.get_text());
@@ -471,8 +476,8 @@ void Okno::render() { // renders things
                     }
                     else if(input_bar3.get_text() == input_bar4.get_text()){
                         text1.Textline_set(650, 250, "Password changed!", 50, &font1);
+                        logged_user->set_password(input_bar4.get_text());
 
-                        /// CHANGE PASSWORD method
                     }
 
                 }
@@ -494,6 +499,12 @@ void Okno::render() { // renders things
         }
         case sites::account_management_site:
         {
+
+            input_bar1.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
+            input_bar2.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
+            input_bar3.set_limit(true,MAX_PASSWORD_CHARACTERS);
+            input_bar4.set_limit(true,MAX_EMAIL_CHARACTERS);
+
 
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
@@ -626,14 +637,107 @@ void Okno::render() { // renders things
         }
         case sites::admin_site_employee_managent_site:{
 
+            switch(selected){
+                case 0:
+                    selected_string = "Login";
+                    input_bar2.set_limit(true,MAX_LOGIN_CHARACTERS);
+                    break;
+                case 1:
+                    selected_string = "Name";
+                    input_bar2.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
+                    break;
+                case 2:
+                    selected_string = "Surname";
+                    input_bar2.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
+                    break;
+                case 3:
+                    selected_string = "Email";
+                    input_bar2.set_limit(true,MAX_EMAIL_CHARACTERS);
+                    break;
+                case 4:
+                    selected_string = "Password";
+                    input_bar2.set_limit(true,MAX_PASSWORD_CHARACTERS);
+                    break;
+            };
+
+
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()) { change_site(sites::admin_start_site); }
             b1.render(this->window);
+            int count = 0;
+            std::string line = "";
+            for (auto a : worker_list.get_worker()){
+                if(count != 0 && count < 20) {
 
 
+                 text1.Textline_set(10, 100 + (count * 20), set_table_line_for_admin_site(a.get_login(),a.get_name(),a.get_surname(),a.get_mail(),a.get_function()),30,&font1);
+                 text1.render(this->window);
+
+                }
+                count++;
+            }
+            input_bar1.set_limit(true,MAX_LOGIN_CHARACTERS);
+
+            text1.Textline_set(180, 50, "Select employee by nickname and change values", 50, &font1);
 
 
+            b2.button_set(900,300,100,500,&font1,"Enter login:" + input_bar1.get_text());
+            b2.update(get_mous_pos());
+            if(b2.is_pressed()){make_input_bar_active(1);}
+
+            b3.button_set(900,400,100,500,&font1,"Selected: " + selected_string);
+            b3.update(get_mous_pos());
+            if(b3.is_pressed()){
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                selected++;
+                if(selected > 4){selected = 0;}
+
+            }
+
+            b4.button_set(900,500,100,500,&font1,"New:" + input_bar2.get_text());
+            b4.update(get_mous_pos());
+            if(b4.is_pressed()){make_input_bar_active(2);}
+
+            b5.button_set(900,600,100,500,&font1,"Change!");
+            b5.update(get_mous_pos());
+            if(b5.is_pressed()){
+                if(input_bar2.get_text() == "" || input_bar1.get_text() == "" )
+                {
+                    text2.Textline_set(920, 260, "Data or Login cannot be empty", 50, &font1);
+                }
+                else{
+                    switch(selected){
+                        case 0:
+                            /// CHANGE LOGIN
+
+                            break;
+                        case 1:
+                            /// CHANGE NAME
+                            break;
+                        case 2:
+                            /// CHANGE SURNAME
+                            break;
+                        case 3:
+                            /// CHANGE EMAIL
+                            break;
+                        case 4:
+                            /// CHANGE PASSWORD
+                            break;
+                    }
+
+                    text1.Textline_set(920, 260, "Changed!", 50, &font1);
+
+
+                }
+            }
+            text1.render(this->window);
+            text2.render(this->window);
+            b1.render(this->window);
+            b2.render(this->window);
+            b3.render(this->window);
+            b4.render(this->window);
+            b5.render(this->window);
             break;
 
         }
@@ -641,8 +745,16 @@ void Okno::render() { // renders things
     this->window->display();
 }
 
+/// to fix
+std::string Okno::set_table_line_for_admin_site(std::string login,std::string name , std::string surname ,std::string mail,std::string fun){
 
+    std::stringstream a_stream;
+    a_stream << std::setiosflags ( std::ios_base::internal)
+    << std::setw ( 30 ) <<login <<"\t"  << std::setw ( 30 )<<name<<"\t"  << std::setw ( 30 )<<surname<<"\t"  << std::setw ( 30 )<<mail<<"\t"  << std::setw ( 30 )<<fun;
+    std::string the_string = a_stream.str();
+    return the_string;
 
+}
 
 void Okno::update() { // checks for changes
     this->poll_events();
@@ -695,8 +807,9 @@ void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites
     /// also changes some staff to be reseted
     verification_code = "000000";
     email_sent =false;
+    selected = 0;
     created_ac = false;
-
+    std::string selected_string = "";
 }
 
 void Okno::generate_code() { /// generates verification code

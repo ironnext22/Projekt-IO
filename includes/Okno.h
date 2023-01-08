@@ -16,6 +16,9 @@
 #include "Loging.h"
 #include "Pracownik.h"
 #include "Time_app.h"
+#include <iostream>
+#include <iomanip>
+#include "../fmt/include/fmt/core.h"
 #define PROJEKT_IO_MENU_H
 enum class sites{
     start_site = 0,
@@ -76,6 +79,8 @@ private:
     bool is_currently_changing_password = false;
     bool is_logged = false;
     Time_app timer;
+    int selected = 0;
+    std::string selected_string = "";
     /// debug and bugfixing
     bool admin = true;
 
@@ -95,6 +100,11 @@ public:
     void poll_events();
     void update();
     void render();
+
+
+    /// bonus functions
+    std::string set_table_line_for_admin_site(std::string login,std::string name , std::string surname ,std::string mail,std::string fun);
+
 
 
 
