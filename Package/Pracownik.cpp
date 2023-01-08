@@ -59,6 +59,8 @@ void Pracownik::set_imie(std::string imie)
     }
     v[0]=imie;
     wks.row(count).values() = v;
+    doc.save();
+    doc.close();
 }
 void Pracownik::set_nazwisko(std::string nazwisko)
 {
@@ -83,6 +85,8 @@ void Pracownik::set_nazwisko(std::string nazwisko)
     }
     v[1]= this->nazwisko;
     wks.row(count).values() = v;
+    doc.save();
+    doc.close();
 }
 void Pracownik::set_mail(std::string mail)
 {
@@ -107,6 +111,8 @@ void Pracownik::set_mail(std::string mail)
     }
     v[5]=this->mail;
     wks.row(count).values() = v;
+    doc.save();
+    doc.close();
 }
 void Pracownik::set_haslo(std::string haslo)
 {
@@ -131,4 +137,7 @@ void Pracownik::set_haslo(std::string haslo)
     }
     v[3]=this->mail;
     wks.row(count).values() = v;
+    doc.save();
+    doc.close();
+
 }
