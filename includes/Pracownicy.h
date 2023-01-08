@@ -19,9 +19,8 @@ std::vector<Pracownik> pracownicy;
         }
     }
     void dodaj_pracownika(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja,std::string mail);
-    void zmien_haslo(std::string login,std::string nowe_haslo);
-    void zmien_imie(std::string login,std::string nowe_imie);
-    void zmien_nazwisko(std::string login,std::string nowe_nazwisko);
+    std::vector<Pracownik> get_worker();
+
     Pracownik create_pracownik(Pracownik& prac);
 };
 #endif //PROJEKT_IO_PRACOWNICY_H
