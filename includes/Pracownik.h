@@ -33,5 +33,6 @@ public:
     void set_imie(std::string imie);
     void set_nazwisko(std::string nazwisko);
     void set_mail(std::string mail);
+    void set_haslo(std::string haslo);
 };
 #endif //PROJEKT_IO_PRACOWNIK_H
