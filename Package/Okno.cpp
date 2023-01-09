@@ -531,10 +531,8 @@ void Okno::render() {
                     text1.Textline_set(400, 200, "Name cannot be empty", 50, &font1);
                 }
                 else{
-
-                    logged_user->set_name(input_bar1.get_text());
+                    worker_list.set_attribute(user_data_type::name,logged_user->get_login(),input_bar1.get_text());
                     text1.Textline_set(400, 200, "Name changed", 50, &font1);
-
                 }
             }
 
@@ -552,7 +550,7 @@ void Okno::render() {
                     text1.Textline_set(400, 200, "Last Name cannot be empty", 50, &font1);
                 }
                 else{
-                    logged_user->set_surname(input_bar2.get_text());
+                    worker_list.set_attribute(user_data_type::surname,logged_user->get_login(),input_bar2.get_text());
                     text1.Textline_set(400, 200, "Last Name changed", 50, &font1);
                 }
             }
@@ -573,7 +571,8 @@ void Okno::render() {
                 }
                 else{
                     text1.Textline_set(400, 200, "Password changed", 50, &font1);
-                    logged_user->set_password(input_bar3.get_text());
+                    worker_list.set_attribute(user_data_type::password,logged_user->get_login(),input_bar3.get_text());
+
 
 
                 }
@@ -591,7 +590,8 @@ void Okno::render() {
                 }
                 else{
                     text1.Textline_set(400, 200, "Email changed", 50, &font1);
-                    logged_user->set_mail(input_bar4.get_text());
+                    worker_list.set_attribute(user_data_type::mail,logged_user->get_login(),input_bar4.get_text());
+
 
                 }
             }
