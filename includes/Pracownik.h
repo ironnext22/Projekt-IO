@@ -35,5 +35,8 @@ public:
     void set_surname(std::string nazwisko);
     void set_mail(std::string mail);
     void set_password(std::string haslo);
+
+
+
 };
 #endif //PROJEKT_IO_PRACOWNIK_H

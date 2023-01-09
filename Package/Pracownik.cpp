@@ -116,7 +116,6 @@ void Pracownik::set_mail(std::string mail)
     doc.close();
 }
 void Pracownik::set_password(std::string haslo) {
-    this->haslo=haslo;
     XLDocument doc;
     doc.open("loginy.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
@@ -140,3 +139,5 @@ void Pracownik::set_password(std::string haslo) {
     doc.save();
     doc.close();
 }
+
+

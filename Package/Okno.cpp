@@ -84,7 +84,7 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
 
 
 /// renders
-void Okno::render() { // renders things
+void Okno::render() {
     this->window->clear(Color::White);
     this->window->draw(sprite);
 
@@ -481,7 +481,8 @@ void Okno::render() { // renders things
                     }
                     else if(input_bar3.get_text() == input_bar4.get_text()){
                         text1.Textline_set(650, 250, "Password changed!", 50, &font1);
-                       // logged_user->set_password(input_bar4.get_text());
+                        worker_list.set_attribute(user_data_type::password,worker_list.get_login_with_mail(input_bar1.get_text()),input_bar3.get_text());
+
 
                     }
 
@@ -573,6 +574,7 @@ void Okno::render() { // renders things
                 else{
                     text1.Textline_set(400, 200, "Password changed", 50, &font1);
                     logged_user->set_password(input_bar3.get_text());
+
 
                 }
             }

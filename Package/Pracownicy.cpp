@@ -39,3 +39,79 @@ std::vector<Pracownik> Pracownicy::get_worker()
 {
     return pracownicy;
 }
+
+std::string Pracownicy::get_login_with_mail(std::string mail){
+    std::string login;
+    XLDocument doc;
+    doc.open("loginy.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[5]==mail)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    login = v[2];
+    wks.row(count).values() = v;
+    doc.save();
+    doc.close();
+    return login;
+
+}
+
+void Pracownicy::set_attribute(user_data_type type,std::string user_login,std::string new_value){
+
+    XLDocument doc;
+    doc.open("loginy.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==user_login)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    switch(type){
+        case user_data_type::name:{
+            v[0]=new_value;
+            break;
+        }
+        case user_data_type::surname:{
+            v[1]=new_value;
+            break;
+        }
+        case user_data_type::login:{
+            v[2]=new_value;
+            break;
+        }
+        case user_data_type::password:{
+            v[3]=new_value;
+            break;
+        }
+        case user_data_type::mail:{
+            v[5]=new_value;
+            break;
+        }
+    }
+    wks.row(count).values() = v;
+    doc.save();
+    doc.close();
+
+}
