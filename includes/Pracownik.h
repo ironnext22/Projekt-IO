@@ -31,10 +31,7 @@ public:
     std::string get_function();
     std::string get_login();
     std::string get_password();
-    /// te setery mozna wywalic i zastapic tymi z PRACOWNICY.H dodajac jedynie funckje szukania
-    /// a trzeba by to wywalic bo zasada DRY - dont reapet yourself
-    /// PS. trzeba zrobic jakies odswiezanie tego pliku .xsls bo trzeba wlaczyc i wylaczyc apke
-    /// w celu odswiezenia sie danych.
+
 
 
 
