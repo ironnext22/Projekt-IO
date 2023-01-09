@@ -409,7 +409,7 @@ void Okno::render() {
 
                 }
                 if (email_sent == true && is_currently_changing_password == false) {
-                    input_bar2.set_limit(true, 3); // () ver code is 4 long
+                    input_bar2.set_limit(true, 3); // ver code is 4 characters long
                     text1.Textline_set(650, 550, "Verification code is sent to this address", 50, &font1);
 
                     b2.button_set(600, 300, 100, 700, &font1, "Ver. code: " + input_bar2.get_text());
@@ -643,7 +643,7 @@ void Okno::render() {
             break;
         }
         case sites::admin_site_employee_managent_site:{
-
+            text2.Textline_set(0, 0, "", 50, &font1);
             switch(selected){
                 case 0:
                     selected_string = "Login";
@@ -668,6 +668,11 @@ void Okno::render() {
                 case 5:
                     selected_string = "Remove";
                     input_bar2.set_limit(true,MAX_PASSWORD_CHARACTERS);
+                    break;
+                case 6:
+                    selected_string = "Position";
+                    input_bar2.set_limit(true,1);
+                    text2.Textline_set(920, 260, "Asystentka=0,Dentysta=1,Administrator=2,No_function=3", 35, &font1);
                     break;
 
             };
@@ -703,7 +708,8 @@ void Okno::render() {
             if(b3.is_pressed()){
                 std::this_thread::sleep_for(std::chrono::milliseconds(50));
                 selected++;
-                if(selected > 5){selected = 0;}
+                if(selected > 6){selected = 0;}
+                input_bar2.clear();
 
             }
 
@@ -714,7 +720,10 @@ void Okno::render() {
             b5.button_set(900,600,100,500,&font1,"Change!");
             b5.update(get_mous_pos());
             if(b5.is_pressed()){
-                if(selected == 5 && input_bar1.get_text() == "" ){
+                if(!logging_menu.check_if_login_exists(input_bar1.get_text())){
+                    text2.Textline_set(920, 260, "No user with that login", 50, &font1);
+                }
+                else if(selected == 5 && input_bar1.get_text() == "" ){
                     /// REMOVE PERSON
                     text1.Textline_set(920, 220, "Removed!", 50, &font1);
                 }
@@ -724,24 +733,37 @@ void Okno::render() {
                 }
                 else{
                     switch(selected){
-                        case 0:
-                            /// CHANGE LOGIN
+                        case 0: /// CHANGE login
+                            worker_list.set_attribute(user_data_type::login,input_bar1.get_text(),input_bar2.get_text());
 
                             break;
-                        case 1:
-                            /// CHANGE NAME
+                        case 1:/// CHANGE NAME
+                            worker_list.set_attribute(user_data_type::name,input_bar1.get_text(),input_bar2.get_text());
                             break;
                         case 2:
                             /// CHANGE SURNAME
+                            worker_list.set_attribute(user_data_type::surname,input_bar1.get_text(),input_bar2.get_text());
+
                             break;
                         case 3:
                             /// CHANGE EMAIL
+                            worker_list.set_attribute(user_data_type::mail,input_bar1.get_text(),input_bar2.get_text());
+
                             break;
                         case 4:
                             /// CHANGE PASSWORD
+                            worker_list.set_attribute(user_data_type::password,input_bar1.get_text(),input_bar2.get_text());
+
                             break;
-                        case 5:
+                        case 5:/// REMOVE
                             break;
+
+                        case 6:
+                            /// CHANGE POSITION
+                            worker_list.set_attribute(user_data_type::position,input_bar1.get_text(),input_bar2.get_text());
+                            break;
+
+
                     }
 
                     text3.Textline_set(920, 220, "Changed: " + selected_string + " to " + input_bar2.get_text(), 50, &font1);
@@ -829,6 +851,7 @@ void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites
     selected = 0;
     created_ac = false;
     std::string selected_string = "";
+    is_currently_changing_password = false;
 }
 
 void Okno::generate_code() { /// generates verification code

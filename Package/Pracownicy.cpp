@@ -109,6 +109,22 @@ void Pracownicy::set_attribute(user_data_type type,std::string user_login,std::s
             v[5]=new_value;
             break;
         }
+        case user_data_type::position:{ ///Asystentka=0,Dentysta=1,Administrator=2,No_function=3
+            if(new_value == "0"){
+                v[4]="Asystentka";
+            }
+            else if(new_value == "1"){
+                v[4]="Dentysta";
+            }
+            else if(new_value == "2"){
+                v[4]="Administrator";
+            }
+            else {
+                v[4]="No_function";
+            }
+
+            break;
+        }
     }
     wks.row(count).values() = v;
     doc.save();

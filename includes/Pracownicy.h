@@ -16,6 +16,7 @@ enum class user_data_type{
 
 };
 
+
 class Pracownicy
 {
 private:
