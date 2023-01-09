@@ -633,12 +633,12 @@ void Okno::render() {
 
             b3.button_set(1000,400,100,400,&font1,"Magazine");
             b3.update(get_mous_pos());
-            if(b3.is_pressed()){change_site(sites::admin_site_employee_managent_site);}
+            if(b3.is_pressed()){}
             b3.render(this->window);
 
-            b4.button_set(1000,400,100,400,&font1,"Calendar");
+            b4.button_set(1000,300,100,400,&font1,"Calendar");
             b4.update(get_mous_pos());
-            if(b4.is_pressed()){change_site(sites::admin_site_employee_managent_site);}
+            if(b4.is_pressed()){}
             b4.render(this->window);
             break;
         }
