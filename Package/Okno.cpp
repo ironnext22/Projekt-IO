@@ -258,8 +258,8 @@ void Okno::render() { // renders things
                     else if (/*logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())*/ !email_sent) {
                         /// also add
 
-                        generate_code();
-                        mailbox.send_mail_with_verification_code(input_bar4.get_text(),verification_code);
+
+                        if(!email_sent){ generate_code();mailbox.send_mail_with_verification_code(input_bar1.get_text(),verification_code);}
                         std::cout << std::endl << verification_code << " -ver code"<< std::endl;
                         email_sent = true;
                         text1.Textline_set(650, 150, "Verification code has been sent", 50, &font1);
@@ -397,11 +397,11 @@ void Okno::render() { // renders things
                 b4.update(get_mous_pos());
                 if (b4.is_pressed() && logging_menu.check_if_email_is_in_data_base(input_bar1.get_text())) {
 
-                    /// SEND EMAIL to input_bar1.gettext() Title: Ver cod , send verification_code
 
+                    if(!email_sent){  generate_code();mailbox.send_mail_with_verification_code(input_bar1.get_text(),verification_code);}
                     email_sent = true;
-                    generate_code();
-                    ////////////////////////////////////////
+
+
                     text1.Textline_set(650, 550, "Verification code is sent to this address", 50, &font1);
 
                 } else if (b4.is_pressed() && !logging_menu.check_if_email_is_in_data_base(input_bar1.get_text())) {
@@ -481,7 +481,7 @@ void Okno::render() { // renders things
                     }
                     else if(input_bar3.get_text() == input_bar4.get_text()){
                         text1.Textline_set(650, 250, "Password changed!", 50, &font1);
-                        logged_user->set_password(input_bar4.get_text());
+                       // logged_user->set_password(input_bar4.get_text());
 
                     }
 
@@ -830,7 +830,7 @@ void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites
 }
 
 void Okno::generate_code() { /// generates verification code
-    verification_code = std::to_string( rand()%10000);
+    verification_code = std::to_string( 1000+rand()%9000);
 }
 
 void Okno::make_input_bar_active(int which_one){
