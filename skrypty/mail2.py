@@ -1,7 +1,7 @@
 import gmail
 # Twój adres e-mail i hasło
-username = 'wiktor.k.2002@gmail.com'
-password = 'jzsrhjzaklpwyabo'
+username = 'gabinetdentystycznyiodent@gmail.com'
+password = 'ppbrnlloepwfgjau'
 def mail1(mail = "X",data=""):
     client = gmail.GMail('Klinika Dentystyczna<'+username+'>',password)
     msg = gmail.Message('Wizyta',to='pacjent<'+mail+'>',text='Przypominamy o wizycie w dniu: '+data)
