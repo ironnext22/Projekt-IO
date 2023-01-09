@@ -16,8 +16,10 @@
 #include "Loging.h"
 #include "Pracownik.h"
 #include "Time_app.h"
+#include "Mail.h"
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #define PROJEKT_IO_MENU_H
 enum class sites{
     start_site = 0,
@@ -54,6 +56,7 @@ private:
     void make_input_bar_active(int which_one);
 
     Loging logging_menu;
+    Mail mailbox;
     RenderWindow* window;
     Event ev;
     VideoMode video_mode;

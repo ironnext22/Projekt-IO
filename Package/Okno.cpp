@@ -248,14 +248,18 @@ void Okno::render() { // renders things
                     } else if (input_bar2.get_text() != input_bar3.get_text()) {
                         text1.Textline_set(650, 150, "Passwords aren't the same", 50, &font1);
                     }
+                    /// HERE ADD IF THAT ACCOUNT ALREADY EXISTS
+
                         ///  else if(!logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())){
                         ///      text1.Textline_set(650,150,"There are no accounts with this email.",50,&font1);
                         ///
                         ///   }
+
                     else if (/*logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())*/ !email_sent) {
-                        /// SEND EMAIL with code //////////////////////////////////
+                        /// also add
 
                         generate_code();
+                        mailbox.send_mail_with_verification_code(input_bar4.get_text(),verification_code);
                         std::cout << std::endl << verification_code << " -ver code"<< std::endl;
                         email_sent = true;
                         text1.Textline_set(650, 150, "Verification code has been sent", 50, &font1);
