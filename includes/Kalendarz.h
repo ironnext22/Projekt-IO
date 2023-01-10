@@ -10,5 +10,6 @@ std::vector<Wizyta> wizyty;
 public:
     Kalendarz();
     void dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina);
+    std::vector<Wizyta> get_wizyty();
 };
 #endif //PROJEKT_IO_KALENDARZ_H
