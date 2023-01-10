@@ -8,7 +8,7 @@ Loging login;
 Kalendarz test;
 int main()
 {
-    test.dodal_wizyte("Wiktor","Kowalski","2222222","19.09.2022","19.22");
+    //test.dodal_wizyte("Wiktor","Kowalski","2222222","19.09.2022","19.22");
 
     Okno menu;
 
