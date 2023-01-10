@@ -2,12 +2,13 @@
 #include "includes/Okno.h"
 #include "includes/Pracownicy.h"
 #include "includes/Loging.h"
+#include "includes/Kalendarz.h"
 using namespace sf;
 Loging login;
-Pracownicy test;
+Kalendarz test;
 int main()
 {
-
+    test.dodal_wizyte("Wiktor","Kowalski","2222222","19.09.2022","19.22");
 
     Okno menu;
 
