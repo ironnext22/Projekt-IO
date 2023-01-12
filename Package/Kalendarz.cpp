@@ -42,3 +42,54 @@ std::vector<Wizyta> Kalendarz::get_wizyty()
 {
     return wizyty;
 }
+
+void Kalendarz::set_data(std::string data,std::string pesel)
+{
+    XLDocument doc;
+    doc.open("wizyty.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==pesel)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[3]=data;
+    wks.row(count).values() = v;
+    doc.save();
+    doc.close();
+}
+void Kalendarz::set_godzina(std::string godzina,std::string pesel)
+{
+    XLDocument doc;
+    doc.open("wizyty.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[2]==pesel)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[4]=godzina;
+    wks.row(count).values() = v;
+    doc.save();
+    doc.close();
+}

@@ -91,22 +91,27 @@ void Pracownicy::set_attribute(user_data_type type,std::string user_login,std::s
     switch(type){
         case user_data_type::name:{
             v[0]=new_value;
+            pracownicy[count-1].set_name(new_value);
             break;
         }
         case user_data_type::surname:{
             v[1]=new_value;
+            pracownicy[count-1].set_surname(new_value);
             break;
         }
         case user_data_type::login:{
             v[2]=new_value;
+            pracownicy[count-1].set_login(new_value);
             break;
         }
         case user_data_type::password:{
             v[3]=new_value;
+            pracownicy[count-1].set_password(new_value);
             break;
         }
         case user_data_type::mail:{
             v[5]=new_value;
+            pracownicy[count-1].set_mail(new_value);
             break;
         }
         case user_data_type::position:{ ///Asystentka=0,Dentysta=1,Administrator=2,No_function=3

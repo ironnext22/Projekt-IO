@@ -25,13 +25,11 @@ public:
             else this->funkcja=Funkcje::No_function;
     }
     Pracownik(std::string login,std::string haslo);
-    std::string get_name();
-    std::string get_surname();
-    std::string get_mail();
     std::string get_function();
     std::string get_login();
     std::string get_password();
-
+    void set_login(std::string login);
+    void set_password(std::string password);
 
 
 

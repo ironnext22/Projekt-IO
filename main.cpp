@@ -3,15 +3,12 @@
 #include "includes/Pracownicy.h"
 #include "includes/Loging.h"
 #include "includes/Kalendarz.h"
-using namespace sf;
-Loging login;
 Kalendarz test;
+using namespace sf;
 int main()
 {
-    //test.dodal_wizyte("Wiktor","Kowalski","2222222","19.09.2022","19.22");
-
+    test.set_godzina("19.22","2222222");
     Okno menu;
-
 
     while(menu.get_window_is_open()) {
 
