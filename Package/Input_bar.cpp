@@ -134,4 +134,4 @@ void Input_bar::typed_on(sf::Event input) {
 
 bool Input_bar::get_is_selected(){
     return is_selected;
-}
+}//
