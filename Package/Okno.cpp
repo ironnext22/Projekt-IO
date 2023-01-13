@@ -404,12 +404,18 @@ void Okno::render() {
 
 
 
+            auto kalendarz = assistant->get_kalendars();
+            auto wizyty = kalendarz.get_wizyty();
+            for(auto a: wizyty){
 
+
+            }
             sf::RectangleShape rec1;
             sf::Text t1;
             for(int i = 0;i<6;i++){
                 for(int j =0; j<9;j++)
                 {
+
 
                     rec1.setSize(sf::Vector2f(200,80));
                     rec1.setPosition(180+(i*200),35+(j*80));
