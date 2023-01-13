@@ -93,7 +93,7 @@ void Kalendarz::set_godzina(std::string godzina,std::string pesel)
     doc.save();
     doc.close();
 }
-
+//k
 Pacjent Kalendarz::find_pacjet(std::string pesel)
 {
     Pacjent pom;
