@@ -17,6 +17,9 @@
 #include "Pracownik.h"
 #include "Time_app.h"
 #include "Mail.h"
+#include "Assistant.h"
+#include "Admin.h"
+#include "Dentist.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -32,10 +35,10 @@ enum class sites{
     password_reset_site =7,
     calendar_display_site=8,
     account_management_site =9,
-    password_changing_site=10,
     admin_start_site = 11,
     admin_site_employee_managent_site = 12,
     admin_magazine_site = 13,
+
 
 
 
@@ -72,8 +75,14 @@ private:
     sites site;
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
+
     Pracownik* logged_user = nullptr;
+
     Pracownicy worker_list;
+    Admin *adm = nullptr;
+    Assistant *assistant = nullptr;
+    Dentist *dentist = nullptr;
+
 
     /// auxiliary variables
     bool email_sent = false;
