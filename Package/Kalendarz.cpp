@@ -93,3 +93,13 @@ void Kalendarz::set_godzina(std::string godzina,std::string pesel)
     doc.save();
     doc.close();
 }
+
+Pacjent Kalendarz::find_pacjet(std::string pesel)
+{
+    Pacjent pom;
+    for(auto a : wizyty)
+    {
+        if(a.get_pacjent().get_pesel()==pesel)pom=a.get_pacjent();
+    }
+    return pom;
+}

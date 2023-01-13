@@ -8,5 +8,6 @@ private:
     std::string pesel;
 public:
     void set_pesel(std::string pesel){this->pesel=pesel;}
+    std::string get_pesel(){return pesel;}
 };
 #endif //PROJEKT_IO_PACJENT_H

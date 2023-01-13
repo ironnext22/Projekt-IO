@@ -7,5 +7,6 @@ class Assistant:public Pracownik
 Kalendarz kalendarz;
 public:
      Kalendarz get_kalendars();
+     Assistant(std::string login,std::string haslo): Pracownik(login,haslo){}
 };
 #endif //PROJEKT_IO_ASSISTANT_H
