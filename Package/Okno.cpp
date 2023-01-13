@@ -361,10 +361,6 @@ void Okno::render() {
             text1.render(this->window);
             text2.render(this->window);
 
-            /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
-
-
-
             break;
         }
         case sites::calendar_site:
