@@ -8,8 +8,8 @@ std::string Wizyta::get_godzina() {return godzina;}
 
 void Wizyta::set_pacjent(std::string imie, std::string nazwisko, std::string pesel)
 {
-    pacjent.set_imie(imie);
-    pacjent.set_nazwisko(nazwisko);
+    pacjent.set_name(imie);
+    pacjent.set_surname(nazwisko);
     pacjent.set_pesel(pesel);
 }
 

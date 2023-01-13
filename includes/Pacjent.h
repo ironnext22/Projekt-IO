@@ -1,17 +1,12 @@
 #ifndef PROJEKT_IO_PACJENT_H
 #define PROJEKT_IO_PACJENT_H
 #include <string>
-class Pacjent
+#include "../includes/Osoba.h"
+class Pacjent:public Osoba
 {
-    std::string imie;
-    std::string nazwisko;
+private:
     std::string pesel;
 public:
-    void set_imie(std::string imie);
-    void set_nazwisko(std::string nazwisko);
-    void set_pesel(std::string pesel);
-    std::string get_imie();
-    std::string get_nazwisko();
-    std::string get_pesel();
+    void set_pesel(std::string pesel){this->pesel=pesel;}
 };
 #endif //PROJEKT_IO_PACJENT_H
