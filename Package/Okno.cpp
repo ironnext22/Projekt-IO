@@ -480,7 +480,6 @@ void Okno::render() {
                 }
             }
 
-
             break;
 
         }
