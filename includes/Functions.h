@@ -7,10 +7,18 @@
 #define PROJEKT_IO_FUNCTIONS_H
 
 
-bool check_if_data_is_the_same(std::string data1, std::string data2){
-if(data1 == data2){return true;}
-return false;
-}
+
+struct Date2 {
+    int day;
+    int month;
+    int year;
+};
+
+Date2 get_day_of_year(int dayOfYear, int year);
+
+int lastMonday(int year);
+int firstMonday(int year);
+
 
 
 

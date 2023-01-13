@@ -20,6 +20,7 @@
 #include "Assistant.h"
 #include "Admin.h"
 #include "Dentist.h"
+#include "Functions.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -92,8 +93,15 @@ private:
     Time_app timer;
     int selected = 0;
     std::string selected_string = "";
+    int current_day = 2;
+    int year = 2023;
     /// debug and bugfixing
     bool admin = true;
+
+
+
+
+
 
 
     ///

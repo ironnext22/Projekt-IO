@@ -145,14 +145,14 @@ void Okno::render() {
 
 
                     if(logged_user->get_function() == "Administrator"){
-
+                        adm = new Admin(input_bar1.get_text(),input_bar2.get_text());
                         change_site(sites::admin_start_site);}
                     else {
-                        if(logged_user->get_function() == "Dentist"){
-
+                        if(logged_user->get_function() == "Dentysta"){
+                            dentist = new Dentist(input_bar1.get_text(),input_bar2.get_text());
                         }
-                        if(logged_user->get_function() == "Assistant"){
-
+                        if(logged_user->get_function() == "Asystentka"){
+                            assistant = new Assistant(input_bar1.get_text(),input_bar2.get_text());
                         }
 
                         change_site(sites::logged_in_site);
@@ -335,9 +335,15 @@ void Okno::render() {
 
             b2.button_set(1000,400,100,400,&font1,"Calendar");
             b2.update(get_mous_pos());
-            if(b2.is_pressed()){change_site(sites::calendar_site);}
-            b2.render(this->window);
+            if(b2.is_pressed()) {
+                if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
+                    change_site(sites::calendar_site);
+                } else {
+                    text2.Textline_set(1020, 280, "no permission", 50, &font1);
+                }
 
+            }
+            b2.render(this->window);
             b3.button_set(1000,300,100,400,&font1,"Magazine");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::magazine_site);}
@@ -359,6 +365,7 @@ void Okno::render() {
             " "+logged_user->get_surname()+"\n\nPosition: "+logged_user->get_function()+"\n\nEmail: "+logged_user->get_mail()
             +"\n\nToday is: "+timer.currentDateTime()+"\n\nHave a good day",50,&font1);
             text1.render(this->window);
+            text2.render(this->window);
 
             /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
 
@@ -375,21 +382,29 @@ void Okno::render() {
 
             b2.button_set(20, 120, 100, 150, &font1, "Next");
             b2.update(get_mous_pos());
-            if (b2.is_pressed()){};
+            if (b2.is_pressed()) {
+                current_day+=7;
+                if(current_day > 365) {
+                  year++;
+                  current_day= firstMonday(year);
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+            };
             b2.render(this->window);
 
             b3.button_set(20, 220, 100, 150, &font1, "Prev");
             b3.update(get_mous_pos());
-            if (b3.is_pressed()){};
+            if (b3.is_pressed()){
+                if(current_day > 0){current_day -=7;}
+                if(current_day<0){year--; current_day = lastMonday(year);}
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+            }
             b3.render(this->window);
 
-            std::string array[6][9];
-            array[0][0] = "";
-            array[1][0] = "Monday";
-            array[2][0] = "Tuesday";
-            array[3][0] = "Wednesday";
-            array[4][0] = "Thursday";
-            array[5][0] = "Friday";
+            std::string array[8][9];
+
 
             array[0][0] = "";
             array[0][1] = "8:00-9:00";
@@ -402,24 +417,57 @@ void Okno::render() {
             array[0][8] = "15:00-16:00";
 
 
+            array[1][0] = "Monday\n";
+            array[2][0] = "Tuesday\n";
+            array[3][0] = "Wednesday\n";
+            array[4][0] = "Thursday\n";
+            array[5][0] = "Friday\n";
+            array[6][0] = "Saturday\n";
+            array[7][0] = "Sunday\n";
 
-
-            auto kalendarz = assistant->get_kalendars();
-            auto wizyty = kalendarz.get_wizyty();
-            for(auto a: wizyty){
-
-
+            Kalendarz kalendarz;
+            if(logged_user->get_function() == "Asystentka"){
+                kalendarz = assistant->get_kalendars();
             }
+            else if(logged_user->get_function() == "Dentysta"){
+                kalendarz = dentist->get_kalendars();
+            }
+            else
+            {
+                std::cout << "X";
+            }
+
+            auto wizyty = kalendarz.get_wizyty();
+
+            Date2 dateX;
+
+
+            for(int i =1;i<8;i++){
+
+                dateX = get_day_of_year(current_day+i-1,year);
+                array[i][0] += std::to_string(dateX.day);
+                array[i][0] += ".";
+                if(dateX.month == 13){
+                    array[i][0] += "1";
+                    dateX.month =1;
+                }else
+                { array[i][0] += std::to_string(dateX.month);}
+
+                array[i][0] += ".";
+                array[i][0] += std::to_string(dateX.year);
+            }
+
+
             sf::RectangleShape rec1;
             sf::Text t1;
-            for(int i = 0;i<6;i++){
+            for(int i = 0;i<8;i++){
                 for(int j =0; j<9;j++)
                 {
 
 
-                    rec1.setSize(sf::Vector2f(200,80));
-                    rec1.setPosition(180+(i*200),35+(j*80));
-                    text1.Textline_set(180+(i*200),35+(j*80),array[i][j],50,&font1);
+                    rec1.setSize(sf::Vector2f(150,80));
+                    rec1.setPosition(180+(i*150),35+(j*80));
+                    text1.Textline_set(180+(i*150),35+(j*80),array[i][j] ,50,&font1);
                     rec1.setOutlineColor(sf::Color::Black);
                     rec1.setOutlineThickness(5);
                     rec1.setFillColor(sf::Color::White);
@@ -882,6 +930,9 @@ const bool Okno::get_window_is_open() const
 
 void Okno::initialize_variables() {
     this->window = nullptr;
+
+
+
 }
 
 sf::Vector2f Okno::get_mous_pos()
