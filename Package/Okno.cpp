@@ -415,8 +415,6 @@ void Okno::render() {
             array[0][6] = "13:00-14:00";
             array[0][7] = "14:00-15:00";
             array[0][8] = "15:00-16:00";
-
-
             array[1][0] = "Monday\n";
             array[2][0] = "Tuesday\n";
             array[3][0] = "Wednesday\n";
@@ -426,6 +424,9 @@ void Okno::render() {
             array[7][0] = "Sunday\n";
 
             Kalendarz kalendarz;
+            auto wizyty = kalendarz.get_wizyty();
+            Date2 dateX,dateY;
+
             if(logged_user->get_function() == "Asystentka"){
                 kalendarz = assistant->get_kalendars();
             }
@@ -437,11 +438,8 @@ void Okno::render() {
                 std::cout << "X";
             }
 
-            auto wizyty = kalendarz.get_wizyty();
 
-            Date2 dateX;
-
-
+            /// makes table look good and work properly with dates (Monday 1.1.2023 , Tuesday 2.1.2023..)
             for(int i =1;i<8;i++){
 
                 dateX = get_day_of_year(current_day+i-1,year);
@@ -460,16 +458,49 @@ void Okno::render() {
 
             sf::RectangleShape rec1;
             sf::Text t1;
+
             for(int i = 0;i<8;i++){
+                if(i > 0) { /// i>0 bc 1st kolumn is hours
+                    dateY.day = get_day_of_year(current_day +i-1, year).day;
+                    dateY.month = get_day_of_year(current_day+i-1 , year).month;
+                    dateY.year = get_day_of_year(current_day+i -1, year).year;
+
+                    int k =0;
+                    for(auto a: wizyty) {
+                        if(k!=0) {
+                            std::cout << a.get_data() << " " << a.get_godzina() << "\n";
+
+                           if (std::to_string(dateY.year) == get_year_from_DMY_format(a.get_data())) {
+                                if (std::to_string(dateY.month) == get_month_from_DMY_format(a.get_data()) ||
+                                       "0" + std::to_string(dateY.month)  == get_month_from_DMY_format(a.get_data())) {
+
+                                    if (std::to_string(dateY.day) == get_day_from_DMY_format(a.get_data()) ||
+                                       "0" + std::to_string(dateY.day) == get_day_from_DMY_format(a.get_data())) {
+
+                                        for(int j =1; j<9;j++) {
+                                                  if(get_hour_from_HM_format(a.get_godzina())== std::to_string(7+j) || get_hour_from_HM_format(a.get_godzina())== "0"+std::to_string(7+j)){
+                                                      array[i][j]= a.get_pacjent().get_name() + " " + a.get_pacjent().get_surname() + " "+a.get_pacjent().get_mail();
+                                                  }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        k++;
+                    }
+                }
+
                 for(int j =0; j<9;j++)
                 {
 
-
                     rec1.setSize(sf::Vector2f(150,80));
                     rec1.setPosition(180+(i*150),35+(j*80));
-                    text1.Textline_set(180+(i*150),35+(j*80),array[i][j] ,50,&font1);
+                    int char_size=25;
+                    if(j==0 || i==0){char_size = 50;}
+                    text1.Textline_set(180+(i*150),35+(j*80),array[i][j] ,char_size,&font1);
                     rec1.setOutlineColor(sf::Color::Black);
-                    rec1.setOutlineThickness(5);
+                    rec1.setOutlineThickness(1);
                     rec1.setFillColor(sf::Color::White);
                     this->window->draw(rec1);
                     text1.render(this->window);

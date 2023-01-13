@@ -19,8 +19,12 @@ Date2 get_day_of_year(int dayOfYear, int year);
 int lastMonday(int year);
 int firstMonday(int year);
 
+std::string get_day_from_DMY_format(std::string DMY);
+std::string get_month_from_DMY_format(std::string DMY);
+std::string get_year_from_DMY_format(std::string DMY);
 
-
+std::string get_hour_from_HM_format(std::string HM);
+std::string get_minute_from_HM_format(std::string HM);
 
 
 #endif //PROJEKT_IO_FUNCTIONS_H

@@ -23,6 +23,7 @@
 #include "Functions.h"
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include <fstream>
 #define PROJEKT_IO_MENU_H
 enum class sites{

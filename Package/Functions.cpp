@@ -2,6 +2,8 @@
 // Created by Mateusz on 13.01.2023.
 //
 #include "../includes/Functions.h"
+#include <string>
+
 
 Date2 get_day_of_year(int dayOfYear, int year) {
     int monthDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -50,3 +52,31 @@ int lastMonday(int year) {
     return day_count;
 }
 
+std::string get_day_from_DMY_format(std::string DMY){
+    if(DMY == ""){return "";}
+    std::cout<<DMY.substr(0,2) <<"/";
+    return DMY.substr(0,2);
+}
+std::string get_month_from_DMY_format(std::string DMY){
+    if(DMY == ""){return "";}
+    std::cout<<DMY.substr(3,2) <<"/";
+    return DMY.substr(3,2);
+
+}
+std::string get_year_from_DMY_format(std::string DMY){
+    if(DMY == ""){return "";}
+    std::cout<<DMY.substr(6,4) <<"/";
+    return DMY.substr(6,4);
+
+}
+
+std::string get_hour_from_HM_format(std::string HM){
+    if(HM == ""){return "";}
+    return HM.substr(0,2);
+
+}
+std::string get_minute_from_HM_format(std::string HM){
+    if(HM == ""){return "";}
+  //  return HM.substr(3-4);
+
+}
