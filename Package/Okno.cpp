@@ -184,7 +184,7 @@ void Okno::render() {
 
         }
         case sites::credits_site: {
-            clear_site_and_wait();
+
             text1.Textline_set(200, 200, "Wykonali:", 40, &font1);
             text2.Textline_set(200, 250, "Mateusz Kuzera", 40, &font1);
             text3.Textline_set(200, 300, "Wiktor Kowalski:", 40, &font1);
