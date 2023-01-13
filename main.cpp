@@ -3,15 +3,14 @@
 #include "includes/Pracownicy.h"
 #include "includes/Loging.h"
 #include "includes/Kalendarz.h"
-using namespace sf;
-Loging login;
+#include "includes/Assistant.h"
 Kalendarz test;
+using namespace sf;
 int main()
 {
-    //test.dodal_wizyte("Wiktor","Kowalski","2222222","19.09.2022","19.22");
-
+    auto as = new Assistant("123","123");
+    //test.set_godzina("19.22","2222222");
     Okno menu;
-
 
     while(menu.get_window_is_open()) {
 
