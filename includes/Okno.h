@@ -88,10 +88,11 @@ private:
     Dentist *dentist = nullptr;
 
 
-    /// auxiliary variables
+    /// auxiliary variables // zmienne pomocnicze
     bool email_sent = false;
     bool created_ac = false;
     bool is_currently_changing_password = false;
+    bool is_currently_choosing_data = false;
     bool is_logged = false;
     Time_app timer;
     int selected = 0;
@@ -99,6 +100,7 @@ private:
     int current_day = 2;
     int year = 2023;
     std::string ID = "XXXXXX";
+    std::string help1,help2,help3,help4;
     /// debug and bugfixing
     bool admin = true;
 

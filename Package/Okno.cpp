@@ -8,6 +8,7 @@
 #define MAX_LOGIN_CHARACTERS 20
 #define MAX_EMAIL_CHARACTERS 25
 #define MAX_NAME_SURNAME_CHARACTERS 20
+#define MAX_PESEL_CHARACTERS 10
 
 
 /// TO DO HERE:
@@ -971,52 +972,152 @@ void Okno::render() {
 
             break;
         }
-        case sites::calendar_add_visit_site:{
-            b1.button_set(20, 20, 100, 150, &font1, "Back");
-            b1.update(get_mous_pos());
-            if (b1.is_pressed()){change_site(sites::calendar_site);};
-            b1.render(this->window);
+        case sites::calendar_add_visit_site: {
 
-            input_bar1.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
-            input_bar2.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
-            input_bar3.set_limit(true,MAX_PASSWORD_CHARACTERS);
-            input_bar4.set_limit(true,MAX_EMAIL_CHARACTERS);
+            if (!is_currently_choosing_data) { /// here chooses the info about Patient
+                b1.button_set(20, 20, 100, 150, &font1, "Back");
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) { change_site(sites::calendar_site); };
+                b1.render(this->window);
+
+                input_bar1.set_limit(true, MAX_NAME_SURNAME_CHARACTERS);
+                input_bar2.set_limit(true, MAX_NAME_SURNAME_CHARACTERS);
+                input_bar3.set_limit(true, MAX_EMAIL_CHARACTERS);
+                input_bar4.set_limit(true, MAX_PESEL_CHARACTERS);
 
 
-            text1.Textline_set(400, 200, "Add visit", 50, &font1);
+
+                text1.Textline_set(620, 620, "Add visit", 50, &font1);
+
+                b2.button_set(600, 100, 100, 750, &font1, "Name:" + input_bar1.get_text());
+                b2.update(get_mous_pos());
+                if (b2.is_pressed()) { make_input_bar_active(1); }
+
+                b3.button_set(600, 200, 100, 750, &font1, "Surname: " + input_bar2.get_text());
+                b3.update(get_mous_pos());
+                if (b3.is_pressed()) { make_input_bar_active(2); }
+
+                b4.button_set(600, 300, 100, 750, &font1, "Email: " + input_bar3.get_text());
+                b4.update(get_mous_pos());
+                if (b4.is_pressed()) { make_input_bar_active(3); }
+
+                b5.button_set(600, 400, 100, 750, &font1, "Pesel: " + input_bar4.get_text());
+                b5.update(get_mous_pos());
+                if (b5.is_pressed()) { make_input_bar_active(4); }
 
 
-            b2.button_set(600,300,100,750,&font1,"Name:" + input_bar1.get_text());
-            b2.update(get_mous_pos());
-            if(b2.is_pressed()){make_input_bar_active(1);}
 
-            b3.button_set(600,400,100,750,&font1,"Surname: " + input_bar2.get_text());
-            b3.update(get_mous_pos());
-            if(b3.is_pressed()){make_input_bar_active(2);}
 
-            b4.button_set(600,500,100,750,&font1,"Email: " + input_bar3.get_text());
-            b4.update(get_mous_pos());
-            if(b4.is_pressed()){make_input_bar_active(3);}
 
-            b4.button_set(600,600,100,750,&font1,"Pesel: " + input_bar4.get_text());
-            b4.update(get_mous_pos());
-            if(b4.is_pressed()){make_input_bar_active(4);}
+                b6.button_set(600, 500, 100, 750, &font1, "Choose Date");
+                b6.update(get_mous_pos());
+                if (b6.is_pressed()) {
 
-            b5.button_set(600,700,100,750,&font1,"Choose Date");
-            b5.update(get_mous_pos());
-            if(b5.is_pressed()){
+                    if (input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == "" ||
+                        input_bar4.get_text() == "") {
+                        text1.Textline_set(620, 620, "Enter all values", 50, &font1);
+                    } else if (input_bar4.get_text().length() != 11) {
+                        text1.Textline_set(620, 620, "Pesel invalid", 50, &font1);
+                    } else {
+                        is_currently_choosing_data = true;
+                        help1 = input_bar1.get_text();
+                        help2 = input_bar2.get_text();
+                        help3 = input_bar3.get_text();
+                        help4 = input_bar4.get_text();
 
-                /// ADD PACJENT to DATA BASE
-                /// THEN SWTICH TO SELECTING DATE AND HOURS
+                        input_bar1.clear();
+                        input_bar2.clear();
+                        input_bar3.clear();
+                        input_bar4.clear();
+
+                    }
+                }
+
+
+                text1.render(this->window);
+                b1.render(this->window);
+                b2.render(this->window);
+                b3.render(this->window);
+                b4.render(this->window);
+                b5.render(this->window);
+                b6.render(this->window);
 
             }
+            else /// here chooses the data
+            {
 
 
-            text1.render(this->window);
-            b1.render(this->window);
-            b2.render(this->window);
-            b3.render(this->window);
-            b4.render(this->window);
+
+                b1.button_set(20, 20, 100, 150, &font1, "Back");
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) { change_site(sites::calendar_site); };
+                b1.render(this->window);
+
+
+                input_bar1.set_limit(true,1);
+                b2.button_set(300,100, 100, 200, &font1, "DD: " + input_bar1.get_text());
+                b2.update(get_mous_pos());
+                if (b2.is_pressed()) { make_input_bar_active(1);}
+                b2.render(this->window);
+
+                input_bar2.set_limit(true,1);
+                b3.button_set(500,100, 100, 200, &font1, "MM: " + input_bar2.get_text());
+                b3.update(get_mous_pos());
+                if (b3.is_pressed()) { make_input_bar_active(2);}
+                b3.render(this->window);
+
+                input_bar3.set_limit(true,3);
+                b4.button_set(700,100, 100, 300, &font1, "YYYY: " + input_bar3.get_text());
+                b4.update(get_mous_pos());
+                if (b4.is_pressed()) { make_input_bar_active(3);}
+                b4.render(this->window);
+
+                input_bar4.set_limit(true,1);
+                b5.button_set(300,200, 100, 200, &font1, "HH: " + input_bar4.get_text());
+                b5.update(get_mous_pos());
+                if (b5.is_pressed()) { make_input_bar_active(4);}
+                b5.render(this->window);
+
+                input_bar5.set_limit(true,1);
+                b6.button_set(500,200, 100, 200, &font1, "MM: " + input_bar5.get_text());
+                b6.update(get_mous_pos());
+                if (b6.is_pressed()) { make_input_bar_active(5);}
+                b6.render(this->window);
+
+
+                b7.button_set(700,200, 100, 300, &font1, "Add");
+                b7.update(get_mous_pos());
+                if (b7.is_pressed()) {
+
+                    if(input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == ""
+                    ||input_bar4.get_text() == ""||input_bar5.get_text() == ""){
+                        text2.Textline_set(350,320,"Enter all values",50,&font1);
+                    }
+                    else if(false){
+
+                        /// ADD ZABEZPIECZNIA
+                    }
+
+
+
+                }
+                text2.render(this->window);
+                b7.render(this->window);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
 
 
         }
