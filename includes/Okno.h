@@ -40,6 +40,8 @@ enum class sites{
     admin_start_site = 11,
     admin_site_employee_managent_site = 12,
     admin_magazine_site = 13,
+    calendar_visit_edit_site =14,
+    calendar_add_visit_site = 15,
 
 
 
@@ -96,6 +98,7 @@ private:
     std::string selected_string = "";
     int current_day = 2;
     int year = 2023;
+    std::string ID = "XXXXXX";
     /// debug and bugfixing
     bool admin = true;
 

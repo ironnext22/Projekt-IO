@@ -34,9 +34,11 @@ void Okno::initialize_window() {
     this->video_mode.height = 800;
     this->video_mode.width = 1400;
 
+
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
     this->window = new RenderWindow(this->video_mode,"Proba nr 1.",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
+    this->window->setKeyRepeatEnabled(false);
 
 }
 
@@ -365,6 +367,8 @@ void Okno::render() {
         }
         case sites::calendar_site:
         {
+            ID = "XXXXXX";
+            input_bar1.set_limit(true,4);
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);};
@@ -391,7 +395,38 @@ void Okno::render() {
                 std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
             }
+
             b3.render(this->window);
+
+            b4.button_set(20, 320, 100, 150, &font1, "ID: " +input_bar1.get_text());
+            b4.update(get_mous_pos());
+            if (b4.is_pressed()){make_input_bar_active(1);};
+            b4.render(this->window);
+
+            b5.button_set(20, 420, 100, 150, &font1, "Edit");
+            b5.update(get_mous_pos());
+            if (b5.is_pressed()){
+                if(input_bar1.get_text() == "")
+                {
+                    text1.Textline_set(20,680,"ID is empty",30,&font1);
+                }
+                else if(false /* !ID_is_in_data_base(input_bar1.get_get())   */)
+                {
+                    text1.Textline_set(20,680,"Visit dont exists",30,&font1);
+                }
+                else if(input_bar1.get_text() == "XD" /* ID_is_in_data_base(input_bar1.get_get())   */){
+                    ID = input_bar1.get_text();
+                    change_site(sites::calendar_visit_edit_site);
+                }
+
+            };
+            b5.render(this->window);
+            text1.render(this->window);
+
+            b6.button_set(20, 520, 100, 150, &font1, "Add");
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()){ change_site(sites::calendar_add_visit_site);}
+            b6.render(this->window);
 
             std::string array[8][9];
 
@@ -920,6 +955,28 @@ void Okno::render() {
             b4.render(this->window);
             b5.render(this->window);
             break;
+
+        }
+        case sites::calendar_visit_edit_site:{
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()){change_site(sites::calendar_site);};
+            b1.render(this->window);
+
+
+
+            break;
+        }
+        case sites::calendar_add_visit_site:{
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()){change_site(sites::calendar_site);};
+            b1.render(this->window);
+
+
+
+
+
 
         }
 
