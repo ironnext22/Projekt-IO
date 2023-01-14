@@ -12,9 +12,10 @@ Kalendarz::Kalendarz()
             pom.push_back(static_cast<std::string>(cell.value()));
         }
         auto* pomocnicza = new Wizyta;
-        pomocnicza->set_pacjent(pom[0],pom[1],pom[2]);
+        pomocnicza->set_pacjent(pom[0],pom[1],pom[2],pom[5]);
         pomocnicza->set_data(pom[3]);
         pomocnicza->set_godzina(pom[4]);
+        pomocnicza->set_ID(pom[6]);
         wizyty.push_back(*pomocnicza);
         delete pomocnicza;
         pom.clear();
@@ -22,15 +23,15 @@ Kalendarz::Kalendarz()
     doc.close();
 }
 
-void Kalendarz::dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina)
+void Kalendarz::dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina,std::string mail, std::string ID)
 {
     XLDocument doc;
     doc.open("wizyty.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
     int count=wks.rowCount();
-    wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,pesel,data,godzina};
+    wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,pesel,data,godzina,mail,ID};
     auto pom = new Wizyta;
-    pom->set_pacjent(imie,nazwisko,pesel);
+    pom->set_pacjent(imie,nazwisko,pesel,mail);
     pom->set_data(data);
     pom->set_godzina(godzina);
     delete pom;
