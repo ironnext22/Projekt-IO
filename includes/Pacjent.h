@@ -4,6 +4,8 @@
 #include "Osoba.h"
 class Pacjent:public Osoba
 {
+    std::string imie;
+    std::string nazwisko;
     std::string pesel;
 public:
     void set_imie(std::string imie);

@@ -1,7 +1,4 @@
 #include "../includes/Pracownik.h"
- std::string Pracownik::get_name() {return imie;}
- std::string Pracownik::get_surname() {return nazwisko;}
- std::string Pracownik::get_mail() {return mail;}
  std::string Pracownik::get_login() {return login;}
  std::string Pracownik::get_password() {return haslo;}
  std::string Pracownik::get_function() {
@@ -38,5 +35,7 @@ Pracownik::Pracownik(std::string login, std::string haslo)
     else this->funkcja=Funkcje::No_function;
 }
 
+void Pracownik::set_login(std::string login) { this->login=login;}
+void Pracownik::set_password(std::string password) {this->haslo=password;}
 
 

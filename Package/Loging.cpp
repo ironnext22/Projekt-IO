@@ -4,7 +4,7 @@ bool Loging::check_if_email_is_in_data_base(std::string email_from_user)
 {
     for(auto a : login_list.get_worker())
     {
-        if(a.mail==email_from_user)return true;
+        if(a.get_mail()==email_from_user)return true;
     }
     return false;
 }
