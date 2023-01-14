@@ -10,6 +10,10 @@
 #define MAX_NAME_SURNAME_CHARACTERS 20
 
 
+/// TO DO HERE:
+/// sites::calendar_add_visit -> waiting for adding pacjent's then add visit
+
+
 
 
 Okno::Okno() {  /// initializes on the start
@@ -973,9 +977,46 @@ void Okno::render() {
             if (b1.is_pressed()){change_site(sites::calendar_site);};
             b1.render(this->window);
 
+            input_bar1.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
+            input_bar2.set_limit(true,MAX_NAME_SURNAME_CHARACTERS);
+            input_bar3.set_limit(true,MAX_PASSWORD_CHARACTERS);
+            input_bar4.set_limit(true,MAX_EMAIL_CHARACTERS);
 
 
+            text1.Textline_set(400, 200, "Add visit", 50, &font1);
 
+
+            b2.button_set(600,300,100,750,&font1,"Name:" + input_bar1.get_text());
+            b2.update(get_mous_pos());
+            if(b2.is_pressed()){make_input_bar_active(1);}
+
+            b3.button_set(600,400,100,750,&font1,"Surname: " + input_bar2.get_text());
+            b3.update(get_mous_pos());
+            if(b3.is_pressed()){make_input_bar_active(2);}
+
+            b4.button_set(600,500,100,750,&font1,"Email: " + input_bar3.get_text());
+            b4.update(get_mous_pos());
+            if(b4.is_pressed()){make_input_bar_active(3);}
+
+            b4.button_set(600,600,100,750,&font1,"Pesel: " + input_bar4.get_text());
+            b4.update(get_mous_pos());
+            if(b4.is_pressed()){make_input_bar_active(4);}
+
+            b5.button_set(600,700,100,750,&font1,"Choose Date");
+            b5.update(get_mous_pos());
+            if(b5.is_pressed()){
+
+                /// ADD PACJENT to DATA BASE
+                /// THEN SWTICH TO SELECTING DATE AND HOURS
+
+            }
+
+
+            text1.render(this->window);
+            b1.render(this->window);
+            b2.render(this->window);
+            b3.render(this->window);
+            b4.render(this->window);
 
 
         }
