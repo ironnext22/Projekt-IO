@@ -970,6 +970,10 @@ void Okno::render() {
 
 
 
+
+
+
+
             break;
         }
         case sites::calendar_add_visit_site: {
@@ -1100,7 +1104,7 @@ void Okno::render() {
                         /// inputbar2= miesiac (max 2 znaki)
                         /// inputbar3= rok (max 4 znaki)
                         /// inputbar4= godzina (max 2 znaki)
-                        /// inputbar5= minuta(max 2 znaki)
+                        /// inputbar5= minuta(max 2 znaki) // wsm minuta nie ma sensu bo i tak mozna tylko na 8:00 (czyli w pelne godziny)
 
                         /// TZN.:
                         /// check if np. Dzien == od 1 do 31 (ale to sa stringi i trzeba sprawdzic czy ktos np nie wprowadzil
@@ -1111,7 +1115,9 @@ void Okno::render() {
                         /// HH.MM - to samo
                         /// i te 2 formaty wprowadzic do dodaj wizyte
                         // if (warunki sa git)
+                        /// noi jeszvze sprawdzic czy nie ma juz w ten porze wizyty
                         // wizyta->dodaj_wizyte()
+                        // a i jak dodajesz gozine np 8:00 to musi byc 08:00 format!
                     }
 
 
