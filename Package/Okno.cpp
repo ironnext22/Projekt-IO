@@ -1088,14 +1088,30 @@ void Okno::render() {
                 b7.button_set(700,200, 100, 300, &font1, "Add");
                 b7.update(get_mous_pos());
                 if (b7.is_pressed()) {
-
+                    /// tu sprawdza czy wszytsko jest zapelnione
                     if(input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == ""
                     ||input_bar4.get_text() == ""||input_bar5.get_text() == ""){
                         text2.Textline_set(350,320,"Enter all values",50,&font1);
                     }
-                    else if(false){
+                    else {
 
                         /// ADD ZABEZPIECZNIA
+                        /// inputbar1.get_text() = Dzien (max 2 znaki)
+                        /// inputbar2= miesiac (max 2 znaki)
+                        /// inputbar3= rok (max 4 znaki)
+                        /// inputbar4= godzina (max 2 znaki)
+                        /// inputbar5= minuta(max 2 znaki)
+
+                        /// TZN.:
+                        /// check if np. Dzien == od 1 do 31 (ale to sa stringi i trzeba sprawdzic czy ktos np nie wprowadzil
+                        /// X2 zamiast 12)
+
+                        /// potem polaczyc inputbar1 +"."+inputbar2....
+                        /// i polaczyc w DD.MM.YYYY format sting
+                        /// HH.MM - to samo
+                        /// i te 2 formaty wprowadzic do dodaj wizyte
+                        // if (warunki sa git)
+                        // wizyta->dodaj_wizyte()
                     }
 
 
