@@ -969,6 +969,22 @@ void Okno::render() {
             b1.render(this->window);
 
 
+            b2.button_set(100,300,100,500,&font1,"Change Name");
+            b2.update(get_mous_pos());
+            b3.button_set(600,300,100,750,&font1,"New Name:" + input_bar1.get_text());
+            b3.update(get_mous_pos());
+            if(b3.is_pressed()){make_input_bar_active(1);}
+            if(b2.is_pressed()){
+                if(input_bar1.get_text() == "")
+                {
+                    text1.Textline_set(400, 200, "Name cannot be empty", 50, &font1);
+                }
+                else{
+                    worker_list.set_attribute(user_data_type::name,logged_user->get_login(),input_bar1.get_text());
+                    text1.Textline_set(400, 200, "Name changed", 50, &font1);
+                }
+            }
+
 
 
 
