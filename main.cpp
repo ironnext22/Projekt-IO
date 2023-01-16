@@ -8,7 +8,7 @@ Kalendarz test;
 using namespace sf;
 int main()
 {
-    test.dodal_wizyte("Wiktor","Kowalski","23412343","19.01.2023","19.00","wiktor.k.2002@icloud.com");
+//    test.dodal_wizyte("Wiktor","Kowalski","23412343","19.01.2023","19.00","wiktor.k.2002@icloud.com");
     Okno menu;
 
 
