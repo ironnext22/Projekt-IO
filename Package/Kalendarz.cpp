@@ -23,17 +23,18 @@ Kalendarz::Kalendarz()
     doc.close();
 }
 
-void Kalendarz::dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina,std::string mail, std::string ID)
+void Kalendarz::dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina,std::string mail)
 {
     XLDocument doc;
     doc.open("wizyty.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
     int count=wks.rowCount();
-    wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,pesel,data,godzina,mail,ID};
+    wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,pesel,data,godzina,mail,std::to_string(wks.rowCount()+1)};
     auto pom = new Wizyta;
     pom->set_pacjent(imie,nazwisko,pesel,mail);
     pom->set_data(data);
     pom->set_godzina(godzina);
+    pom->set_ID(std::to_string(wks.rowCount()+1));
     delete pom;
     doc.save();
     doc.close();
