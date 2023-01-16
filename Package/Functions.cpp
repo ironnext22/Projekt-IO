@@ -82,7 +82,7 @@ std::string get_minute_from_HM_format(std::string HM){
 
 }
 #include <string>
-std::string get_nice_looking_HHMMYYYY_format(std::string input_from_the_input_bar){
+std::string get_nice_looking_DDMMYYYY_format(std::string input_from_the_input_bar){
     std::string newstr,str2;
     if(input_from_the_input_bar == ""){return "DD.MM.YYYY";}
 
@@ -211,5 +211,51 @@ std::string get_nice_looking_HHMMYYYY_format(std::string input_from_the_input_ba
 
     }
     else return "";
+}
+
+std::string get_nice_looking_HHMM_format(std::string input_from_the_input_bar){
+
+    std::string newstr ="",str2;
+    if(input_from_the_input_bar == ""){return "HH.MM";}
+
+    else if(input_from_the_input_bar.length() == 1){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        newstr.append("H.MM");
+        return newstr;
+    }
+    else if (input_from_the_input_bar.length() == 2){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".MM");
+        return newstr;
+    }
+
+    else if (input_from_the_input_bar.length() == 3){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        newstr.append("M");
+        return newstr;
+    }
+    else if (input_from_the_input_bar.length() == 4){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[3];
+        newstr.append(str2);
+        return newstr;
+    }
+
 }
 

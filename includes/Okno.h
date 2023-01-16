@@ -21,6 +21,7 @@
 #include "Admin.h"
 #include "Dentist.h"
 #include "Functions.h"
+#include "Pacjeci.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -42,6 +43,8 @@ enum class sites{
     admin_magazine_site = 13,
     calendar_visit_edit_site =14,
     calendar_add_visit_site = 15,
+    admin_edit_visit_site = 16,
+
 
 
 
@@ -75,13 +78,13 @@ private:
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
     sf::Texture background_photo;
     sf::Sprite sprite;
-    Input_bar input_bar1,input_bar2,input_bar3,input_bar4,input_bar5,input_bar6;
+    Input_bar input_bar1,input_bar2,input_bar3,input_bar4,input_bar5,input_bar6,input_bar7;
     sites site;
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
 
     Pracownik* logged_user = nullptr;
-
+    Pacjeci pacient_list;
     Pracownicy worker_list;
     Admin *adm = nullptr;
     Assistant *assistant = nullptr;
@@ -101,7 +104,7 @@ private:
     int year = 2023;
     std::string ID = "XXXXXX";
     /// debug and bugfixing
-    bool admin = true;
+
 
 
 

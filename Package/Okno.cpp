@@ -13,6 +13,7 @@
 
 /// TO DO HERE:
 /// sites::calendar_add_visit -> waiting for adding pacjent's then add visit
+/// calendar_edit_visit add edition of visit fun
 
 
 
@@ -79,6 +80,12 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
                 }
                 else if(input_bar5.get_is_selected()){
                     input_bar5.typed_on(ev);
+                }
+                else if(input_bar6.get_is_selected()){
+                    input_bar6.typed_on(ev);
+                }
+                else if(input_bar7.get_is_selected()){
+                    input_bar7.typed_on(ev);
                 }
 
 
@@ -818,7 +825,7 @@ void Okno::render() {
 
             b4.button_set(1000,300,100,400,&font1,"Calendar");
             b4.update(get_mous_pos());
-            if(b4.is_pressed()){}
+            if(b4.is_pressed()){ change_site(sites::admin_edit_visit_site);}
             b4.render(this->window);
             break;
         }
@@ -969,6 +976,33 @@ void Okno::render() {
             b1.render(this->window);
 
 
+            input_bar5.set_limit(true, 7);
+            input_bar6.set_limit(true,3);
+
+
+
+            text1.Textline_set(650, 80, "Edit Visit", 50, &font1);
+
+            b6.button_set(600, 300, 100, 750, &font1, "Date: "+get_nice_looking_DDMMYYYY_format(input_bar5.get_text()));
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()) { make_input_bar_active(5);}
+
+            b7.button_set(600, 400, 100, 750, &font1,"Hour: " + get_nice_looking_HHMM_format(input_bar6.get_text()));
+            b7.update(get_mous_pos());
+            if (b7.is_pressed()) { make_input_bar_active(6);}
+
+            b8.button_set(600, 600, 100, 750, &font1,"Change");
+            b8.update(get_mous_pos());
+            if (b8.is_pressed()) {
+
+
+            }
+            text1.render(this->window);
+
+            b6.render(this->window);
+            b7.render(this->window);
+            b8.render(this->window);
+
 
             break;
         }
@@ -985,34 +1019,58 @@ void Okno::render() {
                 input_bar3.set_limit(true, MAX_EMAIL_CHARACTERS);
                 input_bar4.set_limit(true, MAX_PESEL_CHARACTERS);
                 input_bar5.set_limit(true, 7);
+                input_bar6.set_limit(true,3);
+                input_bar7.set_limit(true,10);
 
 
 
-                text1.Textline_set(620, 620, "Add visit", 50, &font1);
 
-                b2.button_set(600, 100, 100, 750, &font1, "Name:" + input_bar1.get_text());
+
+                b2.button_set(600, 0, 100, 750, &font1, "Name:" + input_bar1.get_text());
                 b2.update(get_mous_pos());
                 if (b2.is_pressed()) { make_input_bar_active(1); }
 
-                b3.button_set(600, 200, 100, 750, &font1, "Surname: " + input_bar2.get_text());
+                b3.button_set(600, 100, 100, 750, &font1, "Surname: " + input_bar2.get_text());
                 b3.update(get_mous_pos());
                 if (b3.is_pressed()) { make_input_bar_active(2); }
 
-                b4.button_set(600, 300, 100, 750, &font1, "Email: " + input_bar3.get_text());
+                b4.button_set(600, 200, 100, 750, &font1, "Email: " + input_bar3.get_text());
                 b4.update(get_mous_pos());
                 if (b4.is_pressed()) { make_input_bar_active(3); }
 
-                b5.button_set(600, 400, 100, 750, &font1, "Pesel: " + input_bar4.get_text());
+                b5.button_set(600, 300, 100, 750, &font1, "Pesel: " + input_bar4.get_text());
                 b5.update(get_mous_pos());
                 if (b5.is_pressed()) { make_input_bar_active(4); }
 
-                b6.button_set(600, 500, 100, 750, &font1, get_nice_looking_HHMMYYYY_format(input_bar5.get_text()));
+                b6.button_set(600, 400, 100, 750, &font1, "Date: "+get_nice_looking_DDMMYYYY_format(input_bar5.get_text()));
                 b6.update(get_mous_pos());
                 if (b6.is_pressed()) { make_input_bar_active(5);}
 
+                b7.button_set(600, 500, 100, 750, &font1,"Hour: " + get_nice_looking_HHMM_format(input_bar6.get_text()));
+                b7.update(get_mous_pos());
+                if (b7.is_pressed()) { make_input_bar_active(6);}
+
+                b9.button_set(600, 600, 100, 750, &font1,"Paid: (use .) " + input_bar7.get_text() + " ZL");
+                b9.update(get_mous_pos());
+                if (b9.is_pressed()) { make_input_bar_active(7);}
+
+                b8.button_set(600, 700, 100, 750, &font1,"Add Visit");
+                b8.update(get_mous_pos());
+                if (b8.is_pressed()) {
 
 
-                text1.render(this->window);
+
+                    /// add safety features
+                    /// (check if hour&&data is good)
+                    ///
+
+                    /// CHECK IF THERE IS THAT PATIENT
+                    ///  pacient_list.dodaj_pacjęt(input_bar1.get_text(),input_bar2.get_text(),input_bar4.get_text(),input_bar3.get_text());
+                    /// ADD VISIT
+
+
+                }
+
                 b1.render(this->window);
                 b2.render(this->window);
                 b3.render(this->window);
@@ -1020,8 +1078,54 @@ void Okno::render() {
                 b5.render(this->window);
                 b6.render(this->window);
                 b7.render(this->window);
+                b8.render(this->window);
+                b9.render(this->window);
+                break;
             }
+        case sites::admin_edit_visit_site:{
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()){change_site(sites::admin_start_site);};
+            b1.render(this->window);
+
+            input_bar1.set_limit(true, 7);
+            input_bar5.set_limit(true, 7);
+            input_bar6.set_limit(true,3);
+
+
+
+            text1.Textline_set(650, 80, "Edit Visit", 50, &font1);
+
+            b6.button_set(600, 200, 100, 750, &font1, "ID: ");
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()) { make_input_bar_active(1);}
+
+            b6.button_set(600, 300, 100, 750, &font1, "Date: "+get_nice_looking_DDMMYYYY_format(input_bar5.get_text()));
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()) { make_input_bar_active(5);}
+
+            b7.button_set(600, 400, 100, 750, &font1,"Hour: " + get_nice_looking_HHMM_format(input_bar6.get_text()));
+            b7.update(get_mous_pos());
+            if (b7.is_pressed()) { make_input_bar_active(6);}
+
+            b8.button_set(600, 600, 100, 750, &font1,"Change");
+            b8.update(get_mous_pos());
+            if (b8.is_pressed()) {
+                //
+
+            }
+            text1.render(this->window);
+            b1.render(this->window);
+            b6.render(this->window);
+            b7.render(this->window);
+            b8.render(this->window);
+
+
+            break;
         }
+
+    }
+
     this->window->display();
 }
 
@@ -1089,6 +1193,8 @@ void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites
     input_bar4.clear();
     input_bar5.clear();
     input_bar6.clear();
+    input_bar7.clear();
+
     /// also changes some staff to be reseted
     verification_code = "000000";
     email_sent =false;
@@ -1112,6 +1218,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar4.set_selected(false);
             input_bar5.set_selected(false);
             input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
         }
         case 2:{
@@ -1121,6 +1228,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar4.set_selected(false);
             input_bar5.set_selected(false);
             input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
         }
         case 3:{
@@ -1130,6 +1238,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar4.set_selected(false);
             input_bar5.set_selected(false);
             input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
         }
         case 4:{
@@ -1139,6 +1248,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar4.set_selected(true);
             input_bar5.set_selected(false);
             input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
 
         }
@@ -1150,6 +1260,7 @@ void Okno::make_input_bar_active(int which_one){
             input_bar4.set_selected(false);
             input_bar5.set_selected(true);
             input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
 
         }
@@ -1160,6 +1271,17 @@ void Okno::make_input_bar_active(int which_one){
             input_bar4.set_selected(false);
             input_bar5.set_selected(false);
             input_bar6.set_selected(true);
+            input_bar7.set_selected(false);
+            break;
+        }
+        case 7:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(false);
+            input_bar5.set_selected(false);
+            input_bar6.set_selected(false);
+            input_bar7.set_selected(true);
             break;
         }
        default:{
