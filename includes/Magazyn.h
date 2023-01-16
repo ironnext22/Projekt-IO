@@ -2,6 +2,8 @@
 #define PROJEKT_IO_MAGAZYN_H
 #include "Inwentarz.h"
 #include <vector>
+#include <OpenXLSX.hpp>
+using namespace OpenXLSX;
 class Magazyn {
     std::vector<Inwentarz> magazyn;
 public:
