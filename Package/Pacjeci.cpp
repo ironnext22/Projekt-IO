@@ -12,8 +12,8 @@ Pacjeci::Pacjeci()
             pomm.push_back(static_cast<std::string>(cell.value()));
         }
         auto* pom = new Pacjent;
-        pom->set_imie(pomm[0]);
-        pom->set_nazwisko(pomm[1]);
+        pom->set_name(pomm[0]);
+        pom->set_surname(pomm[1]);
         pom->set_pesel(pomm[2]);
         pom->set_mail(pomm[3]);
         pacjęci.push_back(*pom);
@@ -33,8 +33,8 @@ void Pacjeci::dodaj_pacjęt(std::string imie, std::string nazwisko, std::string 
     int count=wks.rowCount();
     wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,pesel,email};
     auto pom = new Pacjent;
-    pom->set_imie(imie);
-    pom->set_nazwisko(nazwisko);
+    pom->set_name(imie);
+    pom->set_surname(nazwisko);
     pom->set_pesel(pesel);
     pom->set_mail(email);
     delete pom;
