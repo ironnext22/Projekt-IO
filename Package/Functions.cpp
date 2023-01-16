@@ -78,7 +78,7 @@ std::string get_hour_from_HM_format(std::string HM){
 }
 std::string get_minute_from_HM_format(std::string HM){
     if(HM == ""){return "";}
-  //  return HM.substr(3-4);
+
 
 }
 #include <string>

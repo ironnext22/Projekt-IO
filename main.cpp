@@ -7,6 +7,7 @@
 #include "includes/Magazyn.h"
 Kalendarz test;
 Magazyn t2;
+
 using namespace sf;
 int main()
 {
