@@ -20,8 +20,11 @@
 #include "Assistant.h"
 #include "Admin.h"
 #include "Dentist.h"
+#include "Functions.h"
+#include "Pacjeci.h"
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include <fstream>
 #define PROJEKT_IO_MENU_H
 enum class sites{
@@ -38,6 +41,12 @@ enum class sites{
     admin_start_site = 11,
     admin_site_employee_managent_site = 12,
     admin_magazine_site = 13,
+    calendar_visit_edit_site =14,
+    calendar_add_visit_site = 15,
+    admin_edit_visit_site = 16,
+    money_safe_site = 17,
+
+
 
 
 
@@ -69,31 +78,40 @@ private:
     Textline text1,text2,text3,text4,text5;
     sf::RectangleShape test;
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
-    sf::Texture background_photo;
-    sf::Sprite sprite;
-    Input_bar input_bar1,input_bar2,input_bar3,input_bar4,input_bar5;
+    sf::Texture background_photo,logo;
+    sf::Sprite sprite,sprite2;
+    Input_bar input_bar1,input_bar2,input_bar3,input_bar4,input_bar5,input_bar6,input_bar7;
     sites site;
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
 
     Pracownik* logged_user = nullptr;
-
+    Pacjeci pacient_list;
     Pracownicy worker_list;
     Admin *adm = nullptr;
     Assistant *assistant = nullptr;
     Dentist *dentist = nullptr;
 
 
-    /// auxiliary variables
+    /// auxiliary variables // zmienne pomocnicze
     bool email_sent = false;
     bool created_ac = false;
     bool is_currently_changing_password = false;
+    bool is_currently_choosing_data = false;
     bool is_logged = false;
     Time_app timer;
     int selected = 0;
     std::string selected_string = "";
+    int current_day = 2;
+    int year = 2023;
+    std::string ID = "XXXXXX";
     /// debug and bugfixing
-    bool admin = true;
+
+
+
+
+
+
 
 
     ///

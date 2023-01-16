@@ -8,7 +8,7 @@ Kalendarz test;
 using namespace sf;
 int main()
 {
-    //test.set_godzina("19.22","2222222");
+
     Okno menu;
 
 

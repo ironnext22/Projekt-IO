@@ -8,6 +8,12 @@
 #define MAX_LOGIN_CHARACTERS 20
 #define MAX_EMAIL_CHARACTERS 25
 #define MAX_NAME_SURNAME_CHARACTERS 20
+#define MAX_PESEL_CHARACTERS 10
+
+
+/// TO DO HERE:
+/// sites::calendar_add_visit -> waiting for adding pacjent's then add visit
+/// calendar_edit_visit add edition of visit fun
 
 
 
@@ -19,6 +25,11 @@ Okno::Okno() {  /// initializes on the start
     font1.loadFromFile("../arial.ttf");
     background_photo.loadFromFile("../stuff/background.png");
     sprite.setTexture(background_photo);
+
+    logo.loadFromFile("../stuff/logo.png");
+    sprite2.setTexture(logo);
+
+
 }
 Okno::~Okno() {
     delete this->window;
@@ -34,9 +45,11 @@ void Okno::initialize_window() {
     this->video_mode.height = 800;
     this->video_mode.width = 1400;
 
+
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
-    this->window = new RenderWindow(this->video_mode,"IO-Dent",Style::Titlebar | Style::Close);
+    this->window = new RenderWindow(this->video_mode,"Gabinet Dentystyczny IO-DENT",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
+    this->window->setKeyRepeatEnabled(false);
 
 }
 
@@ -73,6 +86,12 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
                 else if(input_bar5.get_is_selected()){
                     input_bar5.typed_on(ev);
                 }
+                else if(input_bar6.get_is_selected()){
+                    input_bar6.typed_on(ev);
+                }
+                else if(input_bar7.get_is_selected()){
+                    input_bar7.typed_on(ev);
+                }
 
 
 
@@ -87,6 +106,7 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
 void Okno::render() {
     this->window->clear(Color::White);
     this->window->draw(sprite);
+    this->window->draw(sprite2);
 
     switch(site) {
         case sites::start_site: {
@@ -145,14 +165,14 @@ void Okno::render() {
 
 
                     if(logged_user->get_function() == "Administrator"){
-
+                        adm = new Admin(input_bar1.get_text(),input_bar2.get_text());
                         change_site(sites::admin_start_site);}
                     else {
-                        if(logged_user->get_function() == "Dentist"){
-
+                        if(logged_user->get_function() == "Dentysta"){
+                            dentist = new Dentist(input_bar1.get_text(),input_bar2.get_text());
                         }
-                        if(logged_user->get_function() == "Assistant"){
-
+                        if(logged_user->get_function() == "Asystentka"){
+                            assistant = new Assistant(input_bar1.get_text(),input_bar2.get_text());
                         }
 
                         change_site(sites::logged_in_site);
@@ -184,18 +204,13 @@ void Okno::render() {
 
         }
         case sites::credits_site: {
-            clear_site_and_wait();
-            text1.Textline_set(200, 200, "Wykonali:", 40, &font1);
-            text2.Textline_set(200, 250, "Mateusz Kuzera", 40, &font1);
-            text3.Textline_set(200, 300, "Wiktor Kowalski:", 40, &font1);
-            text4.Textline_set(200, 350, "Mateusz Lugowski", 40, &font1);
-            text5.Textline_set(200, 400, "Projekt Gabinetu Dentystycznego, grupa labolatoryjna 3.", 40, &font1);
+
+            text1.Textline_set(200, 400, "Wykonali:\n  Mateusz Kuzera, Wiktor Kowalski, Mateusz Lugowski\n"
+                                         "  AGH, Informatyka Techniczna 2022/2023\n"
+                                         "  grupa laboratoryjna 3.", 50, &font1);
+
 
             text1.render(this->window);
-            text2.render(this->window);
-            text3.render(this->window);
-            text4.render(this->window);
-            text5.render(this->window);
 
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
@@ -259,30 +274,23 @@ void Okno::render() {
                     } else if (input_bar2.get_text() != input_bar3.get_text()) {
                         text1.Textline_set(650, 150, "Passwords aren't the same", 50, &font1);
                     }
-                    /// HERE ADD IF THAT ACCOUNT ALREADY EXISTS
+                    else if(logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())){
+                        text1.Textline_set(650,150,"Email already used",50,&font1);
+                    }
 
-                        ///  else if(!logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())){
-                        ///      text1.Textline_set(650,150,"There are no accounts with this email.",50,&font1);
-                        ///
-                        ///   }
-
-                    else if (/*logging_menu.check_if_email_is_in_data_base(input_bar4.get_text())*/ !email_sent) {
+                    else if (!email_sent) {
                         /// also add
 
-
-                        if(!email_sent){ generate_code();mailbox.send_mail_with_verification_code(input_bar1.get_text(),verification_code);}
+                        if(!email_sent){ generate_code();mailbox.send_mail_with_verification_code(input_bar4.get_text(),verification_code);}
                         std::cout << std::endl << verification_code << " -ver code"<< std::endl;
                         email_sent = true;
                         text1.Textline_set(650, 150, "Verification code has been sent", 50, &font1);
 
                     }
-
-
-
-                    break;
                 }
                 text1.render(this->window);
                 b5.render(this->window);
+
 
             }
             else if(email_sent) {
@@ -335,10 +343,16 @@ void Okno::render() {
 
             b2.button_set(1000,400,100,400,&font1,"Calendar");
             b2.update(get_mous_pos());
-            if(b2.is_pressed()){change_site(sites::calendar_site);}
-            b2.render(this->window);
+            if(b2.is_pressed()) {
+                if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
+                    change_site(sites::calendar_site);
+                } else {
+                    text2.Textline_set(1020, 280, "no permission", 50, &font1);
+                }
 
-            b3.button_set(1000,300,100,400,&font1,"Inwentarz");
+            }
+            b2.render(this->window);
+            b3.button_set(1000,300,100,400,&font1,"Magazine");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::magazine_site);}
             b3.render(this->window);
@@ -350,24 +364,23 @@ void Okno::render() {
                 change_site(sites::start_site);}
             b2.render(this->window);
 
-            b3.button_set(1000,500,100,400,&font1,"My account:");
+            b3.button_set(1000,500,100,400,&font1,"My account");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::account_management_site);}
             b3.render(this->window);
 
-            text1.Textline_set(100,100,"Logged as: " +logged_user->get_login() + "\n\n"+logged_user->get_name()+
+            text1.Textline_set(100,400,"Logged as: " +logged_user->get_login() + "\n\n"+logged_user->get_name()+
             " "+logged_user->get_surname()+"\n\nPosition: "+logged_user->get_function()+"\n\nEmail: "+logged_user->get_mail()
-            +"\n\nToday is: "+timer.currentDateTime()+"\n\nHave a good day",50,&font1);
+            +"\n\nToday is: "+timer.currentDateTime()+"\nHave a good day",50,&font1);
             text1.render(this->window);
-
-            /// HERE ADD INFORMATION ABOUT ACCOUNT LOGGED IN
-
-
+            text2.render(this->window);
 
             break;
         }
         case sites::calendar_site:
         {
+            ID = "XXXXXX";
+            input_bar1.set_limit(true,4);
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);};
@@ -375,21 +388,60 @@ void Okno::render() {
 
             b2.button_set(20, 120, 100, 150, &font1, "Next");
             b2.update(get_mous_pos());
-            if (b2.is_pressed()){};
+            if (b2.is_pressed()) {
+                current_day+=7;
+                if(current_day > 365) {
+                  year++;
+                  current_day= firstMonday(year);
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+            };
             b2.render(this->window);
 
             b3.button_set(20, 220, 100, 150, &font1, "Prev");
             b3.update(get_mous_pos());
-            if (b3.is_pressed()){};
+            if (b3.is_pressed()){
+                if(current_day > 0){current_day -=7;}
+                if(current_day<0){year--; current_day = lastMonday(year);}
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+            }
+
             b3.render(this->window);
 
-            std::string array[6][9];
-            array[0][0] = "";
-            array[1][0] = "Monday";
-            array[2][0] = "Tuesday";
-            array[3][0] = "Wednesday";
-            array[4][0] = "Thursday";
-            array[5][0] = "Friday";
+            b4.button_set(20, 320, 100, 150, &font1, "ID: " +input_bar1.get_text());
+            b4.update(get_mous_pos());
+            if (b4.is_pressed()){make_input_bar_active(1);};
+            b4.render(this->window);
+
+            b5.button_set(20, 420, 100, 150, &font1, "Edit");
+            b5.update(get_mous_pos());
+            if (b5.is_pressed()){
+                if(input_bar1.get_text() == "")
+                {
+                    text1.Textline_set(20,680,"ID is empty",30,&font1);
+                }
+                else if(false /* !ID_is_in_data_base(input_bar1.get_get())   */)
+                {
+                    text1.Textline_set(20,680,"Visit dont exists",30,&font1);
+                }
+                else if(input_bar1.get_text() == "XD" /* ID_is_in_data_base(input_bar1.get_get())   */){
+                    ID = input_bar1.get_text();
+                    change_site(sites::calendar_visit_edit_site);
+                }
+
+            };
+            b5.render(this->window);
+            text1.render(this->window);
+
+            b6.button_set(20, 520, 100, 150, &font1, "Add");
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()){ change_site(sites::calendar_add_visit_site);}
+            b6.render(this->window);
+
+            std::string array[8][9];
+
 
             array[0][0] = "";
             array[0][1] = "8:00-9:00";
@@ -400,28 +452,92 @@ void Okno::render() {
             array[0][6] = "13:00-14:00";
             array[0][7] = "14:00-15:00";
             array[0][8] = "15:00-16:00";
+            array[1][0] = "Monday\n";
+            array[2][0] = "Tuesday\n";
+            array[3][0] = "Wednesday\n";
+            array[4][0] = "Thursday\n";
+            array[5][0] = "Friday\n";
+            array[6][0] = "Saturday\n";
+            array[7][0] = "Sunday\n";
 
-
-
-
-            auto kalendarz = assistant->get_kalendars();
+            Kalendarz kalendarz;
             auto wizyty = kalendarz.get_wizyty();
-            for(auto a: wizyty){
+            Date2 dateX,dateY;
 
-
+            if(logged_user->get_function() == "Asystentka"){
+                kalendarz = assistant->get_kalendars();
             }
+            else if(logged_user->get_function() == "Dentysta"){
+                kalendarz = dentist->get_kalendars();
+            }
+            else
+            {
+                std::cout << "X";
+            }
+
+
+            /// makes table look good and work properly with dates (Monday 1.1.2023 , Tuesday 2.1.2023..)
+            for(int i =1;i<8;i++){
+
+                dateX = get_day_of_year(current_day+i-1,year);
+                array[i][0] += std::to_string(dateX.day);
+                array[i][0] += ".";
+                if(dateX.month == 13){
+                    array[i][0] += "1";
+                    dateX.month =1;
+                }else
+                { array[i][0] += std::to_string(dateX.month);}
+
+                array[i][0] += ".";
+                array[i][0] += std::to_string(dateX.year);
+            }
+
+
             sf::RectangleShape rec1;
             sf::Text t1;
-            for(int i = 0;i<6;i++){
+
+            for(int i = 0;i<8;i++){
+                if(i > 0) { /// i>0 bc 1st kolumn is hours
+                    dateY.day = get_day_of_year(current_day +i-1, year).day;
+                    dateY.month = get_day_of_year(current_day+i-1 , year).month;
+                    dateY.year = get_day_of_year(current_day+i -1, year).year;
+
+                    int k =0;
+                    for(auto a: wizyty) {
+                        if(k!=0) {
+                            std::cout << a.get_data() << " " << a.get_godzina() << "\n";
+
+                           if (std::to_string(dateY.year) == get_year_from_DMY_format(a.get_data())) {
+                                if (std::to_string(dateY.month) == get_month_from_DMY_format(a.get_data()) ||
+                                       "0" + std::to_string(dateY.month)  == get_month_from_DMY_format(a.get_data())) {
+
+                                    if (std::to_string(dateY.day) == get_day_from_DMY_format(a.get_data()) ||
+                                       "0" + std::to_string(dateY.day) == get_day_from_DMY_format(a.get_data())) {
+
+                                        for(int j =1; j<9;j++) {
+                                                  if(get_hour_from_HM_format(a.get_godzina())== std::to_string(7+j) || get_hour_from_HM_format(a.get_godzina())== "0"+std::to_string(7+j)){
+                                                      array[i][j]= a.get_pacjent().get_name() + " " + a.get_pacjent().get_surname() + " "+a.get_pacjent().get_mail();
+                                                  }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        k++;
+                    }
+                }
+
                 for(int j =0; j<9;j++)
                 {
 
-
-                    rec1.setSize(sf::Vector2f(200,80));
-                    rec1.setPosition(180+(i*200),35+(j*80));
-                    text1.Textline_set(180+(i*200),35+(j*80),array[i][j],50,&font1);
+                    rec1.setSize(sf::Vector2f(150,80));
+                    rec1.setPosition(180+(i*150),35+(j*80));
+                    int char_size=25;
+                    if(j==0 || i==0){char_size = 50;}
+                    text1.Textline_set(180+(i*150),35+(j*80),array[i][j] ,char_size,&font1);
                     rec1.setOutlineColor(sf::Color::Black);
-                    rec1.setOutlineThickness(5);
+                    rec1.setOutlineThickness(1);
                     rec1.setFillColor(sf::Color::White);
                     this->window->draw(rec1);
                     text1.render(this->window);
@@ -432,7 +548,6 @@ void Okno::render() {
                 }
             }
 
-
             break;
 
         }
@@ -442,6 +557,9 @@ void Okno::render() {
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);}
             b1.render(this->window);
+
+
+
             break;
 
         }
@@ -588,9 +706,8 @@ void Okno::render() {
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);};
             b1.render(this->window);
-            text1.Textline_set(400, 200, "Your account", 50, &font1);
 
-
+            text1.Textline_set(330, 270, "Your account: Here you can change your information", 50, &font1);
 
             b2.button_set(100,300,100,500,&font1,"Change Name");
             b2.update(get_mous_pos());
@@ -600,11 +717,11 @@ void Okno::render() {
             if(b2.is_pressed()){
                 if(input_bar1.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Name cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Name cannot be empty", 50, &font1);
                 }
                 else{
                     worker_list.set_attribute(user_data_type::name,logged_user->get_login(),input_bar1.get_text());
-                    text1.Textline_set(400, 200, "Name changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Name changed", 50, &font1);
                 }
             }
 
@@ -619,11 +736,11 @@ void Okno::render() {
             if(b4.is_pressed()){
                 if(input_bar2.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Last Name cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Last Name cannot be empty", 50, &font1);
                 }
                 else{
                     worker_list.set_attribute(user_data_type::surname,logged_user->get_login(),input_bar2.get_text());
-                    text1.Textline_set(400, 200, "Last Name changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Last Name changed", 50, &font1);
                 }
             }
             password="";
@@ -639,10 +756,10 @@ void Okno::render() {
             if(b6.is_pressed()){
                 if(input_bar3.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Password cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Password cannot be empty", 50, &font1);
                 }
                 else{
-                    text1.Textline_set(400, 200, "Password changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Password changed", 50, &font1);
                     worker_list.set_attribute(user_data_type::password,logged_user->get_login(),input_bar3.get_text());
 
 
@@ -658,10 +775,10 @@ void Okno::render() {
             if(b8.is_pressed()){
                 if(input_bar4.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Email cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Email cannot be empty", 50, &font1);
                 }
                 else{
-                    text1.Textline_set(400, 200, "Email changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Email changed", 50, &font1);
                     worker_list.set_attribute(user_data_type::mail,logged_user->get_login(),input_bar4.get_text());
 
 
@@ -710,7 +827,7 @@ void Okno::render() {
 
             b4.button_set(1000,300,100,400,&font1,"Calendar");
             b4.update(get_mous_pos());
-            if(b4.is_pressed()){}
+            if(b4.is_pressed()){ change_site(sites::admin_edit_visit_site);}
             b4.render(this->window);
             break;
         }
@@ -854,8 +971,163 @@ void Okno::render() {
             break;
 
         }
+        case sites::calendar_visit_edit_site:{
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()){change_site(sites::calendar_site);};
+            b1.render(this->window);
+
+
+            input_bar5.set_limit(true, 7);
+            input_bar6.set_limit(true,3);
+
+
+
+            text1.Textline_set(650, 80, "Edit Visit", 50, &font1);
+
+            b6.button_set(600, 300, 100, 750, &font1, "Date: "+get_nice_looking_DDMMYYYY_format(input_bar5.get_text()));
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()) { make_input_bar_active(5);}
+
+            b7.button_set(600, 400, 100, 750, &font1,"Hour: " + get_nice_looking_HHMM_format(input_bar6.get_text()));
+            b7.update(get_mous_pos());
+            if (b7.is_pressed()) { make_input_bar_active(6);}
+
+            b8.button_set(600, 600, 100, 750, &font1,"Change");
+            b8.update(get_mous_pos());
+            if (b8.is_pressed()) {
+
+
+            }
+            text1.render(this->window);
+
+            b6.render(this->window);
+            b7.render(this->window);
+            b8.render(this->window);
+
+
+            break;
+        }
+        case sites::calendar_add_visit_site: {
+
+
+                b1.button_set(20, 20, 100, 150, &font1, "Back");
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) { change_site(sites::calendar_site); };
+                b1.render(this->window);
+
+                input_bar1.set_limit(true, MAX_NAME_SURNAME_CHARACTERS);
+                input_bar2.set_limit(true, MAX_NAME_SURNAME_CHARACTERS);
+                input_bar3.set_limit(true, MAX_EMAIL_CHARACTERS);
+                input_bar4.set_limit(true, MAX_PESEL_CHARACTERS);
+                input_bar5.set_limit(true, 7);
+                input_bar6.set_limit(true,3);
+                input_bar7.set_limit(true,10);
+
+
+
+
+
+                b2.button_set(600, 0, 100, 750, &font1, "Name:" + input_bar1.get_text());
+                b2.update(get_mous_pos());
+                if (b2.is_pressed()) { make_input_bar_active(1); }
+
+                b3.button_set(600, 100, 100, 750, &font1, "Surname: " + input_bar2.get_text());
+                b3.update(get_mous_pos());
+                if (b3.is_pressed()) { make_input_bar_active(2); }
+
+                b4.button_set(600, 200, 100, 750, &font1, "Email: " + input_bar3.get_text());
+                b4.update(get_mous_pos());
+                if (b4.is_pressed()) { make_input_bar_active(3); }
+
+                b5.button_set(600, 300, 100, 750, &font1, "Pesel: " + input_bar4.get_text());
+                b5.update(get_mous_pos());
+                if (b5.is_pressed()) { make_input_bar_active(4); }
+
+                b6.button_set(600, 400, 100, 750, &font1, "Date: "+get_nice_looking_DDMMYYYY_format(input_bar5.get_text()));
+                b6.update(get_mous_pos());
+                if (b6.is_pressed()) { make_input_bar_active(5);}
+
+                b7.button_set(600, 500, 100, 750, &font1,"Hour: " + get_nice_looking_HHMM_format(input_bar6.get_text()));
+                b7.update(get_mous_pos());
+                if (b7.is_pressed()) { make_input_bar_active(6);}
+
+                b9.button_set(600, 600, 100, 750, &font1,"Paid: (use .) " + input_bar7.get_text() + " ZL");
+                b9.update(get_mous_pos());
+                if (b9.is_pressed()) { make_input_bar_active(7);}
+
+                b8.button_set(600, 700, 100, 750, &font1,"Add Visit");
+                b8.update(get_mous_pos());
+                if (b8.is_pressed()) {
+
+
+
+                    /// add safety features
+                    /// (check if hour&&data is good)
+                    ///
+
+                    /// CHECK IF THERE IS THAT PATIENT
+                    ///  pacient_list.dodaj_pacjęt(input_bar1.get_text(),input_bar2.get_text(),input_bar4.get_text(),input_bar3.get_text());
+                    /// ADD VISIT
+
+
+                }
+
+                b1.render(this->window);
+                b2.render(this->window);
+                b3.render(this->window);
+                b4.render(this->window);
+                b5.render(this->window);
+                b6.render(this->window);
+                b7.render(this->window);
+                b8.render(this->window);
+                b9.render(this->window);
+                break;
+            }
+        case sites::admin_edit_visit_site:{
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()){change_site(sites::admin_start_site);};
+            b1.render(this->window);
+
+            input_bar1.set_limit(true, 7);
+            input_bar5.set_limit(true, 7);
+            input_bar6.set_limit(true,3);
+
+
+
+            text1.Textline_set(650, 80, "Edit Visit", 50, &font1);
+
+            b6.button_set(600, 200, 100, 750, &font1, "ID: ");
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()) { make_input_bar_active(1);}
+
+            b6.button_set(600, 300, 100, 750, &font1, "Date: "+get_nice_looking_DDMMYYYY_format(input_bar5.get_text()));
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()) { make_input_bar_active(5);}
+
+            b7.button_set(600, 400, 100, 750, &font1,"Hour: " + get_nice_looking_HHMM_format(input_bar6.get_text()));
+            b7.update(get_mous_pos());
+            if (b7.is_pressed()) { make_input_bar_active(6);}
+
+            b8.button_set(600, 600, 100, 750, &font1,"Change");
+            b8.update(get_mous_pos());
+            if (b8.is_pressed()) {
+                //
+
+            }
+            text1.render(this->window);
+            b1.render(this->window);
+            b6.render(this->window);
+            b7.render(this->window);
+            b8.render(this->window);
+
+
+            break;
+        }
 
     }
+
     this->window->display();
 }
 
@@ -882,6 +1154,9 @@ const bool Okno::get_window_is_open() const
 
 void Okno::initialize_variables() {
     this->window = nullptr;
+
+
+
 }
 
 sf::Vector2f Okno::get_mous_pos()
@@ -918,6 +1193,10 @@ void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites
     input_bar2.clear();
     input_bar3.clear();
     input_bar4.clear();
+    input_bar5.clear();
+    input_bar6.clear();
+    input_bar7.clear();
+
     /// also changes some staff to be reseted
     verification_code = "000000";
     email_sent =false;
@@ -940,6 +1219,8 @@ void Okno::make_input_bar_active(int which_one){
             input_bar3.set_selected(false);
             input_bar4.set_selected(false);
             input_bar5.set_selected(false);
+            input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
         }
         case 2:{
@@ -948,6 +1229,8 @@ void Okno::make_input_bar_active(int which_one){
             input_bar3.set_selected(false);
             input_bar4.set_selected(false);
             input_bar5.set_selected(false);
+            input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
         }
         case 3:{
@@ -956,6 +1239,8 @@ void Okno::make_input_bar_active(int which_one){
             input_bar3.set_selected(true);
             input_bar4.set_selected(false);
             input_bar5.set_selected(false);
+            input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
         }
         case 4:{
@@ -964,6 +1249,8 @@ void Okno::make_input_bar_active(int which_one){
             input_bar3.set_selected(false);
             input_bar4.set_selected(true);
             input_bar5.set_selected(false);
+            input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
 
         }
@@ -974,14 +1261,38 @@ void Okno::make_input_bar_active(int which_one){
             input_bar3.set_selected(false);
             input_bar4.set_selected(false);
             input_bar5.set_selected(true);
+            input_bar6.set_selected(false);
+            input_bar7.set_selected(false);
             break;
 
+        }
+        case 6:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(false);
+            input_bar5.set_selected(false);
+            input_bar6.set_selected(true);
+            input_bar7.set_selected(false);
+            break;
+        }
+        case 7:{
+            input_bar1.set_selected(false);
+            input_bar2.set_selected(false);
+            input_bar3.set_selected(false);
+            input_bar4.set_selected(false);
+            input_bar5.set_selected(false);
+            input_bar6.set_selected(false);
+            input_bar7.set_selected(true);
+            break;
         }
        default:{
             input_bar1.set_selected(false);
             input_bar2.set_selected(false);
             input_bar3.set_selected(false);
             input_bar4.set_selected(false);
+            input_bar5.set_selected(false);
+            input_bar6.set_selected(false);
             break;
         }
 

@@ -3,7 +3,7 @@
  std::string Pracownik::get_password() {return haslo;}
  std::string Pracownik::get_function() {
      std::string fun;
-    if(funkcja==Funkcje::Asystentka)fun="Asysystentka";
+    if(funkcja==Funkcje::Asystentka)fun="Asystentka";
     if(funkcja==Funkcje::Dentysta)fun="Dentysta";
     if(funkcja==Funkcje::Administrator)fun="Administrator";
     if(funkcja==Funkcje::No_function)fun="No Function";
