@@ -28,7 +28,7 @@ std::vector<Pacjent> Pacjeci::get_pacjeci() {return pacjęci;}
 void Pacjeci::dodaj_pacjęt(std::string imie, std::string nazwisko, std::string pesel, std::string email)
 {
     XLDocument doc;
-    doc.open("pacjęci.xlsx");
+    doc.open("pacjeci.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
     int count=wks.rowCount();
     wks.row(count+1).values() = std::vector<std::string>{imie,nazwisko,pesel,email};
