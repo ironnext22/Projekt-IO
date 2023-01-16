@@ -949,7 +949,19 @@ void Okno::render() {
 
                         case 6:
                             /// CHANGE POSITION
-                            worker_list.set_attribute(user_data_type::position,input_bar1.get_text(),input_bar2.get_text());
+                            if(input_bar2.get_text() == "0"){
+                                adm->set_function(input_bar1.get_text(),"Asystentka");
+                            }
+                            else if(input_bar2.get_text() == "1"){
+                                adm->set_function(input_bar1.get_text(),"Dentysta");
+                            }
+                            else if(input_bar2.get_text() == "2"){
+                                adm->set_function(input_bar1.get_text(),"Administrator");
+                            }
+                            else {
+                                adm->set_function(input_bar1.get_text(),"No_function");
+                            }
+
                             break;
 
 
