@@ -3,6 +3,7 @@
 //
 #include "../includes/Functions.h"
 #include <string>
+#include <iostream>
 
 
 Date2 get_day_of_year(int dayOfYear, int year) {
@@ -80,3 +81,135 @@ std::string get_minute_from_HM_format(std::string HM){
   //  return HM.substr(3-4);
 
 }
+#include <string>
+std::string get_nice_looking_HHMMYYYY_format(std::string input_from_the_input_bar){
+    std::string newstr,str2;
+    if(input_from_the_input_bar == ""){return "DD.MM.YYYY";}
+
+    else if(input_from_the_input_bar.length() == 1){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        newstr.append("D.MM.YYYY");
+        return newstr;
+    }
+    else if (input_from_the_input_bar.length() == 2){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".MM.YYYY");
+        return newstr;
+    }
+
+    else if (input_from_the_input_bar.length() == 3){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        newstr.append("M.YYYY");
+        return newstr;
+    }
+    else if (input_from_the_input_bar.length() == 4){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[3];
+        newstr.append(str2);
+        newstr.append(".YYYY");
+        return newstr;
+    }
+    else if (input_from_the_input_bar.length() == 5){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[3];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[4];
+        newstr.append(str2);
+        newstr.append("YYY");
+
+        return newstr;
+
+    }
+
+    else if (input_from_the_input_bar.length() == 6){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[3];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[4];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[5];
+        newstr.append(str2);
+        newstr.append("YY");
+        return newstr;
+
+
+    }
+    else if (input_from_the_input_bar.length() == 7){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[3];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[4];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[5];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[6];
+        newstr.append(str2);
+        newstr.append("Y");
+
+        return newstr;
+
+
+    }
+    else if (input_from_the_input_bar.length() == 8){
+        str2 = input_from_the_input_bar[0];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[1];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[2];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[3];
+        newstr.append(str2);
+        newstr.append(".");
+        str2 = input_from_the_input_bar[4];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[5];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[6];
+        newstr.append(str2);
+        str2 = input_from_the_input_bar[7];
+        newstr.append(str2);
+
+        return newstr;
+
+    }
+    else return "";
+}
+

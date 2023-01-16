@@ -26,5 +26,7 @@ std::string get_year_from_DMY_format(std::string DMY);
 std::string get_hour_from_HM_format(std::string HM);
 std::string get_minute_from_HM_format(std::string HM);
 
+std::string get_nice_looking_HHMMYYYY_format(std::string input_from_the_input_bar);
+
 
 #endif //PROJEKT_IO_FUNCTIONS_H
