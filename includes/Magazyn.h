@@ -8,7 +8,8 @@ class Magazyn {
     std::vector<Inwentarz> magazyn;
 public:
     Magazyn();
-    void dodaj_do_magazynu();
+    void dodaj_do_magazynu(std::string nazwa,std::string id,std::string ilosc);
+    std::vector<Inwentarz> get_magazyn();
 };
 
 

@@ -45,7 +45,7 @@ std::vector<Wizyta> Kalendarz::get_wizyty()
     return wizyty;
 }
 
-void Kalendarz::set_data(std::string data,std::string pesel)
+void Kalendarz::set_data(std::string data,std::string ID)
 {
     XLDocument doc;
     doc.open("wizyty.xlsx");
@@ -58,7 +58,7 @@ void Kalendarz::set_data(std::string data,std::string pesel)
         {
             v.push_back(static_cast<std::string>(b.value()));
         }
-        if(v[2]==pesel)
+        if(v[6]==ID)
         {
             break;
         }
@@ -70,7 +70,7 @@ void Kalendarz::set_data(std::string data,std::string pesel)
     doc.save();
     doc.close();
 }
-void Kalendarz::set_godzina(std::string godzina,std::string pesel)
+void Kalendarz::set_godzina(std::string godzina,std::string ID)
 {
     XLDocument doc;
     doc.open("wizyty.xlsx");
@@ -83,7 +83,7 @@ void Kalendarz::set_godzina(std::string godzina,std::string pesel)
         {
             v.push_back(static_cast<std::string>(b.value()));
         }
-        if(v[2]==pesel)
+        if(v[6]==ID)
         {
             break;
         }
