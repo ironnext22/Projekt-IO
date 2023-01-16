@@ -25,6 +25,11 @@ Okno::Okno() {  /// initializes on the start
     font1.loadFromFile("../arial.ttf");
     background_photo.loadFromFile("../stuff/background.png");
     sprite.setTexture(background_photo);
+
+    logo.loadFromFile("../stuff/logo.png");
+    sprite2.setTexture(logo);
+
+
 }
 Okno::~Okno() {
     delete this->window;
@@ -101,6 +106,7 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
 void Okno::render() {
     this->window->clear(Color::White);
     this->window->draw(sprite);
+    this->window->draw(sprite2);
 
     switch(site) {
         case sites::start_site: {
@@ -199,17 +205,12 @@ void Okno::render() {
         }
         case sites::credits_site: {
 
-            text1.Textline_set(200, 200, "Wykonali:", 40, &font1);
-            text2.Textline_set(200, 250, "Mateusz Kuzera", 40, &font1);
-            text3.Textline_set(200, 300, "Wiktor Kowalski:", 40, &font1);
-            text4.Textline_set(200, 350, "Mateusz Lugowski", 40, &font1);
-            text5.Textline_set(200, 400, "Projekt Gabinetu Dentystycznego, grupa labolatoryjna 3.", 40, &font1);
+            text1.Textline_set(200, 400, "Wykonali:\n  Mateusz Kuzera, Wiktor Kowalski, Mateusz Lugowski\n"
+                                         "  AGH, Informatyka Techniczna 2022/2023\n"
+                                         "  grupa laboratoryjna 3.", 50, &font1);
+
 
             text1.render(this->window);
-            text2.render(this->window);
-            text3.render(this->window);
-            text4.render(this->window);
-            text5.render(this->window);
 
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
@@ -286,11 +287,10 @@ void Okno::render() {
                         text1.Textline_set(650, 150, "Verification code has been sent", 50, &font1);
 
                     }
-
-                    break;
                 }
                 text1.render(this->window);
                 b5.render(this->window);
+
 
             }
             else if(email_sent) {
@@ -364,14 +364,14 @@ void Okno::render() {
                 change_site(sites::start_site);}
             b2.render(this->window);
 
-            b3.button_set(1000,500,100,400,&font1,"My account:");
+            b3.button_set(1000,500,100,400,&font1,"My account");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){change_site(sites::account_management_site);}
             b3.render(this->window);
 
-            text1.Textline_set(100,100,"Logged as: " +logged_user->get_login() + "\n\n"+logged_user->get_name()+
+            text1.Textline_set(100,400,"Logged as: " +logged_user->get_login() + "\n\n"+logged_user->get_name()+
             " "+logged_user->get_surname()+"\n\nPosition: "+logged_user->get_function()+"\n\nEmail: "+logged_user->get_mail()
-            +"\n\nToday is: "+timer.currentDateTime()+"\n\nHave a good day",50,&font1);
+            +"\n\nToday is: "+timer.currentDateTime()+"\nHave a good day",50,&font1);
             text1.render(this->window);
             text2.render(this->window);
 
@@ -703,9 +703,8 @@ void Okno::render() {
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);};
             b1.render(this->window);
-            text1.Textline_set(400, 200, "Your account", 50, &font1);
 
-
+            text1.Textline_set(330, 270, "Your account: Here you can change your information", 50, &font1);
 
             b2.button_set(100,300,100,500,&font1,"Change Name");
             b2.update(get_mous_pos());
@@ -715,11 +714,11 @@ void Okno::render() {
             if(b2.is_pressed()){
                 if(input_bar1.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Name cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Name cannot be empty", 50, &font1);
                 }
                 else{
                     worker_list.set_attribute(user_data_type::name,logged_user->get_login(),input_bar1.get_text());
-                    text1.Textline_set(400, 200, "Name changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Name changed", 50, &font1);
                 }
             }
 
@@ -734,11 +733,11 @@ void Okno::render() {
             if(b4.is_pressed()){
                 if(input_bar2.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Last Name cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Last Name cannot be empty", 50, &font1);
                 }
                 else{
                     worker_list.set_attribute(user_data_type::surname,logged_user->get_login(),input_bar2.get_text());
-                    text1.Textline_set(400, 200, "Last Name changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Last Name changed", 50, &font1);
                 }
             }
             password="";
@@ -754,10 +753,10 @@ void Okno::render() {
             if(b6.is_pressed()){
                 if(input_bar3.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Password cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Password cannot be empty", 50, &font1);
                 }
                 else{
-                    text1.Textline_set(400, 200, "Password changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Password changed", 50, &font1);
                     worker_list.set_attribute(user_data_type::password,logged_user->get_login(),input_bar3.get_text());
 
 
@@ -773,10 +772,10 @@ void Okno::render() {
             if(b8.is_pressed()){
                 if(input_bar4.get_text() == "")
                 {
-                    text1.Textline_set(400, 200, "Email cannot be empty", 50, &font1);
+                    text1.Textline_set(330, 270, "Email cannot be empty", 50, &font1);
                 }
                 else{
-                    text1.Textline_set(400, 200, "Email changed", 50, &font1);
+                    text1.Textline_set(330, 270, "Email changed", 50, &font1);
                     worker_list.set_attribute(user_data_type::mail,logged_user->get_login(),input_bar4.get_text());
 
 
