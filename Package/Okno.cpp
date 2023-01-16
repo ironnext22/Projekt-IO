@@ -35,7 +35,7 @@ void Okno::initialize_window() {
     this->video_mode.width = 1400;
 
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
-    this->window = new RenderWindow(this->video_mode,"Proba nr 1.",Style::Titlebar | Style::Close);
+    this->window = new RenderWindow(this->video_mode,"IO-Dent",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
 
 }
@@ -135,18 +135,29 @@ void Okno::render() {
 
                 if (input_bar1.get_text() == "" || input_bar2.get_text() == "") {
                     text1.Textline_set(650, 350, "No login or password entered!", 50, &font1);
-
-                } else if (logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
+                }
+                else if (!logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
+                    text1.Textline_set(650, 350, "Invalid login or password!", 50, &font1);
+                }
+                else if (logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
                     logged_user= new Pracownik(input_bar1.get_text(),input_bar2.get_text());
-
                     is_logged = true;
-                    if(logged_user->get_function() == "Administrator"){change_site(sites::admin_start_site);}
+
+
+                    if(logged_user->get_function() == "Administrator"){
+
+                        change_site(sites::admin_start_site);}
                     else {
+                        if(logged_user->get_function() == "Dentist"){
+
+                        }
+                        if(logged_user->get_function() == "Assistant"){
+
+                        }
+
                         change_site(sites::logged_in_site);
                     }
 
-                } else if (!logging_menu.log_in(input_bar1.get_text(), input_bar2.get_text())) {
-                    text1.Textline_set(650, 350, "Invalid login or password!", 50, &font1);
                 }
 
             }
@@ -361,6 +372,67 @@ void Okno::render() {
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);};
             b1.render(this->window);
+
+            b2.button_set(20, 120, 100, 150, &font1, "Next");
+            b2.update(get_mous_pos());
+            if (b2.is_pressed()){};
+            b2.render(this->window);
+
+            b3.button_set(20, 220, 100, 150, &font1, "Prev");
+            b3.update(get_mous_pos());
+            if (b3.is_pressed()){};
+            b3.render(this->window);
+
+            std::string array[6][9];
+            array[0][0] = "";
+            array[1][0] = "Monday";
+            array[2][0] = "Tuesday";
+            array[3][0] = "Wednesday";
+            array[4][0] = "Thursday";
+            array[5][0] = "Friday";
+
+            array[0][0] = "";
+            array[0][1] = "8:00-9:00";
+            array[0][2] = "9:00-10:00";
+            array[0][3] = "10:00-11:00";
+            array[0][4] = "11:00-12:00";
+            array[0][5] = "12:00-13:00";
+            array[0][6] = "13:00-14:00";
+            array[0][7] = "14:00-15:00";
+            array[0][8] = "15:00-16:00";
+
+
+
+
+            auto kalendarz = assistant->get_kalendars();
+            auto wizyty = kalendarz.get_wizyty();
+            for(auto a: wizyty){
+
+
+            }
+            sf::RectangleShape rec1;
+            sf::Text t1;
+            for(int i = 0;i<6;i++){
+                for(int j =0; j<9;j++)
+                {
+
+
+                    rec1.setSize(sf::Vector2f(200,80));
+                    rec1.setPosition(180+(i*200),35+(j*80));
+                    text1.Textline_set(180+(i*200),35+(j*80),array[i][j],50,&font1);
+                    rec1.setOutlineColor(sf::Color::Black);
+                    rec1.setOutlineThickness(5);
+                    rec1.setFillColor(sf::Color::White);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+
+
+
+
+                }
+            }
+
+
             break;
 
         }
@@ -782,6 +854,7 @@ void Okno::render() {
             break;
 
         }
+
     }
     this->window->display();
 }
