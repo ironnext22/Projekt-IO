@@ -557,6 +557,9 @@ void Okno::render() {
             b1.update(get_mous_pos());
             if (b1.is_pressed()){change_site(sites::logged_in_site);}
             b1.render(this->window);
+
+
+
             break;
 
         }

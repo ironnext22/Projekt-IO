@@ -44,6 +44,8 @@ enum class sites{
     calendar_visit_edit_site =14,
     calendar_add_visit_site = 15,
     admin_edit_visit_site = 16,
+    money_safe_site = 17,
+
 
 
 
