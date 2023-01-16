@@ -1071,9 +1071,9 @@ void Okno::render() {
                 b8.button_set(600, 700, 100, 750, &font1,"Add Visit");
                 b8.update(get_mous_pos());
                 if (b8.is_pressed()) {
-
-                //    assistant->get_kalendars().dodal_wizyte(input_bar1.get_text(),input_bar2.get_text(),input_bar4.get_text(),
-                 //                                          get_nice_looking_DDMMYYYY_format(input_bar5.get_text()), get_nice_looking_HHMM_format(input_bar6.get_text()),input_bar3.get_text());
+                    pacient_list.dodaj_pacjęt(input_bar1.get_text(), input_bar2.get_text(),input_bar4.get_text(),input_bar3.get_text());
+                    assistant->get_kalendars().dodal_wizyte(input_bar1.get_text(),input_bar2.get_text(),input_bar4.get_text(),
+                                                           get_nice_looking_DDMMYYYY_format(input_bar5.get_text()), get_nice_looking_HHMM_format(input_bar6.get_text()),input_bar3.get_text());
 
 
 
