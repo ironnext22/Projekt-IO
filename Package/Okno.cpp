@@ -47,7 +47,7 @@ void Okno::initialize_window() {
 
 
     // this->video_mode.getDesktopMode(); // this can give you the parametres of your screen to your window
-    this->window = new RenderWindow(this->video_mode,"Proba nr 1.",Style::Titlebar | Style::Close);
+    this->window = new RenderWindow(this->video_mode,"Gabinet Dentystyczny IO-DENT",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
     this->window->setKeyRepeatEnabled(false);
 
