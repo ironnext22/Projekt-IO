@@ -10,6 +10,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
+#include "Functions.h"
 #include "Button.h"
 #include "Textline.h"
 #include "Input_bar.h"
