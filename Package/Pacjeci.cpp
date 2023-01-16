@@ -27,6 +27,7 @@ std::vector<Pacjent> Pacjeci::get_pacjeci() {return pacjęci;}
 
 void Pacjeci::dodaj_pacjęt(std::string imie, std::string nazwisko, std::string pesel, std::string email)
 {
+    if(pacjet_exist(pesel))return;
     XLDocument doc;
     doc.open("pacjeci.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
@@ -40,4 +41,28 @@ void Pacjeci::dodaj_pacjęt(std::string imie, std::string nazwisko, std::string 
     delete pom;
     doc.save();
     doc.close();
+}
+
+bool Pacjeci::pacjet_exist(std::string pesel)
+{
+    bool pom= false;
+    XLDocument doc;
+    doc.open("pacjeci.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> pomocnicza;
+    for(auto x : wks.rows())
+    {
+        for(auto y : x.cells())
+        {
+            pomocnicza.push_back(static_cast<std::string>(y.value()));
+        }
+        if(pomocnicza[2]==pesel)
+        {
+            pom = true;
+            pomocnicza.clear();
+            break;
+        }
+        pomocnicza.clear();
+    }
+    return pom;
 }

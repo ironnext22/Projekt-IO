@@ -11,5 +11,6 @@ public:
     Pacjeci();
     void dodaj_pacjęt(std::string imie,std::string nazwisko,std::string pesel,std::string email);
     std::vector<Pacjent> get_pacjeci();
+    bool pacjet_exist(std::string pesel);
 };
 #endif //PROJEKT_IO_PACJECI_H
