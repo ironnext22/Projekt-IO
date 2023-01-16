@@ -820,7 +820,7 @@ void Okno::render() {
             if(b2.is_pressed()){change_site(sites::admin_site_employee_managent_site);}
             b2.render(this->window);
 
-            b3.button_set(1000,400,100,400,&font1,"Magazine");
+            b3.button_set(1000,400,100,400,&font1,"Inwentarz");
             b3.update(get_mous_pos());
             if(b3.is_pressed()){}
             b3.render(this->window);
