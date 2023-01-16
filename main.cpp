@@ -4,7 +4,9 @@
 #include "includes/Loging.h"
 #include "includes/Kalendarz.h"
 #include "includes/Assistant.h"
+#include "includes/Magazyn.h"
 Kalendarz test;
+Magazyn t2;
 using namespace sf;
 int main()
 {
