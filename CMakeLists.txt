@@ -3,7 +3,7 @@ project(Projekt-IO)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Projekt-IO main.cpp Package/Button.cpp includes/Button.h Package/Textline.cpp includes/Textline.h Package/Input_bar.cpp includes/Input_bar.h includes/Pracownik.h includes/Osoba.h includes/Pracownicy.h Package/Pracownicy.cpp Package/Okno.cpp includes/Loging.h Package/Loging.cpp Package/Pracownik.cpp includes/Time_app.h Package/Time_app.cpp includes/Assistant.h includes/Dentist.h includes/Admin.h Package/Admin.cpp includes/Mail.h Package/Mail.cpp includes/Kalendarz.h includes/Wizyta.h includes/Pacjent.h Package/Wizyta.cpp Package/Kalendarz.cpp Package/Osoba.cpp Package/Assistant.cpp includes/Functions.h)
+add_executable(Projekt-IO main.cpp Package/Button.cpp includes/Button.h Package/Textline.cpp includes/Textline.h Package/Input_bar.cpp includes/Input_bar.h includes/Pracownik.h includes/Osoba.h includes/Pracownicy.h Package/Pracownicy.cpp Package/Okno.cpp includes/Loging.h Package/Loging.cpp Package/Pracownik.cpp includes/Time_app.h Package/Time_app.cpp includes/Assistant.h includes/Dentist.h includes/Admin.h Package/Admin.cpp includes/Mail.h Package/Mail.cpp includes/Kalendarz.h includes/Wizyta.h includes/Pacjent.h Package/Pacjent.cpp Package/Wizyta.cpp Package/Kalendarz.cpp includes/Pacjeci.h Package/Pacjeci.cpp Package/Osoba.cpp Package/Inwentarz.cpp includes/Inwentarz.h Package/Magazyn.cpp includes/Magazyn.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR ./SFML-2.5.1/lib/cmake/SFML)

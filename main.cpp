@@ -11,6 +11,7 @@ int main()
     //test.set_godzina("19.22","2222222");
     Okno menu;
 
+
     while(menu.get_window_is_open()) {
 
                 menu.update();

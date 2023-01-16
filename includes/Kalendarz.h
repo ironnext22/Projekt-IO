@@ -9,7 +9,7 @@ class Kalendarz
 std::vector<Wizyta> wizyty;
 public:
     Kalendarz();
-    void dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina);
+    void dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina,std::string mail, std::string ID);
     std::vector<Wizyta> get_wizyty();
     void set_data(std::string data,std::string pesel);
     void set_godzina(std::string godzina,std::string pesel);
