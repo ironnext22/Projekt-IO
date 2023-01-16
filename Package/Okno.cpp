@@ -949,7 +949,19 @@ void Okno::render() {
 
                         case 6:
                             /// CHANGE POSITION
-                            worker_list.set_attribute(user_data_type::position,input_bar1.get_text(),input_bar2.get_text());
+                            if(input_bar2.get_text() == "0"){
+                                adm->set_function(input_bar1.get_text(),"Asystentka");
+                            }
+                            else if(input_bar2.get_text() == "1"){
+                                adm->set_function(input_bar1.get_text(),"Dentysta");
+                            }
+                            else if(input_bar2.get_text() == "2"){
+                                adm->set_function(input_bar1.get_text(),"Administrator");
+                            }
+                            else {
+                                adm->set_function(input_bar1.get_text(),"No_function");
+                            }
+
                             break;
 
 
@@ -1059,6 +1071,10 @@ void Okno::render() {
                 b8.button_set(600, 700, 100, 750, &font1,"Add Visit");
                 b8.update(get_mous_pos());
                 if (b8.is_pressed()) {
+
+                //    assistant->get_kalendars().dodal_wizyte(input_bar1.get_text(),input_bar2.get_text(),input_bar4.get_text(),
+                 //                                          get_nice_looking_DDMMYYYY_format(input_bar5.get_text()), get_nice_looking_HHMM_format(input_bar6.get_text()),input_bar3.get_text());
+
 
 
 
