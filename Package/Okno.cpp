@@ -859,23 +859,85 @@ void Okno::render() {
             b1.render(this->window);
             int count = 0;
             std::string line = "";
+
+
+
+            sf::RectangleShape rec1;
+            sf::Text t1;
+            rec1.setSize(sf::Vector2f(200, 40));
+            int char_size = 35;
+            rec1.setOutlineColor(sf::Color::Black);
+            rec1.setOutlineThickness(1);
+            rec1.setFillColor(sf::Color::White);
+            int i =0;
+            int j= 0;
             for (auto a: worker_list.get_worker()) {
-                if (count != 0 && count < 20) {
+
+                    if(i==0){
+                        rec1.setPosition(10,100+(i*40));
+                        text1.Textline_set(20, 110+(i*40) ,"Name", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+
+                        rec1.setPosition(210,100+(i*40));
+                        text1.Textline_set(220, 110+(i*40) ,"Surname", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+
+                        rec1.setPosition(410+(j*110),100+(i*40));
+                        text1.Textline_set(420, 110+(i*40),"Email", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+
+                        rec1.setPosition(610,100+(i*40));
+                        text1.Textline_set(620, 110+(i*40),"Position", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+
+                        rec1.setSize(sf::Vector2f(150, 40));
+                        rec1.setPosition(810,100+(i*40));
+                        text1.Textline_set(820, 110+(i*40),"Login", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+                        rec1.setSize(sf::Vector2f(200, 40));
 
 
+                        i++;
 
+                        continue;
 
+                    }
 
-
-
-
-                    text1.Textline_set(10, 100 + (count * 20),
-                                       set_table_line_for_admin_site(a.get_login(), a.get_name(), a.get_surname(),
-                                                                     a.get_mail(), a.get_function()), 30, &font1);
+                    rec1.setPosition(10,100+(i*40));
+                    text1.Textline_set(20, 110+(i*40),a.get_name(), char_size, &font1);
+                    this->window->draw(rec1);
                     text1.render(this->window);
 
-                }
-                count++;
+                    rec1.setPosition(210,100+(i*40));
+                    text1.Textline_set(220, 110 +(i*40),a.get_surname(), char_size, &font1);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+
+                    rec1.setPosition(410,100+(i*40));
+                    text1.Textline_set(420, 110+(i*40),a.get_mail(), char_size, &font1);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+
+                    rec1.setPosition(610,100+(i*40));
+                    text1.Textline_set(620, 110+(i*40),a.get_function(), char_size, &font1);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+                    rec1.setSize(sf::Vector2f(150, 40));
+                    rec1.setPosition(810,100+(i*40));
+                    text1.Textline_set(820, 110+(i*40),a.get_login(), char_size, &font1);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+                    rec1.setSize(sf::Vector2f(200, 40));
+
+                    i++;
+
+                    if(i == 15){j++;}
+
             }
             input_bar1.set_limit(true, MAX_LOGIN_CHARACTERS);
 
@@ -959,6 +1021,8 @@ void Okno::render() {
 
 
                     }
+
+
 
                     text3.Textline_set(920, 220, "Changed: " + selected_string + " to " + input_bar2.get_text(), 50,
                                        &font1);
