@@ -26,6 +26,7 @@
 #include "Tranzakcja.h"
 #include "Finanse.h"
 #include "Magazyn.h"
+#include "Kartoteka.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -90,6 +91,7 @@ private:
     sites site;
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
+    std::string textpat = "";
 
     Pracownik* logged_user = nullptr;
     Pacjeci pacient_list;
@@ -101,6 +103,8 @@ private:
     Tranzakcja tranzakcja;
     Finanse finanse;
     Magazyn mag;
+    Kartoteka kartoteka2;
+
 
 
 
