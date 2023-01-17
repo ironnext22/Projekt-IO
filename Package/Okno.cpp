@@ -1188,6 +1188,11 @@ void Okno::render() {
 
                     pacient_list.dodaj_pacjęt(input_bar1.get_text(), input_bar2.get_text(), input_bar4.get_text(),
                                               input_bar3.get_text());
+                    if(!kartoteka2.pacjet_exist(input_bar4.get_text())){
+
+                        kartoteka2.dodaj_pacjeta(input_bar4.get_text(),"Data dodania pacjenta do systemu:" +get_nice_looking_DDMMYYYY_format(input_bar5.get_text()) + "\n");
+
+                    }
                     dentist->get_finanse().dodaj_tranzakcje(get_nice_looking_DDMMYYYY_format(input_bar5.get_text()),input_bar7.get_text());
 
 
@@ -1199,6 +1204,11 @@ void Okno::render() {
                                                             get_nice_looking_HHMM_format(input_bar6.get_text()),
                                                             input_bar3.get_text());
 
+                    if(!kartoteka2.pacjet_exist(input_bar4.get_text())){
+
+                        kartoteka2.dodaj_pacjeta(input_bar4.get_text(),"Data dodania pacjenta do systemu:" +get_nice_looking_DDMMYYYY_format(input_bar5.get_text()) + "\n");
+
+                    }
                     pacient_list.dodaj_pacjęt(input_bar1.get_text(), input_bar2.get_text(),
                                               input_bar4.get_text(), input_bar3.get_text());
                     assistant->get_finanse().dodaj_tranzakcje(get_nice_looking_DDMMYYYY_format(input_bar5.get_text()),input_bar7.get_text());
@@ -1523,6 +1533,7 @@ void Okno::render() {
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()) {
+                textpat = "";
                 if(logged_user->get_function() == "Administrator") {
                     change_site(sites::admin_start_site);
                 }
@@ -1532,7 +1543,7 @@ void Okno::render() {
             }
             b1.render(this->window);
 
-            input_bar1.set_limit(MAX_PESEL_CHARACTERS);
+            input_bar1.set_limit(true, MAX_PESEL_CHARACTERS);
             b2.button_set(600, 0, 100, 750, &font1, "Pesel: " + input_bar1.get_text());
             b2.update(get_mous_pos());
             if (b2.is_pressed()) { make_input_bar_active(1); }
@@ -1540,13 +1551,21 @@ void Okno::render() {
             b3.button_set(600, 100, 100, 750, &font1, "Search");
             b3.update(get_mous_pos());
             if (b3.is_pressed()) {
+                if(kartoteka2.pacjet_exist(input_bar1.get_text())) {
 
+                  //  textpat = kartoteka2.find_pacjet(input_bar1.get_text())->get_tekst();
+                    text2.Textline_set(100,30,"" , 50, &font1);
+                }
+                else{
+                    text2.Textline_set(180,60,"No patient with that pesel" , 50, &font1);
+                }
             }
             b3.render(this->window);
 
             b4.button_set(600, 200, 100, 750, &font1, "Add new note");
             b4.update(get_mous_pos());
             if (b4.is_pressed()) {
+                kartoteka2.find_pacjet(input_bar1.get_text())->dodaj_wizyte(input_bar2.get_text());
 
             }
             b4.render(this->window);
@@ -1565,10 +1584,10 @@ void Okno::render() {
             rec1.setOutlineThickness(5);
             rec1.setFillColor(sf::Color::White);
             rec1.setPosition(30,130);
-            text1.Textline_set(40,140 ,"Current disease history of Patient", char_size, &font1);
+            text1.Textline_set(40,140 ,"Current medical history of patient\n" + textpat, char_size, &font1);
             this->window->draw(rec1);
             text1.render(this->window);
-
+            text2.render(this->window);
             break;
 
 
