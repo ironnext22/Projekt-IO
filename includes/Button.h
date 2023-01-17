@@ -32,7 +32,7 @@ public:
     void button_set(float x, float y, float height, float width, sf::Font* font,std::string text);
     ~Button();
     /// Accessors
-
+    void special_button_set(float x, float y, float height, float width, sf::Font* font,std::string text);
     const bool is_pressed() const;
 
 
