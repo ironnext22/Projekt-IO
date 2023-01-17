@@ -6,13 +6,13 @@
 #include <chrono>
 #define MAX_PASSWORD_CHARACTERS 20
 #define MAX_LOGIN_CHARACTERS 20
-#define MAX_EMAIL_CHARACTERS 25
+#define MAX_EMAIL_CHARACTERS 30
 #define MAX_NAME_SURNAME_CHARACTERS 20
 #define MAX_PESEL_CHARACTERS 10
 
 
 
-/// Dodaj: if_Id_exists ->admin edit vists i edit visist site
+
 
 
 Okno::Okno() {  /// initializes on the start
@@ -89,10 +89,6 @@ void Okno::poll_events() { /// checks if something was done eg. key pressed
                 else if(input_bar7.get_is_selected()){
                     input_bar7.typed_on(ev);
                 }
-
-
-
-
         }
     }
 }
@@ -347,7 +343,14 @@ void Okno::render() {
             b2.render(this->window);
             b3.button_set(1000, 300, 100, 400, &font1, "Magazine");
             b3.update(get_mous_pos());
-            if (b3.is_pressed()) { change_site(sites::magazine_site); }
+            if (b3.is_pressed()) {
+                if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
+                    change_site(sites::magazine_site);
+                } else {
+                    text2.Textline_set(1020, 280, "No permission", 50, &font1);
+                }
+
+               }
             b3.render(this->window);
 
             b2.button_set(1000, 700, 100, 400, &font1, "Log out");
@@ -365,7 +368,14 @@ void Okno::render() {
 
             b4.button_set(1000, 600, 100, 400, &font1, "Finance");
             b4.update(get_mous_pos());
-            if (b4.is_pressed()) { change_site(sites::finance_site); }
+            if (b4.is_pressed()) {
+                if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
+                    change_site(sites::finance_site);
+                } else {
+                    text2.Textline_set(1020, 280, "no permission", 50, &font1);
+                }
+
+                }
             b4.render(this->window);
 
             text1.Textline_set(100, 400, "Logged as: " + logged_user->get_login() + "\n\n" + logged_user->get_name() +
@@ -928,6 +938,7 @@ void Okno::render() {
                     this->window->draw(rec1);
                     text1.render(this->window);
                     rec1.setSize(sf::Vector2f(150, 40));
+
                     rec1.setPosition(810,100+(i*40));
                     text1.Textline_set(820, 110+(i*40),a.get_login(), char_size, &font1);
                     this->window->draw(rec1);
@@ -1485,11 +1496,6 @@ void Okno::render() {
 
                 break;
             }
-
-
-
-
-
 
     }
     this->window->display();
