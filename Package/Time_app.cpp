@@ -19,7 +19,7 @@ Time_app::Time_app() {
 
 }
 
-std::string Time_app::Yesterday()
+std::string Time_app::Tomorrowday()
 {
     time_t rawtime;
     struct tm * timeinfo;
