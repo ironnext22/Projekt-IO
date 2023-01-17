@@ -45,7 +45,6 @@
 // stand-alone regression test.
 
 #include <iostream>
-#include <ostream>
 
 #include "gtest/gtest-spi.h"
 #include "gtest/gtest.h"
