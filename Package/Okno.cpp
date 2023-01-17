@@ -1528,18 +1528,18 @@ void Okno::render() {
             b1.render(this->window);
 
             input_bar1.set_limit(MAX_PESEL_CHARACTERS);
-            b2.button_set(600, 100, 100, 750, &font1, "Pesel: " + input_bar1.get_text());
+            b2.button_set(600, 0, 100, 750, &font1, "Pesel: " + input_bar1.get_text());
             b2.update(get_mous_pos());
             if (b2.is_pressed()) { make_input_bar_active(1); }
             b2.render(this->window);
-            b3.button_set(600, 200, 100, 750, &font1, "Search");
+            b3.button_set(600, 100, 100, 750, &font1, "Search");
             b3.update(get_mous_pos());
             if (b3.is_pressed()) {
 
             }
             b3.render(this->window);
 
-            b4.button_set(600, 300, 100, 750, &font1, "Add new note");
+            b4.button_set(600, 200, 100, 750, &font1, "Add new note");
             b4.update(get_mous_pos());
             if (b4.is_pressed()) {
 
@@ -1547,21 +1547,24 @@ void Okno::render() {
             b4.render(this->window);
 
             input_bar2.set_limit(false);
-            b5.special_button_set(600, 400, 450, 750, &font1, "Input:" + input_bar2.get_text());
+            b5.special_button_set(500, 300, 550, 920, &font1,input_bar2.get_text());
             b5.update(get_mous_pos());
             if (b5.is_pressed()) { make_input_bar_active(2); }
             b5.render(this->window);
 
 
+            sf::RectangleShape rec1;
+            rec1.setSize(sf::Vector2f(500, 600));
+            int char_size = 25;
+            rec1.setOutlineColor(sf::Color::Black);
+            rec1.setOutlineThickness(5);
+            rec1.setFillColor(sf::Color::White);
+            rec1.setPosition(30,130);
+            text1.Textline_set(40,140 ,"Current disease history of Patient", char_size, &font1);
+            this->window->draw(rec1);
+            text1.render(this->window);
 
-
-
-
-
-
-
-
-
+            break;
 
 
         }

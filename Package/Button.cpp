@@ -50,7 +50,7 @@ void Button::special_button_set(float x, float y, float height, float width, sf:
     this->text.setOutlineColor(sf::Color{out_line_color});
     this->text.setCharacterSize(40);
 
-    this->text.setPosition( this->shape.getPosition().x + 110,this->shape.getPosition().y + 50);
+    this->text.setPosition( this->shape.getPosition().x + 130,this->shape.getPosition().y + 70);
 
 
 
