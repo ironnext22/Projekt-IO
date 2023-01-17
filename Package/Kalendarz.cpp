@@ -23,6 +23,30 @@ Kalendarz::Kalendarz()
     doc.close();
 }
 
+void Kalendarz::reload()
+{
+    wizyty.clear();
+    XLDocument doc;
+    doc.open("wizyty.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> pom;
+    for(auto& row : wks.rows())
+    {
+        for(auto& cell : row.cells())
+        {
+            pom.push_back(static_cast<std::string>(cell.value()));
+        }
+        auto* pomocnicza = new Wizyta;
+        pomocnicza->set_pacjent(pom[0],pom[1],pom[2],pom[5]);
+        pomocnicza->set_data(pom[3]);
+        pomocnicza->set_godzina(pom[4]);
+        pomocnicza->set_ID(pom[6]);
+        wizyty.push_back(*pomocnicza);
+        delete pomocnicza;
+        pom.clear();
+    }
+    doc.close();
+}
 void Kalendarz::dodal_wizyte(std::string imie, std::string nazwisko, std::string pesel, std::string data, std::string godzina,std::string mail)
 {
     XLDocument doc;

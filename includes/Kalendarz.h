@@ -15,5 +15,6 @@ public:
     void set_godzina(std::string godzina,std::string ID);
     Pacjent find_pacjet(std::string pesel);
     bool ID_is_in_data_base(std::string ID);
+    void reload();
 };
 #endif //PROJEKT_IO_KALENDARZ_H
