@@ -44,10 +44,11 @@ enum class sites{
     account_management_site =9,
     admin_start_site = 11,
     admin_site_employee_managent_site = 12,
-    admin_magazine_site = 13,
+    magazin_site_add = 13,
     calendar_visit_edit_site =14,
     calendar_add_visit_site = 15,
     admin_edit_visit_site = 16,
+    magazin_site_edit = 17,
 
 
 
@@ -98,7 +99,7 @@ private:
 
     Tranzakcja tranzakcja;
     Finanse finanse;
-    Magazyn mag;
+  //  Magazyn mag;
 
 
 

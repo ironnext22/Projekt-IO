@@ -1100,10 +1100,6 @@ void Okno::render() {
                     assistant->get_finanse().dodaj_tranzakcje(get_nice_looking_DDMMYYYY_format(input_bar5.get_text()),input_bar7.get_text());
 
                 }
-                std::cout << input_bar1.get_text() << " " << input_bar2.get_text() << " " << input_bar4.get_text() <<
-                          " " << input_bar3.get_text() << " " << get_nice_looking_DDMMYYYY_format(input_bar5.get_text())
-                          << std::endl
-                          << get_nice_looking_HHMM_format(input_bar6.get_text()) << " " << input_bar7.get_text();
 
             }
 
@@ -1170,6 +1166,7 @@ void Okno::render() {
 
             break;
         }
+        /*
         case sites::finance_site: {
 
             b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -1251,6 +1248,7 @@ void Okno::render() {
 
             break;
         }
+      /*
         case sites::magazine_site:{
 
                 b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -1267,8 +1265,22 @@ void Okno::render() {
                     }
                 }
 
-
                 b1.render(this->window);
+                b2.button_set(20, 120, 100, 150, &font1, "Add");b2.update(get_mous_pos());if(b2.is_pressed()){
+                change_site(sites::magazin_site_add);}
+                b2.render(this->window);
+
+                b3.button_set(20, 220, 100, 150, &font1, "Edit");
+                b3.update(get_mous_pos());if(b3.is_pressed()){
+                change_site(sites::magazin_site_edit);
+                }
+                b3.render(this->window);
+
+
+
+
+
+
 
 
 
@@ -1321,15 +1333,95 @@ void Okno::render() {
                     text1.render(this->window);
                     i++;
                     if(i == 15){j++;}
+                }
+                break;
+            }
+
+            case sites::magazin_site_add:{
+
+                b1.button_set(20, 20, 100, 150, &font1, "Back");
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) { change_site(sites::magazine_site);}
+
+                text1.Textline_set(200, 100,"To add: fill all areas, if ID already exists, item will not be added" , 50,&font1);
+                text2.Textline_set(650, 200,"To edit: insert ID, name or count of that item will be changed" , 50,&font1);
+
+
+                input_bar1.set_limit(true,20);
+                b3.button_set(600, 100, 100, 750, &font1, "Item name: " + input_bar1.get_text());
+                b3.update(get_mous_pos());
+                if (b3.is_pressed()) { make_input_bar_active(1); }
+
+                input_bar2.set_limit(true,5);
+                b4.button_set(600, 200, 100, 750, &font1, "Item ID: " + input_bar2.get_text());
+                b4.update(get_mous_pos());
+                if (b4.is_pressed()) { make_input_bar_active(2); }
+
+                input_bar3.set_limit(true,7);
+                b2.button_set(600, 300, 100, 750, &font1, "Count: " + input_bar3.get_text());
+                b2.update(get_mous_pos());
+                if (b2.is_pressed()) { make_input_bar_active(3); }
+
+                b5.button_set(600, 400, 100, 375, &font1, "Add");
+                b5.update(get_mous_pos());
+
+                b6.button_set(600, 735, 100, 375, &font1, "Edit");
+                b6.update(get_mous_pos());
+
+                if (b5.is_pressed()) {
+                    if(input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == "" ){
+                        text3.Textline_set(650, 430,"Cannot be empty" , 50,&font1);
+
+                    }
+
+                    if(false)
+                    {
+                        mag.dodaj_do_magazynu(input_bar1.get_text(),input_bar2.get_text(),input_bar3.get_text());
+                    }
 
                 }
 
+                if (b5.is_pressed()) {
+                    if(input_bar1.get_text() == ""){
+
+                        text3.Textline_set(650, 430,"ID cannot be empty" , 50,&font1);
+
+                    }
+                    else if(input_bar2.get_text() == "" && input_bar3.get_text() == ""){
+
+                        text3.Textline_set(650, 430,"Name or count is empty" , 50,&font1);
+
+                    }
+                    else
+                    {
+                        if(input_bar1.get_text() != ""){
+                            mag.set_nazwa(input_bar1.get_text(),input_bar2.get_text());
+                            text3.Textline_set(650, 430,"Changed" , 50,&font1);
+
+
+                        }
+                        else if(input_bar3.get_text() != "")
+                        {
+                            mag.set_ilosc(input_bar3.get_text(),input_bar2.get_text());
+                            text3.Textline_set(650, 430,"Changed" , 50,&font1);
+                        }
+                    }
+                }
+
+
+                text1.render(this->window);
+                text2.render(this->window);
+                text3.render(this->window);
 
 
 
 
                 break;
             }
+*/
+
+
+
 
 
     }
