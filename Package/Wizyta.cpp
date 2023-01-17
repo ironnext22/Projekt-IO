@@ -6,6 +6,8 @@ std::string Wizyta::get_data() {return data;}
 
 std::string Wizyta::get_godzina() {return godzina;}
 
+std::string Wizyta::get_ID() {return ID;}
+
 void Wizyta::set_pacjent(std::string imie, std::string nazwisko, std::string pesel,std::string mail)
 {
     pacjent.set_mail(mail);

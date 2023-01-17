@@ -16,5 +16,6 @@ public:
     void set_data(std::string data);
     void set_godzina(std::string godzina);
     void set_ID(std::string ID);
+    std::string get_ID();
 };
 #endif //PROJEKT_IO_WIZYTA_H
