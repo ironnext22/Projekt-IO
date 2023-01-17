@@ -423,14 +423,27 @@ void Okno::render() {
             if (b5.is_pressed()) {
                 if (input_bar1.get_text() == "") {
                     text1.Textline_set(20, 680, "ID is empty", 30, &font1);
-                } else if (false /* !ID_is_in_data_base(input_bar1.get_get())   */) {
-                    text1.Textline_set(20, 680, "Visit dont exists", 30, &font1);
-                } else {
-                    ID = input_bar1.get_text();
-                    change_site(sites::calendar_visit_edit_site);
                 }
+                else if (logged_user->get_function() == "Asystentka") {
+                    if (assistant->get_kalendars().ID_is_in_data_base(input_bar1.get_text())) {
+                        ID = input_bar1.get_text();
+                        change_site(sites::calendar_visit_edit_site);
+                    } else {
 
-            };
+                        text1.Textline_set(20, 680, "Visit dont exists", 30, &font1);
+                    }
+                }
+                else if (logged_user->get_function() == "Dentysta") {
+                    if (dentist->get_kalendars().ID_is_in_data_base(input_bar1.get_text())) {
+                        ID = input_bar1.get_text();
+                        change_site(sites::calendar_visit_edit_site);
+                    } else {
+
+                        text1.Textline_set(20, 680, "Visit dont exists", 30, &font1);
+                    }
+                }
+            }
+
             b5.render(this->window);
             text1.render(this->window);
 
@@ -543,16 +556,6 @@ void Okno::render() {
 
                 }
             }
-
-            break;
-
-        }
-        case sites::magazine_site: {
-            b1.button_set(20, 20, 100, 150, &font1, "Back");
-            b1.update(get_mous_pos());
-            if (b1.is_pressed()) { change_site(sites::logged_in_site); }
-            b1.render(this->window);
-
 
             break;
 
@@ -800,7 +803,7 @@ void Okno::render() {
 
             b3.button_set(1000, 400, 100, 400, &font1, "Inventory");
             b3.update(get_mous_pos());
-            if (b3.is_pressed()) {}
+            if (b3.is_pressed()) { change_site(sites::magazine_site);}
             b3.render(this->window);
 
             b4.button_set(1000, 300, 100, 400, &font1, "Calendar");
@@ -1071,8 +1074,6 @@ void Okno::render() {
             b8.button_set(600, 700, 100, 750, &font1, "Add Visit");
             b8.update(get_mous_pos());
             if (b8.is_pressed()) {
-
-
                 if (dentist != nullptr) {
 
                     dentist->get_kalendars().dodal_wizyte(input_bar1.get_text(), input_bar2.get_text(),
@@ -1083,6 +1084,9 @@ void Okno::render() {
 
                     pacient_list.dodaj_pacjęt(input_bar1.get_text(), input_bar2.get_text(), input_bar4.get_text(),
                                               input_bar3.get_text());
+                    dentist->get_finanse().dodaj_tranzakcje(get_nice_looking_DDMMYYYY_format(input_bar5.get_text()),input_bar7.get_text());
+
+
 
                 } else if (assistant != nullptr) {
                     assistant->get_kalendars().dodal_wizyte(input_bar1.get_text(), input_bar2.get_text(),
@@ -1093,7 +1097,7 @@ void Okno::render() {
 
                     pacient_list.dodaj_pacjęt(input_bar1.get_text(), input_bar2.get_text(),
                                               input_bar4.get_text(), input_bar3.get_text());
-
+                    assistant->get_finanse().dodaj_tranzakcje(get_nice_looking_DDMMYYYY_format(input_bar5.get_text()),input_bar7.get_text());
 
                 }
                 std::cout << input_bar1.get_text() << " " << input_bar2.get_text() << " " << input_bar4.get_text() <<
@@ -1143,7 +1147,7 @@ void Okno::render() {
             b8.button_set(600, 500, 100, 750, &font1, "Change");
             b8.update(get_mous_pos());
             if (b8.is_pressed()) {
-                if (true/* if ID exists*/) {
+                if (assistant->get_kalendars().ID_is_in_data_base(input_bar1.get_text())) {
 
                     adm->get_kalendars().set_godzina(get_nice_looking_HHMM_format(input_bar6.get_text()),
                                                      input_bar1.get_text());
@@ -1194,7 +1198,7 @@ void Okno::render() {
             rec1.setOutlineColor(sf::Color::Black);
             rec1.setOutlineThickness(1);
             rec1.setFillColor(sf::Color::White);
-
+            finanse.aktualizuj_tranzakcje();
             auto a = finanse.get_tranzakcje();
             int i =0;
             int j = 0;
@@ -1247,6 +1251,87 @@ void Okno::render() {
 
             break;
         }
+        case sites::magazine_site:{
+
+                b1.button_set(20, 20, 100, 150, &font1, "Back");
+                b1.update(get_mous_pos());
+                if (b1.is_pressed()) {
+                    if(logged_user->get_function() == "Administrator"){
+                        text2.Textline_set(0,0,"", 1, &font1);
+
+                        change_site(sites::admin_start_site);
+
+                    }
+                    else {
+                        change_site(sites::logged_in_site);
+                    }
+                }
+
+
+                b1.render(this->window);
+
+
+
+                sf::RectangleShape rec1;
+                sf::Text t1;
+                rec1.setSize(sf::Vector2f(100, 40));
+                int char_size = 35;
+                rec1.setOutlineColor(sf::Color::Black);
+                rec1.setOutlineThickness(1);
+                rec1.setFillColor(sf::Color::White);
+
+                auto a = mag.get_magazyn();
+                int i =0;
+                int j = 0;
+                for(auto b :a){
+
+                    if(i==0){
+                        rec1.setPosition(180+(j*110),100+(i*40));
+                        text1.Textline_set(190+(j*110), 110+(i*40) ,"ID", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+
+                        rec1.setPosition(280+(j*110),100+(i*40));
+                        text1.Textline_set(290+(j*110), 110+(i*40) ,"Nazwa", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+
+                        rec1.setPosition(380+(j*110),100+(i*40));
+                        text1.Textline_set(390+(j*110), 110+(i*40),"Ilosc", char_size, &font1);
+                        this->window->draw(rec1);
+                        text1.render(this->window);
+                        i++;
+                        continue;
+
+                    }
+
+                    rec1.setPosition(180+(j*110),100+(i*40));
+                    text1.Textline_set(190+(j*110), 110+(i*40) ,b.get_ID(), char_size, &font1);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+
+                    rec1.setPosition(280+(j*110),100+(i*40));
+                    text1.Textline_set(290+(j*110), 110+(i*40) ,b.get_nazwa(), char_size, &font1);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+
+                    rec1.setPosition(380+(j*110),100+(i*40));
+                    text1.Textline_set(390+(j*110), 110+(i*40),std::to_string(b.get_ilosc()), char_size, &font1);
+                    this->window->draw(rec1);
+                    text1.render(this->window);
+                    i++;
+                    if(i == 15){j++;}
+
+                }
+
+
+
+
+
+                break;
+            }
+
+
     }
     this->window->display();
 }

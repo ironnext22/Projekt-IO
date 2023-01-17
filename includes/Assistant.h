@@ -3,6 +3,7 @@
 #include "Pracownik.h"
 #include "Kalendarz.h"
 #include "Finanse.h"
+#include "Magazyn.h"
 class Assistant:public Pracownik
 {
 Kalendarz kalendarz;

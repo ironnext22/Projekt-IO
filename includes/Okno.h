@@ -25,6 +25,7 @@
 #include "Pacjeci.h"
 #include "Tranzakcja.h"
 #include "Finanse.h"
+#include "Magazyn.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -97,6 +98,8 @@ private:
 
     Tranzakcja tranzakcja;
     Finanse finanse;
+    Magazyn mag;
+
 
 
 
