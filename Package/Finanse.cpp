@@ -24,6 +24,7 @@ Finanse::Finanse()
 
 void Finanse::aktualizuj_tranzakcje()
 {
+    finanse.clear();
     XLDocument doc;
     doc.open("finanse.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
