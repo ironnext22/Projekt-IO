@@ -1166,7 +1166,7 @@ void Okno::render() {
 
             break;
         }
-        /*
+
         case sites::finance_site: {
 
             b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -1248,7 +1248,7 @@ void Okno::render() {
 
             break;
         }
-      /*
+
         case sites::magazine_site:{
 
                 b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -1418,11 +1418,6 @@ void Okno::render() {
 
                 break;
             }
-*/
-
-
-
-
 
     }
     this->window->display();
@@ -1595,7 +1590,4 @@ void Okno::make_input_bar_active(int which_one){
         }
 
     }
-
-
-
 }

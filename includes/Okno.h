@@ -99,7 +99,7 @@ private:
 
     Tranzakcja tranzakcja;
     Finanse finanse;
-  //  Magazyn mag;
+    Magazyn mag;
 
 
 
