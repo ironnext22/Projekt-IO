@@ -8,9 +8,12 @@
 #include "includes/Finanse.h"
 #include "includes/Kartoteka.h"
 using namespace sf;
+Kartoteka test;
 int main()
 {
-
+//      //test.dodaj_pacjeta("123432","Elo");
+//      auto x = test.find_pacjet("123432");
+//      std::cout<<x->get_tekst();
     Okno menu;
     while(menu.get_window_is_open()) {
 

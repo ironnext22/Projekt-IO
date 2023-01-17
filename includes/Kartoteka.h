@@ -13,5 +13,6 @@ public:
     Historia get_historia(std::string pesel);
     bool pacjet_exist(std::string pesel);
     Historia* find_pacjet(std::string pesel);
+    std::vector<Historia> get_kartoteka(){return kartoteka;}
 };
 #endif //PROJEKT_IO_KARTOTEKA_H

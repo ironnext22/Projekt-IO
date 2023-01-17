@@ -67,14 +67,16 @@ bool Kartoteka::pacjet_exist(std::string pesel)
 
 Historia *Kartoteka::find_pacjet(std::string pesel)
 {
-    auto x = new Historia;
+    Historia* x = new Historia;
+    int count=0;
     for(auto a : kartoteka)
     {
         if(a.get_pesel()==pesel)
         {
-            x = &a;
             break;
         }
+        count++;
     }
+    x=&kartoteka[count];
     return x;
 }
