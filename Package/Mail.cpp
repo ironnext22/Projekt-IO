@@ -29,3 +29,23 @@
 
     }
 
+bool Mail::send_mail_with_reminder(std::string current_data, std::string data, std::string mail)
+{
+    if(data==current_data)
+    {
+        std::ofstream dat;
+        dat.open("data.txt");
+        if (dat.is_open()) {
+            dat << data;
+            dat.close();
+        }
+        std::ofstream m;
+        m.open("mail2.txt");
+        if (m.is_open()) {
+            m << mail;
+            m.close();
+        } else { return false; }
+        int rezultat1 = system("start /b mail2.exe");
+    }
+}
+

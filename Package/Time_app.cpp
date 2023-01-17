@@ -18,3 +18,18 @@ std::string Time_app::currentDateTime() {
 Time_app::Time_app() {
 
 }
+
+std::string Time_app::currentDay()
+{
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer[80];
+
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer,sizeof(buffer),"%d.%m.%Y",timeinfo);
+    std::string str(buffer);
+
+    return str;
+}
