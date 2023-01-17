@@ -92,6 +92,7 @@ private:
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
     std::string textpat = "";
+    bool added = false;
 
     Pracownik* logged_user = nullptr;
     Pacjeci pacient_list;
@@ -149,7 +150,6 @@ public:
 
 
     /// bonus functions
-    std::string set_table_line_for_admin_site(std::string login,std::string name , std::string surname ,std::string mail,std::string fun);
 
 
 };

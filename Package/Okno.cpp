@@ -334,6 +334,20 @@ void Okno::render() {
         }
         case sites::logged_in_site: {
 
+            b7.button_set(1000, 100, 100, 400, &font1, "Send emails");
+            b7.update(get_mous_pos());
+            if (b7.is_pressed()) {
+                if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
+                    text2.Textline_set(1020, 80, "Reminder emails sent!", 50, &font1);
+
+                    /// TU WSTAW WYSYLANIE MAILA PRZYPOMNIENIA
+
+                }
+                else {
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
+                }
+            }
+            b7.render(this->window);
 
             b6.button_set(1000, 200, 100, 400, &font1, "Patients");
             b6.update(get_mous_pos());
@@ -341,7 +355,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Dentysta") {
                     change_site(sites::patient_history_site);
                 } else {
-                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
                 }
             }
 
@@ -353,7 +367,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::calendar_site);
                 } else {
-                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
                 }
 
             }
@@ -364,7 +378,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::magazine_site);
                 } else {
-                    text2.Textline_set(1020, 180, "No permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "No permission", 50, &font1);
                 }
 
                }
@@ -389,7 +403,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::finance_site);
                 } else {
-                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
                 }
 
                 }
@@ -1565,8 +1579,11 @@ void Okno::render() {
             b4.button_set(600, 200, 100, 750, &font1, "Add new note");
             b4.update(get_mous_pos());
             if (b4.is_pressed()) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(50));
-                kartoteka2.find_pacjet(input_bar1.get_text())->dodaj_wizyte(input_bar2.get_text());
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+                kartoteka2.add_tekst(input_bar1.get_text(),"Wizyta z dnia:" +timer.currentDateTime() + "Doktor: "
+                +logged_user->get_name() +" "+logged_user->get_surname()+"\n"+input_bar2.get_text());
+
 
             }
             b4.render(this->window);
@@ -1590,8 +1607,6 @@ void Okno::render() {
             text1.render(this->window);
             text2.render(this->window);
             break;
-
-
         }
 
     }
@@ -1599,16 +1614,7 @@ void Okno::render() {
 }
 
 
-/// to fix
-std::string Okno::set_table_line_for_admin_site(std::string login,std::string name , std::string surname ,std::string mail,std::string fun){
 
-    std::stringstream a_stream;
-    a_stream << std::setiosflags ( std::ios_base::internal)
-    << std::setw ( 30 ) <<login <<"\t"  << std::setw ( 30 )<<name<<"\t"  << std::setw ( 30 )<<surname<<"\t"  << std::setw ( 30 )<<mail<<"\t"  << std::setw ( 30 )<<fun;
-    std::string the_string = a_stream.str();
-    return the_string;
-
-}
 
 void Okno::update() { // checks for changes
     this->poll_events();
