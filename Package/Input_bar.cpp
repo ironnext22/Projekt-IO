@@ -61,7 +61,7 @@ void Input_bar::input_logic(int char_typed) {
         }
     }
     else if (char_typed == ENTER_KEY) {
-        set_selected(false);
+        text<<"\n";
     }
     sf_text_inputed.setString(text.str() +"_");
 }

@@ -330,13 +330,25 @@ void Okno::render() {
         case sites::logged_in_site: {
 
 
+            b6.button_set(1000, 200, 100, 400, &font1, "Patients");
+            b6.update(get_mous_pos());
+            if (b6.is_pressed()) {
+                if (logged_user->get_function() == "Dentysta") {
+                    change_site(sites::patient_history_site);
+                } else {
+                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
+                }
+            }
+
+            b6.render(this->window);
+
             b2.button_set(1000, 400, 100, 400, &font1, "Calendar");
             b2.update(get_mous_pos());
             if (b2.is_pressed()) {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::calendar_site);
                 } else {
-                    text2.Textline_set(1020, 280, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
                 }
 
             }
@@ -347,7 +359,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::magazine_site);
                 } else {
-                    text2.Textline_set(1020, 280, "No permission", 50, &font1);
+                    text2.Textline_set(1020, 180, "No permission", 50, &font1);
                 }
 
                }
@@ -372,7 +384,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::finance_site);
                 } else {
-                    text2.Textline_set(1020, 280, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
                 }
 
                 }
@@ -389,6 +401,7 @@ void Okno::render() {
             break;
         }
         case sites::calendar_site: {
+            kalendarz.reload();
             ID = "XXXXXX";
             input_bar1.set_limit(true, 4);
             b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -490,10 +503,7 @@ void Okno::render() {
                 kalendarz = assistant->get_kalendars();
             } else if (logged_user->get_function() == "Dentysta") {
                 kalendarz = dentist->get_kalendars();
-            } else {
-
             }
-
 
             /// makes table look good and work properly with dates (Monday 1.1.2023 , Tuesday 2.1.2023..)
             for (int i = 1; i < 8; i++) {
@@ -1056,11 +1066,19 @@ void Okno::render() {
             b1.button_set(20, 20, 100, 150, &font1, "Back");
             b1.update(get_mous_pos());
             if (b1.is_pressed()) {
-                if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
+                if (logged_user->get_function() == "Asystentka") {
+
                     change_site(sites::calendar_site);
-                } else if (logged_user->get_function() == "Administrator") {
+
+                } else if(logged_user->get_function() == "Dentysta"){
+
+                    change_site(sites::calendar_site);
+                }
+                else if (logged_user->get_function() == "Administrator") {
+
                     change_site(sites::admin_start_site);
                 } else {
+
                     change_site(sites::logged_in_site);
                 }
             }
@@ -1073,7 +1091,7 @@ void Okno::render() {
             input_bar6.set_limit(true, 3);
 
 
-            text1.Textline_set(650, 80, "Edit Visit", 50, &font1);
+            text1.Textline_set(650, 280, "Edit Visit", 50, &font1);
 
             b6.button_set(600, 300, 100, 750, &font1,
                           "Date: " + get_nice_looking_DDMMYYYY_format(input_bar5.get_text()));
@@ -1084,7 +1102,7 @@ void Okno::render() {
             b7.update(get_mous_pos());
             if (b7.is_pressed()) { make_input_bar_active(6); }
 
-            b8.button_set(600, 600, 100, 750, &font1, "Change");
+            b8.button_set(600, 500, 100, 750, &font1, "Change");
             b8.update(get_mous_pos());
             if (b8.is_pressed()) {
 
@@ -1333,169 +1351,220 @@ void Okno::render() {
         }
         case sites::magazine_site:{
 
-                b1.button_set(20, 20, 100, 150, &font1, "Back");
-                b1.update(get_mous_pos());
-                if (b1.is_pressed()) {
-                    if(logged_user->get_function() == "Administrator"){
-                        text2.Textline_set(0,0,"", 1, &font1);
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()) {
+                if(logged_user->get_function() == "Administrator"){
+                    text2.Textline_set(0,0,"", 1, &font1);
 
-                        change_site(sites::admin_start_site);
+                    change_site(sites::admin_start_site);
 
-                    }
-                    else {
-                        change_site(sites::logged_in_site);
-                    }
                 }
+                else {
+                    change_site(sites::logged_in_site);
+                }
+            }
 
-                b1.render(this->window);
-                b2.button_set(20, 120, 100, 150, &font1, "Edit");b2.update(get_mous_pos());if(b2.is_pressed()){
-                change_site(sites::magazin_site_add);}
-                b2.render(this->window);
+            b1.render(this->window);
+            b2.button_set(20, 120, 100, 150, &font1, "Edit");b2.update(get_mous_pos());if(b2.is_pressed()){
+            change_site(sites::magazin_site_add);}
+            b2.render(this->window);
 
 
-                sf::RectangleShape rec1;
-                sf::Text t1;
-                rec1.setSize(sf::Vector2f(100, 40));
-                int char_size = 35;
-                rec1.setOutlineColor(sf::Color::Black);
-                rec1.setOutlineThickness(1);
-                rec1.setFillColor(sf::Color::White);
+            sf::RectangleShape rec1;
+            sf::Text t1;
+            rec1.setSize(sf::Vector2f(100, 40));
+            int char_size = 35;
+            rec1.setOutlineColor(sf::Color::Black);
+            rec1.setOutlineThickness(1);
+            rec1.setFillColor(sf::Color::White);
 
-                auto a = mag.get_magazyn();
-                int i =0;
-                int j = 0;
-                for(auto b :a){
+            auto a = mag.get_magazyn();
+            int i =0;
+            int j = 0;
+            for(auto b :a){
 
-                    if(i==0){
-                        rec1.setPosition(180+(j*110),100+(i*40));
-                        text1.Textline_set(190+(j*110), 110+(i*40) ,"ID", char_size, &font1);
-                        this->window->draw(rec1);
-                        text1.render(this->window);
-
-                        rec1.setSize(sf::Vector2f(200, 40));
-                        rec1.setPosition(280+(j*110),100+(i*40));
-                        text1.Textline_set(290+(j*110), 110+(i*40) ,"Nazwa", char_size, &font1);
-                        this->window->draw(rec1);
-                        text1.render(this->window);
-                        rec1.setSize(sf::Vector2f(100, 40));
-                        rec1.setPosition(480+(j*110),100+(i*40));
-                        text1.Textline_set(490+(j*110), 110+(i*40),"Ilosc", char_size, &font1);
-                        this->window->draw(rec1);
-                        text1.render(this->window);
-                        i++;
-                        continue;
-
-                    }
-
+                if(i==0){
                     rec1.setPosition(180+(j*110),100+(i*40));
-                    text1.Textline_set(190+(j*110), 110+(i*40) ,b.get_ID(), char_size, &font1);
+                    text1.Textline_set(190+(j*110), 110+(i*40) ,"ID", char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
 
                     rec1.setSize(sf::Vector2f(200, 40));
                     rec1.setPosition(280+(j*110),100+(i*40));
-                    text1.Textline_set(290+(j*110), 110+(i*40) ,b.get_nazwa(), char_size, &font1);
+                    text1.Textline_set(290+(j*110), 110+(i*40) ,"Nazwa", char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
                     rec1.setSize(sf::Vector2f(100, 40));
                     rec1.setPosition(480+(j*110),100+(i*40));
-                    text1.Textline_set(490+(j*110), 110+(i*40),std::to_string(b.get_ilosc()), char_size, &font1);
+                    text1.Textline_set(490+(j*110), 110+(i*40),"Ilosc", char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
                     i++;
-                    if(i == 15){j++;}
-                }
-                break;
-            }
-            case sites::magazin_site_add:{
-
-                b1.button_set(20, 20, 100, 150, &font1, "Back");
-                b1.update(get_mous_pos());
-                if (b1.is_pressed()) { change_site(sites::magazine_site);}
-
-
-                text1.Textline_set(650, 100,"To add: fill all areas, if ID already exists, item will not be added" , 50,&font1);
-                text2.Textline_set(650, 150,"To edit: insert ID then name or count of that item will be changed" , 50,&font1);
-
-
-                input_bar1.set_limit(true,20);
-                b3.button_set(600, 200, 100, 750, &font1, "Item name: " + input_bar1.get_text());
-                b3.update(get_mous_pos());
-                if (b3.is_pressed()) { make_input_bar_active(1); }
-
-                input_bar2.set_limit(true,5);
-                b4.button_set(600, 300, 100, 750, &font1, "Item ID: " + input_bar2.get_text());
-                b4.update(get_mous_pos());
-                if (b4.is_pressed()) { make_input_bar_active(2); }
-
-                input_bar3.set_limit(true,7);
-                b2.button_set(600, 400, 100, 750, &font1, "Count: " + input_bar3.get_text());
-                b2.update(get_mous_pos());
-                if (b2.is_pressed()) { make_input_bar_active(3); }
-
-                b5.button_set(600, 500, 100, 375, &font1, "Add");
-                b5.update(get_mous_pos());
-
-                b6.button_set(975, 500, 100, 375, &font1, "Edit");
-                b6.update(get_mous_pos());
-
-                if (b5.is_pressed()) {
-                    if(input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == "" ){
-                        text3.Textline_set(650, 530,"Cannot be empty" , 50,&font1);
-                    }
-                    else if(mag.ID_Exist(input_bar2.get_text()))
-                    {
-                        text3.Textline_set(650, 530,"ID already exists" , 50,&font1);
-                    }
-                    else{
-                        mag.dodaj_do_magazynu(input_bar1.get_text(),input_bar2.get_text(),input_bar3.get_text());
-                        text3.Textline_set(650, 530,"Added" , 50,&font1);
-                    }
+                    continue;
 
                 }
 
-                if (b6.is_pressed()) {
-                    if(input_bar1.get_text() == ""){
-
-                        text3.Textline_set(650, 530,"ID cannot be empty" , 50,&font1);
-
-                    }
-                    else if(input_bar2.get_text() == "" && input_bar3.get_text() == ""){
-
-                        text3.Textline_set(650, 530,"Name or count is empty" , 50,&font1);
-
-                    }
-                    else if(!mag.ID_Exist(input_bar2.get_text())){
-                        text3.Textline_set(650, 530,"ID of that item does not exists" , 50,&font1);
-
-                    }
-                    else
-                    {
-                        if(input_bar1.get_text() != ""){
-                            mag.set_nazwa(input_bar1.get_text(),input_bar2.get_text());
-                            text3.Textline_set(650, 530,"Changed" , 50,&font1);
-
-
-                        }
-                        if(input_bar3.get_text() != "")
-                        {
-                            mag.set_ilosc(input_bar3.get_text(),input_bar2.get_text());
-                            text3.Textline_set(650, 530,"Changed" , 50,&font1);
-                        }
-                    }
-                }
+                rec1.setPosition(180+(j*110),100+(i*40));
+                text1.Textline_set(190+(j*110), 110+(i*40) ,b.get_ID(), char_size, &font1);
+                this->window->draw(rec1);
                 text1.render(this->window);
-                text2.render(this->window);
-                text3.render(this->window);
-                b1.render(this->window);
-                b2.render(this->window);
-                b3.render(this->window);
-                b4.render(this->window);
-                b5.render(this->window);
-                b6.render(this->window);
 
-                break;
+                rec1.setSize(sf::Vector2f(200, 40));
+                rec1.setPosition(280+(j*110),100+(i*40));
+                text1.Textline_set(290+(j*110), 110+(i*40) ,b.get_nazwa(), char_size, &font1);
+                this->window->draw(rec1);
+                text1.render(this->window);
+                rec1.setSize(sf::Vector2f(100, 40));
+                rec1.setPosition(480+(j*110),100+(i*40));
+                text1.Textline_set(490+(j*110), 110+(i*40),std::to_string(b.get_ilosc()), char_size, &font1);
+                this->window->draw(rec1);
+                text1.render(this->window);
+                i++;
+                if(i == 15){j++;}
             }
+            break;
+        }
+        case sites::magazin_site_add:{
+
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()) { change_site(sites::magazine_site);}
+
+
+            text1.Textline_set(650, 100,"To add: fill all areas, if ID already exists, item will not be added" , 50,&font1);
+            text2.Textline_set(650, 150,"To edit: insert ID then name or count of that item will be changed" , 50,&font1);
+
+
+            input_bar1.set_limit(true,20);
+            b3.button_set(600, 200, 100, 750, &font1, "Item name: " + input_bar1.get_text());
+            b3.update(get_mous_pos());
+            if (b3.is_pressed()) { make_input_bar_active(1); }
+
+            input_bar2.set_limit(true,5);
+            b4.button_set(600, 300, 100, 750, &font1, "Item ID: " + input_bar2.get_text());
+            b4.update(get_mous_pos());
+            if (b4.is_pressed()) { make_input_bar_active(2); }
+
+            input_bar3.set_limit(true,7);
+            b2.button_set(600, 400, 100, 750, &font1, "Count: " + input_bar3.get_text());
+            b2.update(get_mous_pos());
+            if (b2.is_pressed()) { make_input_bar_active(3); }
+
+            b5.button_set(600, 500, 100, 375, &font1, "Add");
+            b5.update(get_mous_pos());
+
+            b6.button_set(975, 500, 100, 375, &font1, "Edit");
+            b6.update(get_mous_pos());
+
+            if (b5.is_pressed()) {
+                if(input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == "" ){
+                    text3.Textline_set(650, 530,"Cannot be empty" , 50,&font1);
+                }
+                else if(mag.ID_Exist(input_bar2.get_text()))
+                {
+                    text3.Textline_set(650, 530,"ID already exists" , 50,&font1);
+                }
+                else{
+                    mag.dodaj_do_magazynu(input_bar1.get_text(),input_bar2.get_text(),input_bar3.get_text());
+                    text3.Textline_set(650, 530,"Added" , 50,&font1);
+                }
+
+            }
+
+            if (b6.is_pressed()) {
+                if(input_bar1.get_text() == ""){
+
+                    text3.Textline_set(650, 530,"ID cannot be empty" , 50,&font1);
+
+                }
+                else if(input_bar2.get_text() == "" && input_bar3.get_text() == ""){
+
+                    text3.Textline_set(650, 530,"Name or count is empty" , 50,&font1);
+
+                }
+                else if(!mag.ID_Exist(input_bar2.get_text())){
+                    text3.Textline_set(650, 530,"ID of that item does not exists" , 50,&font1);
+
+                }
+                else
+                {
+                    if(input_bar1.get_text() != ""){
+                        mag.set_nazwa(input_bar1.get_text(),input_bar2.get_text());
+                        text3.Textline_set(650, 530,"Changed" , 50,&font1);
+
+
+                    }
+                    if(input_bar3.get_text() != "")
+                    {
+                        mag.set_ilosc(input_bar3.get_text(),input_bar2.get_text());
+                        text3.Textline_set(650, 530,"Changed" , 50,&font1);
+                    }
+                }
+            }
+            text1.render(this->window);
+            text2.render(this->window);
+            text3.render(this->window);
+            b1.render(this->window);
+            b2.render(this->window);
+            b3.render(this->window);
+            b4.render(this->window);
+            b5.render(this->window);
+            b6.render(this->window);
+
+            break;
+        }
+        case sites::patient_history_site:{
+            b1.button_set(20, 20, 100, 150, &font1, "Back");
+            b1.update(get_mous_pos());
+            if (b1.is_pressed()) {
+                if(logged_user->get_function() == "Administrator") {
+                    change_site(sites::admin_start_site);
+                }
+                else if(logged_user->get_function() == "Dentysta"){
+                    change_site(sites::logged_in_site);
+                }
+            }
+            b1.render(this->window);
+
+            input_bar1.set_limit(MAX_PESEL_CHARACTERS);
+            b2.button_set(600, 100, 100, 750, &font1, "Pesel: " + input_bar1.get_text());
+            b2.update(get_mous_pos());
+            if (b2.is_pressed()) { make_input_bar_active(1); }
+            b2.render(this->window);
+            b3.button_set(600, 200, 100, 750, &font1, "Search");
+            b3.update(get_mous_pos());
+            if (b3.is_pressed()) {
+
+            }
+            b3.render(this->window);
+
+            b4.button_set(600, 300, 100, 750, &font1, "Add new note");
+            b4.update(get_mous_pos());
+            if (b4.is_pressed()) {
+
+            }
+            b4.render(this->window);
+
+            input_bar2.set_limit(false);
+            b5.special_button_set(600, 400, 450, 750, &font1, "Input:" + input_bar2.get_text());
+            b5.update(get_mous_pos());
+            if (b5.is_pressed()) { make_input_bar_active(2); }
+            b5.render(this->window);
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 
     }
     this->window->display();

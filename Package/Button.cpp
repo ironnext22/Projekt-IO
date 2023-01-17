@@ -34,6 +34,29 @@ void Button::button_set(float x, float y, float height, float width, sf::Font* f
 
     this->shape.setFillColor(sf::Color{idle_color});
 }
+
+void Button::special_button_set(float x, float y, float height, float width, sf::Font* font,std::string text){
+    button_photo.loadFromFile("../stuff/button.png");
+
+    this->button_state = BUTTON_IDLE;
+    this->shape.setPosition(sf::Vector2f(x,y));
+    this->shape.setSize(sf::Vector2f(width,height));
+    this->shape.setTexture(&button_photo);
+    this->font = font;
+    this->text.setFont(*this->font);
+    this->text.setString(text);
+    this->text.setFillColor(sf::Color{text_color});
+    this->text.setOutlineThickness(4);
+    this->text.setOutlineColor(sf::Color{out_line_color});
+    this->text.setCharacterSize(40);
+
+    this->text.setPosition( this->shape.getPosition().x + 110,this->shape.getPosition().y + 50);
+
+
+
+    this->shape.setFillColor(sf::Color{idle_color});
+}
+
 Button::~Button(){
 
 
