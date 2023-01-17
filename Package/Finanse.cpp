@@ -22,13 +22,14 @@ Finanse::Finanse()
     doc.close();
 }
 
-void Finanse::dodaj_tranzakcje(std::string ID, std::string data, std::string kwota)
+void Finanse::dodaj_tranzakcje(std::string data, std::string kwota)
 {
     XLDocument doc;
     doc.open("finanse.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
     int count = 0;
     count=wks.rowCount();
+    std::string ID = std::to_string(count+1);
     wks.row(count+1).values() = std::vector<std::string>{ID,data, kwota};
     Tranzakcja* pom = new Tranzakcja;
     pom->set_ID(ID);
