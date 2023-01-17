@@ -1553,7 +1553,7 @@ void Okno::render() {
             if (b3.is_pressed()) {
                 if(kartoteka2.pacjet_exist(input_bar1.get_text())) {
 
-                  //  textpat = kartoteka2.find_pacjet(input_bar1.get_text())->get_tekst();
+                    textpat = kartoteka2.find_pacjet(input_bar1.get_text())->get_tekst();
                     text2.Textline_set(100,30,"" , 50, &font1);
                 }
                 else{
@@ -1565,6 +1565,7 @@ void Okno::render() {
             b4.button_set(600, 200, 100, 750, &font1, "Add new note");
             b4.update(get_mous_pos());
             if (b4.is_pressed()) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
                 kartoteka2.find_pacjet(input_bar1.get_text())->dodaj_wizyte(input_bar2.get_text());
 
             }
