@@ -10,7 +10,7 @@
 class Mail{
 public:
     bool send_mail_with_verification_code(std::string address,std::string ver_code);
-    bool send_mail_with_reminder(std::string current_data,std::string data,std::string mail);
+    bool send_mail_with_reminder(std::string data,std::string mail);
 };
 
 
