@@ -105,3 +105,13 @@ Pacjent Kalendarz::find_pacjet(std::string pesel)
     }
     return pom;
 }
+
+bool Kalendarz::ID_is_in_data_base(std::string ID)
+{
+    bool pom=false;
+    for(auto a : wizyty)
+    {
+        if(a.get_ID()==ID)pom= true;
+    }
+    return pom;
+}
