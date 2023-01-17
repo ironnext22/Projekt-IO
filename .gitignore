@@ -33,3 +33,6 @@
 
 CMakeLists.txt
 /SFML-2.5.1/
+/cmake-build-debug/CMakeCache.txt
+/cmake-build-debug/Makefile
+/cmake-build-debug/Projekt-IO.cbp
