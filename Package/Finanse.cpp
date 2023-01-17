@@ -22,6 +22,28 @@ Finanse::Finanse()
     doc.close();
 }
 
+void Finanse::aktualizuj_tranzakcje()
+{
+    XLDocument doc;
+    doc.open("finanse.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> pomocniczy;
+    for (auto& row : wks.rows())
+    {
+        for(auto& cell : row.cells())
+        {
+            pomocniczy.push_back(static_cast<std::string>((cell.value())));
+        }
+        Tranzakcja* pom = new Tranzakcja;
+        pom->set_ID(pomocniczy[0]);
+        pom->set_data(pomocniczy[1]);
+        pom->set_kwota(pomocniczy[2]);
+        finanse.push_back(*pom);
+        pomocniczy.clear();
+        delete pom;
+    }
+    doc.close();
+}
 void Finanse::dodaj_tranzakcje(std::string data, std::string kwota)
 {
     XLDocument doc;

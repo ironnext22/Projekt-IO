@@ -10,6 +10,7 @@ class Finanse
 public:
     Finanse();
     void dodaj_tranzakcje(std::string data,std::string kwota);
+    void aktualizuj_tranzakcje();
     int suma();
     std::vector<Tranzakcja> get_tranzakcje();
 };
