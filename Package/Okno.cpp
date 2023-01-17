@@ -340,7 +340,11 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     text2.Textline_set(1020, 80, "Reminder emails sent!", 50, &font1);
 
-                    /// TU WSTAW WYSYLANIE MAILA PRZYPOMNIENIA
+                    for(auto a: kalendarz.get_wizyty()){
+                    //    if(timer.Yesterday() == a.get_data()){
+                         //   mailbox.send_mail_with_reminder(a.get_data(),a.get_pacjent().get_mail());
+                      //  }
+                    }
 
                 }
                 else {
@@ -922,20 +926,21 @@ void Okno::render() {
                         text1.Textline_set(220, 110+(i*40) ,"Surname", char_size, &font1);
                         this->window->draw(rec1);
                         text1.render(this->window);
-
-                        rec1.setPosition(410+(j*110),100+(i*40));
+                        rec1.setSize(sf::Vector2f(300, 40));
+                        rec1.setPosition(410,100+(i*40));
                         text1.Textline_set(420, 110+(i*40),"Email", char_size, &font1);
                         this->window->draw(rec1);
                         text1.render(this->window);
 
-                        rec1.setPosition(610,100+(i*40));
-                        text1.Textline_set(620, 110+(i*40),"Position", char_size, &font1);
+                        rec1.setSize(sf::Vector2f(150, 40));
+                        rec1.setPosition(710,100+(i*40));
+                        text1.Textline_set(720, 110+(i*40),"Position", char_size, &font1);
                         this->window->draw(rec1);
                         text1.render(this->window);
+                        rec1.setSize(sf::Vector2f(200, 40));
 
-                        rec1.setSize(sf::Vector2f(150, 40));
-                        rec1.setPosition(810,100+(i*40));
-                        text1.Textline_set(820, 110+(i*40),"Login", char_size, &font1);
+                        rec1.setPosition(860,100+(i*40));
+                        text1.Textline_set(870, 110+(i*40),"Login", char_size, &font1);
                         this->window->draw(rec1);
                         text1.render(this->window);
                         rec1.setSize(sf::Vector2f(200, 40));
@@ -956,20 +961,20 @@ void Okno::render() {
                     text1.Textline_set(220, 110 +(i*40),a.get_surname(), char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
-
+                    rec1.setSize(sf::Vector2f(300, 40));
                     rec1.setPosition(410,100+(i*40));
                     text1.Textline_set(420, 110+(i*40),a.get_mail(), char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
-
-                    rec1.setPosition(610,100+(i*40));
-                    text1.Textline_set(620, 110+(i*40),a.get_function(), char_size, &font1);
+                    rec1.setSize(sf::Vector2f(150, 40));
+                    rec1.setPosition(710,100+(i*40));
+                    text1.Textline_set(720, 110+(i*40),a.get_function(), char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
-                    rec1.setSize(sf::Vector2f(150, 40));
+                    rec1.setSize(sf::Vector2f(200, 40));
 
-                    rec1.setPosition(810,100+(i*40));
-                    text1.Textline_set(820, 110+(i*40),a.get_login(), char_size, &font1);
+                    rec1.setPosition(860,100+(i*40));
+                    text1.Textline_set(870, 110+(i*40),a.get_login(), char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
                     rec1.setSize(sf::Vector2f(200, 40));

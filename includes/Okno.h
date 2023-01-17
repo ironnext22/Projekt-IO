@@ -106,11 +106,6 @@ private:
     Magazyn mag;
     Kartoteka kartoteka2;
 
-
-
-
-
-
     /// auxiliary variables // zmienne pomocnicze
     bool email_sent = false;
     bool created_ac = false;
@@ -125,15 +120,6 @@ private:
     std::string ID = "XXXXXX";
 
 
-
-
-
-
-
-
-
-    ///
-
 public:
 
     /// Contructor / destructor
@@ -147,9 +133,6 @@ public:
     void poll_events();
     void update();
     void render();
-
-
-    /// bonus functions
 
 
 };
