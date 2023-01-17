@@ -38,6 +38,8 @@ void Kalendarz::dodal_wizyte(std::string imie, std::string nazwisko, std::string
     delete pom;
     doc.save();
     doc.close();
+
+
 }
 
 std::vector<Wizyta> Kalendarz::get_wizyty()
