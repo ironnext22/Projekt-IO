@@ -110,6 +110,7 @@ void Magazyn::set_nazwa(std::string nazwa,std::string ID)
         count++;
         v.clear();
     }
+    magazyn[count-1].set_nazwa(nazwa);
     v[0]=nazwa;
     wks.row(count).values() = v;
     doc.save();
@@ -136,6 +137,7 @@ void Magazyn::set_ilosc(std::string ilosc, std::string ID)
         count++;
         v.clear();
     }
+    magazyn[count-1].set_ilosc(ilosc);
     v[2]=ilosc;
     wks.row(count).values() = v;
     doc.save();

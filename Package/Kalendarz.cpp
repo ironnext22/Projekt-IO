@@ -68,6 +68,7 @@ void Kalendarz::set_data(std::string data,std::string ID)
         v.clear();
     }
     v[3]=data;
+    wizyty[count-1].set_data(data);
     wks.row(count).values() = v;
     doc.save();
     doc.close();
@@ -92,6 +93,7 @@ void Kalendarz::set_godzina(std::string godzina,std::string ID)
         count++;
         v.clear();
     }
+    wizyty[count-1].set_godzina(godzina);
     v[4]=godzina;
     wks.row(count).values() = v;
     doc.save();
