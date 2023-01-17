@@ -23,6 +23,8 @@
 #include "Dentist.h"
 #include "Functions.h"
 #include "Pacjeci.h"
+#include "Tranzakcja.h"
+#include "Finanse.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -37,7 +39,7 @@ enum class sites{
     calendar_site =5,
     magazine_site=6,
     password_reset_site =7,
-    calendar_display_site=8,
+    finance_site=8,
     account_management_site =9,
     admin_start_site = 11,
     admin_site_employee_managent_site = 12,
@@ -45,7 +47,7 @@ enum class sites{
     calendar_visit_edit_site =14,
     calendar_add_visit_site = 15,
     admin_edit_visit_site = 16,
-    money_safe_site = 17,
+
 
 
 
@@ -93,20 +95,25 @@ private:
     Assistant *assistant = nullptr;
     Dentist *dentist = nullptr;
 
+    Tranzakcja tranzakcja;
+    Finanse finanse;
+
+
+
 
     /// auxiliary variables // zmienne pomocnicze
     bool email_sent = false;
     bool created_ac = false;
     bool is_currently_changing_password = false;
     bool is_currently_choosing_data = false;
-    bool is_logged = false;
     Time_app timer;
     int selected = 0;
     std::string selected_string = "";
     int current_day = 2;
     int year = 2023;
+    bool is_logged = false;
     std::string ID = "XXXXXX";
-    /// debug and bugfixing
+
 
 
 
