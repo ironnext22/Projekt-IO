@@ -26,7 +26,7 @@ std::string Time_app::Yesterday()
     char buffer[80];
 
     time (&rawtime);
-    rawtime -= 86400; // subtracting 86400 seconds (1 day)
+    rawtime += 86400; // adding 86400 seconds (1 day)
     timeinfo = localtime(&rawtime);
 
     strftime(buffer,sizeof(buffer),"%d.%m.%Y",timeinfo);
