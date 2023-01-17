@@ -27,6 +27,9 @@ Okno::Okno() {  /// initializes on the start
     sprite2.setTexture(logo);
 
 
+    icon.loadFromFile("../stuff/logo.png");
+    this->window->setIcon(icon.getSize().x,icon.getSize().y,icon.getPixelsPtr());
+
 }
 Okno::~Okno() {
     delete this->window;
@@ -47,6 +50,8 @@ void Okno::initialize_window() {
     this->window = new RenderWindow(this->video_mode,"Gabinet Dentystyczny IO-DENT",Style::Titlebar | Style::Close);
     this->window->setFramerateLimit(60);
     this->window->setKeyRepeatEnabled(false);
+
+
 
 }
 

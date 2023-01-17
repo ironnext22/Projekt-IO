@@ -84,6 +84,7 @@ private:
     sf::RectangleShape test;
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
     sf::Texture background_photo,logo;
+    sf::Image icon;
     sf::Sprite sprite,sprite2;
     Input_bar input_bar1,input_bar2,input_bar3,input_bar4,input_bar5,input_bar6,input_bar7;
     sites site;
