@@ -5,25 +5,32 @@ Magazyn::Magazyn()
     doc.open("magazyn.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
     std::vector<std::string> pomocniczy;
-    for (auto& row : wks.rows())
+    int count = 0;
+    for(auto& row : wks.rows())
     {
+        if(count==0)
+        {
+            count++;
+            continue;
+        }
+        std::cout<<row.cellCount()<<std::endl;
         for(auto& cell : row.cells())
         {
-            pomocniczy.push_back(static_cast<std::string>((cell.value())));
+            std::cout<<cell.value().typeAsString()<<" ";
+            pomocniczy.push_back(cell.value().typeAsString());
         }
-        auto pom = new Inwentarz;
+        Inwentarz *pom = new Inwentarz;
         pom->set_nazwa(pomocniczy[0]);
         pom->set_id(pomocniczy[1]);
-        bool p= true;
-        for(auto a: pomocniczy[2])
-        {
-            if(!(a>47 and a<58))p=false;
+        bool p = true;
+        for (auto a: pomocniczy[2]) {
+            if (!(a > 47 and a < 58))p = false;
         }
-        if(p)pom->set_ilosc(pomocniczy[2]);
+        if (p)pom->set_ilosc(pomocniczy[2]);
         else pom->set_ilosc("0");
         magazyn.push_back(*pom);
-        pomocniczy.clear();
         delete pom;
+        pomocniczy.clear();
     }
     doc.close();
 }

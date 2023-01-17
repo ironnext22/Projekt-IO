@@ -1295,7 +1295,7 @@ void Okno::render() {
                 auto a = mag.get_magazyn();
                 int i =0;
                 int j = 0;
-                for(auto b :a){
+                for(auto b : a){
 
                     if(i==0){
                         rec1.setPosition(180+(j*110),100+(i*40));
@@ -1328,7 +1328,7 @@ void Okno::render() {
                     text1.render(this->window);
 
                     rec1.setPosition(380+(j*110),100+(i*40));
-                    text1.Textline_set(390+(j*110), 110+(i*40),std::to_string(b.get_ilosc()), char_size, &font1);
+                    text1.Textline_set(390+(j*110), 110+(i*40),b.get_ilosc(), char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
                     i++;

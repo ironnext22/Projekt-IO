@@ -14,3 +14,11 @@ target_link_libraries(Projekt-IO sfml-system sfml-window sfml-graphics sfml-audi
 
 add_subdirectory(OpenXLSX)
 target_link_libraries(Projekt-IO OpenXLSX::OpenXLSX)
+
+set(SOURCE_FILES_TEST )
+
+add_executable(Projekt-IO-test main.cpp Package/Button.cpp includes/Button.h Package/Textline.cpp includes/Textline.h Package/Input_bar.cpp includes/Input_bar.h includes/Pracownik.h includes/Osoba.h includes/Pracownicy.h Package/Pracownicy.cpp Package/Okno.cpp includes/Loging.h Package/Loging.cpp Package/Pracownik.cpp includes/Time_app.h Package/Time_app.cpp includes/Assistant.h includes/Dentist.h includes/Admin.h Package/Admin.cpp includes/Mail.h Package/Mail.cpp includes/Kalendarz.h includes/Wizyta.h includes/Pacjent.h Package/Pacjent.cpp Package/Wizyta.cpp Package/Kalendarz.cpp includes/Pacjeci.h Package/Pacjeci.cpp Package/Osoba.cpp includes/Inwentarz.h Package/Magazyn.cpp includes/Magazyn.h Package/Assistant.cpp Package/Functions.cpp includes/Functions.h includes/Tranzakcja.h includes/Finanse.h Package/Finanse.cpp ${SOURCE_FILES_TEST})
+add_subdirectory(google_test/googletest-main)
+target_link_libraries(Projekt-IO-test gmock OpenXLSX::OpenXLSX sfml-system sfml-window sfml-graphics sfml-audio)
+
+
