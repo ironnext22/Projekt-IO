@@ -14,7 +14,13 @@ Magazyn::Magazyn()
         Inwentarz* pom = new Inwentarz;
         pom->set_nazwa(pomocniczy[0]);
         pom->set_id(pomocniczy[1]);
-        pom->set_ilosc(pomocniczy[2]);
+        bool p= true;
+        for(auto a: pomocniczy[2])
+        {
+            if(!(a>47 and a<58))p=false;
+        }
+        if(p==true)pom->set_ilosc(pomocniczy[2]);
+        else pom->set_ilosc("0");
         magazyn.push_back(*pom);
         pomocniczy.clear();
         delete pom;
@@ -31,6 +37,28 @@ void Magazyn::dodaj_do_magazynu(std::string nazwa,std::string id,std::string ilo
         {
             if(a.get_ID()==id)a.set_ilosc(ilosc);
         }
+        XLDocument doc;
+        doc.open("magazyn.xlsx");
+        auto wks = doc.workbook().worksheet("Sheet1");
+        std::vector<std::string> v;
+        int count=1;
+        for(auto a : wks.rows())
+        {
+            for(auto b: a.cells())
+            {
+                v.push_back(static_cast<std::string>(b.value()));
+            }
+            if(v[1]==id)
+            {
+                break;
+            }
+            count++;
+            v.clear();
+        }
+        v[2]=std::to_string(stoi(v[2])+stoi(ilosc));
+        wks.row(count).values()=v;
+        doc.save();
+        doc.close();
     }
     else
     {
