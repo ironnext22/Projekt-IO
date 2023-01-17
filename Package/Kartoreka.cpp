@@ -86,7 +86,7 @@ void Kartoteka::add_tekst(std::string pesel, std::string tekst)
     auto x = find_pacjet(pesel);
     x->dodaj_wizyte(tekst);
     XLDocument doc;
-    doc.open("wizyty.xlsx");
+    doc.open("historia.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
     std::vector<std::string> v;
     int count=1;
