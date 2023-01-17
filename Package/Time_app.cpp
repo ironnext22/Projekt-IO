@@ -19,13 +19,14 @@ Time_app::Time_app() {
 
 }
 
-std::string Time_app::currentDay()
+std::string Time_app::Yesterday()
 {
     time_t rawtime;
     struct tm * timeinfo;
     char buffer[80];
 
     time (&rawtime);
+    rawtime -= 86400; // subtracting 86400 seconds (1 day)
     timeinfo = localtime(&rawtime);
 
     strftime(buffer,sizeof(buffer),"%d.%m.%Y",timeinfo);

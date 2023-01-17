@@ -12,7 +12,7 @@ class Time_app {
 public:
     Time_app();
     std::string currentDateTime();
-    std::string currentDay();
+    std::string Yesterday();
 };
 
 #endif //PROJEKT_IO_TIME_APP_H
