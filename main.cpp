@@ -14,7 +14,7 @@ int main()
 {
     //test.dodaj_tranzakcje("X1","19.01.2023","500");
 //    test.dodal_wizyte("Mateusz","Lugowski","23412343","19.01.2023","19.00","wiktor.k.2002@icloud.com");
-    //t2.dodaj_do_magazynu("Plomba","T20","200");
+    t2.dodaj_do_magazynu("Plomba","T20","200");
     Okno menu;
 
 
