@@ -113,7 +113,7 @@ void Input_bar::typed_on(sf::Event input) {
     if(is_selected){
         int charTyped = input.text.unicode;
 
-        std::cout<<charTyped;
+
         if(charTyped<128){
             if(has_limit){
                 if(text.str().length() <= limit){

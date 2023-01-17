@@ -22,7 +22,7 @@ bool Loging::check_if_password_is_correct(std::string login,std::string password
     Pracownik* konto;
     for(auto a : login_list.get_worker())
     {
-        std::cout<<a.get_login()<<" "<<login<<std::endl;
+
         if(a.get_login()==login)
         {
             konto = &a;
@@ -30,7 +30,7 @@ bool Loging::check_if_password_is_correct(std::string login,std::string password
         }
     }
     if(konto== nullptr)return false;
-    //std::cout<<konto->login<<" "<<password<<std::endl;
+
     if(konto->get_password()==password)return true;
     else return false;
 }

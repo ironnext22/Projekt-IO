@@ -277,7 +277,7 @@ void Okno::render() {
                             generate_code();
                             mailbox.send_mail_with_verification_code(input_bar4.get_text(), verification_code);
                         }
-                        std::cout << std::endl << verification_code << " -ver code" << std::endl;
+
                         email_sent = true;
                         text1.Textline_set(650, 150, "Verification code has been sent", 50, &font1);
 
@@ -472,7 +472,7 @@ void Okno::render() {
             array[6][0] = "Saturday\n";
             array[7][0] = "Sunday\n";
 
-            Kalendarz kalendarz;
+
             auto wizyty = kalendarz.get_wizyty();
             Date2 dateX, dateY;
 
@@ -481,7 +481,7 @@ void Okno::render() {
             } else if (logged_user->get_function() == "Dentysta") {
                 kalendarz = dentist->get_kalendars();
             } else {
-                std::cout << "X";
+
             }
 
 
@@ -513,7 +513,7 @@ void Okno::render() {
                     int k = 0;
                     for (auto a: wizyty) {
                         if (k != 0) {
-                            std::cout << a.get_data() << " " << a.get_godzina() << "\n";
+
 
                             if (std::to_string(dateY.year) == get_year_from_DMY_format(a.get_data())) {
                                 if (std::to_string(dateY.month) == get_month_from_DMY_format(a.get_data()) ||
@@ -609,7 +609,7 @@ void Okno::render() {
                     b3.button_set(600, 400, 100, 700, &font1, "Check");
                     b3.update(get_mous_pos());
                     if (b3.is_pressed()) {
-                        std::cout << "ver code " << verification_code << " your" << input_bar2.get_text();
+
                         if (input_bar2.get_text() == verification_code) {
                             text1.Textline_set(650, 550, "Verification code is correct", 50, &font1);
                             is_currently_changing_password = true;
@@ -861,6 +861,12 @@ void Okno::render() {
             std::string line = "";
             for (auto a: worker_list.get_worker()) {
                 if (count != 0 && count < 20) {
+
+
+
+
+
+
 
 
                     text1.Textline_set(10, 100 + (count * 20),
@@ -1166,7 +1172,6 @@ void Okno::render() {
 
             break;
         }
-        /*
         case sites::finance_site: {
 
             b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -1199,9 +1204,12 @@ void Okno::render() {
             auto a = finanse.get_tranzakcje();
             int i =0;
             int j = 0;
+            text2.Textline_set(180,40,"Total income: " + std::to_string(finanse.suma()) + " ZL" , 50, &font1);
+            text2.render(this->window);
+            text2.Textline_set(0,0,"", 50, &font1);
+
             for(auto b :a){
-                text2.Textline_set(180,40,"Total income: " + std::to_string(finanse.suma()) + " ZL" , 50, &font1);
-                text2.render(this->window);
+
 
                 if(i==0){
                     rec1.setPosition(180+(j*110),100+(i*40));
@@ -1248,7 +1256,6 @@ void Okno::render() {
 
             break;
         }
-      /*
         case sites::magazine_site:{
 
                 b1.button_set(20, 20, 100, 150, &font1, "Back");
@@ -1266,22 +1273,9 @@ void Okno::render() {
                 }
 
                 b1.render(this->window);
-                b2.button_set(20, 120, 100, 150, &font1, "Add");b2.update(get_mous_pos());if(b2.is_pressed()){
+                b2.button_set(20, 120, 100, 150, &font1, "Edit");b2.update(get_mous_pos());if(b2.is_pressed()){
                 change_site(sites::magazin_site_add);}
                 b2.render(this->window);
-
-                b3.button_set(20, 220, 100, 150, &font1, "Edit");
-                b3.update(get_mous_pos());if(b3.is_pressed()){
-                change_site(sites::magazin_site_edit);
-                }
-                b3.render(this->window);
-
-
-
-
-
-
-
 
 
                 sf::RectangleShape rec1;
@@ -1303,13 +1297,14 @@ void Okno::render() {
                         this->window->draw(rec1);
                         text1.render(this->window);
 
+                        rec1.setSize(sf::Vector2f(200, 40));
                         rec1.setPosition(280+(j*110),100+(i*40));
                         text1.Textline_set(290+(j*110), 110+(i*40) ,"Nazwa", char_size, &font1);
                         this->window->draw(rec1);
                         text1.render(this->window);
-
-                        rec1.setPosition(380+(j*110),100+(i*40));
-                        text1.Textline_set(390+(j*110), 110+(i*40),"Ilosc", char_size, &font1);
+                        rec1.setSize(sf::Vector2f(100, 40));
+                        rec1.setPosition(480+(j*110),100+(i*40));
+                        text1.Textline_set(490+(j*110), 110+(i*40),"Ilosc", char_size, &font1);
                         this->window->draw(rec1);
                         text1.render(this->window);
                         i++;
@@ -1322,13 +1317,14 @@ void Okno::render() {
                     this->window->draw(rec1);
                     text1.render(this->window);
 
+                    rec1.setSize(sf::Vector2f(200, 40));
                     rec1.setPosition(280+(j*110),100+(i*40));
                     text1.Textline_set(290+(j*110), 110+(i*40) ,b.get_nazwa(), char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
-
-                    rec1.setPosition(380+(j*110),100+(i*40));
-                    text1.Textline_set(390+(j*110), 110+(i*40),std::to_string(b.get_ilosc()), char_size, &font1);
+                    rec1.setSize(sf::Vector2f(100, 40));
+                    rec1.setPosition(480+(j*110),100+(i*40));
+                    text1.Textline_set(490+(j*110), 110+(i*40),std::to_string(b.get_ilosc()), char_size, &font1);
                     this->window->draw(rec1);
                     text1.render(this->window);
                     i++;
@@ -1336,89 +1332,96 @@ void Okno::render() {
                 }
                 break;
             }
-
             case sites::magazin_site_add:{
 
                 b1.button_set(20, 20, 100, 150, &font1, "Back");
                 b1.update(get_mous_pos());
                 if (b1.is_pressed()) { change_site(sites::magazine_site);}
 
-                text1.Textline_set(200, 100,"To add: fill all areas, if ID already exists, item will not be added" , 50,&font1);
-                text2.Textline_set(650, 200,"To edit: insert ID, name or count of that item will be changed" , 50,&font1);
+
+                text1.Textline_set(650, 100,"To add: fill all areas, if ID already exists, item will not be added" , 50,&font1);
+                text2.Textline_set(650, 150,"To edit: insert ID then name or count of that item will be changed" , 50,&font1);
 
 
                 input_bar1.set_limit(true,20);
-                b3.button_set(600, 100, 100, 750, &font1, "Item name: " + input_bar1.get_text());
+                b3.button_set(600, 200, 100, 750, &font1, "Item name: " + input_bar1.get_text());
                 b3.update(get_mous_pos());
                 if (b3.is_pressed()) { make_input_bar_active(1); }
 
                 input_bar2.set_limit(true,5);
-                b4.button_set(600, 200, 100, 750, &font1, "Item ID: " + input_bar2.get_text());
+                b4.button_set(600, 300, 100, 750, &font1, "Item ID: " + input_bar2.get_text());
                 b4.update(get_mous_pos());
                 if (b4.is_pressed()) { make_input_bar_active(2); }
 
                 input_bar3.set_limit(true,7);
-                b2.button_set(600, 300, 100, 750, &font1, "Count: " + input_bar3.get_text());
+                b2.button_set(600, 400, 100, 750, &font1, "Count: " + input_bar3.get_text());
                 b2.update(get_mous_pos());
                 if (b2.is_pressed()) { make_input_bar_active(3); }
 
-                b5.button_set(600, 400, 100, 375, &font1, "Add");
+                b5.button_set(600, 500, 100, 375, &font1, "Add");
                 b5.update(get_mous_pos());
 
-                b6.button_set(600, 735, 100, 375, &font1, "Edit");
+                b6.button_set(975, 500, 100, 375, &font1, "Edit");
                 b6.update(get_mous_pos());
 
                 if (b5.is_pressed()) {
                     if(input_bar1.get_text() == "" || input_bar2.get_text() == "" || input_bar3.get_text() == "" ){
-                        text3.Textline_set(650, 430,"Cannot be empty" , 50,&font1);
-
+                        text3.Textline_set(650, 530,"Cannot be empty" , 50,&font1);
                     }
-
-                    if(false)
+                    else if(mag.ID_Exist(input_bar2.get_text()))
                     {
+                        text3.Textline_set(650, 530,"ID already exists" , 50,&font1);
+                    }
+                    else{
                         mag.dodaj_do_magazynu(input_bar1.get_text(),input_bar2.get_text(),input_bar3.get_text());
+                        text3.Textline_set(650, 530,"Added" , 50,&font1);
                     }
 
                 }
 
-                if (b5.is_pressed()) {
+                if (b6.is_pressed()) {
                     if(input_bar1.get_text() == ""){
 
-                        text3.Textline_set(650, 430,"ID cannot be empty" , 50,&font1);
+                        text3.Textline_set(650, 530,"ID cannot be empty" , 50,&font1);
 
                     }
                     else if(input_bar2.get_text() == "" && input_bar3.get_text() == ""){
 
-                        text3.Textline_set(650, 430,"Name or count is empty" , 50,&font1);
+                        text3.Textline_set(650, 530,"Name or count is empty" , 50,&font1);
+
+                    }
+                    else if(!mag.ID_Exist(input_bar2.get_text())){
+                        text3.Textline_set(650, 530,"ID of that item does not exists" , 50,&font1);
 
                     }
                     else
                     {
                         if(input_bar1.get_text() != ""){
                             mag.set_nazwa(input_bar1.get_text(),input_bar2.get_text());
-                            text3.Textline_set(650, 430,"Changed" , 50,&font1);
+                            text3.Textline_set(650, 530,"Changed" , 50,&font1);
 
 
                         }
-                        else if(input_bar3.get_text() != "")
+                        if(input_bar3.get_text() != "")
                         {
                             mag.set_ilosc(input_bar3.get_text(),input_bar2.get_text());
-                            text3.Textline_set(650, 430,"Changed" , 50,&font1);
+                            text3.Textline_set(650, 530,"Changed" , 50,&font1);
                         }
                     }
                 }
-
-
                 text1.render(this->window);
                 text2.render(this->window);
                 text3.render(this->window);
-
-
-
+                b1.render(this->window);
+                b2.render(this->window);
+                b3.render(this->window);
+                b4.render(this->window);
+                b5.render(this->window);
+                b6.render(this->window);
 
                 break;
             }
-*/
+
 
 
 

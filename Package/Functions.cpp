@@ -55,18 +55,18 @@ int lastMonday(int year) {
 
 std::string get_day_from_DMY_format(std::string DMY){
     if(DMY == ""){return "";}
-    std::cout<<DMY.substr(0,2) <<"/";
+
     return DMY.substr(0,2);
 }
 std::string get_month_from_DMY_format(std::string DMY){
     if(DMY == ""){return "";}
-    std::cout<<DMY.substr(3,2) <<"/";
+
     return DMY.substr(3,2);
 
 }
 std::string get_year_from_DMY_format(std::string DMY){
     if(DMY == ""){return "";}
-    std::cout<<DMY.substr(6,4) <<"/";
+
     return DMY.substr(6,4);
 
 }
@@ -76,11 +76,7 @@ std::string get_hour_from_HM_format(std::string HM){
     return HM.substr(0,2);
 
 }
-std::string get_minute_from_HM_format(std::string HM){
-    if(HM == ""){return "";}
 
-
-}
 #include <string>
 std::string get_nice_looking_DDMMYYYY_format(std::string input_from_the_input_bar){
     std::string newstr,str2;

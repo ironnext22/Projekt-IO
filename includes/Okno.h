@@ -96,10 +96,10 @@ private:
     Admin *adm = nullptr;
     Assistant *assistant = nullptr;
     Dentist *dentist = nullptr;
-
+    Kalendarz kalendarz;
     Tranzakcja tranzakcja;
     Finanse finanse;
-  //  Magazyn mag;
+    Magazyn mag;
 
 
 
