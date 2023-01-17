@@ -6,8 +6,7 @@
 #include "includes/Assistant.h"
 #include "includes/Magazyn.h"
 #include "includes/Finanse.h"
-
-
+#include "includes/Kartoteka.h"
 using namespace sf;
 int main()
 {
