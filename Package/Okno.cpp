@@ -334,6 +334,20 @@ void Okno::render() {
         }
         case sites::logged_in_site: {
 
+            b7.button_set(1000, 100, 100, 400, &font1, "Send emails");
+            b7.update(get_mous_pos());
+            if (b7.is_pressed()) {
+                if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
+                    text2.Textline_set(1020, 80, "Reminder emails sent!", 50, &font1);
+
+                    /// TU WSTAW WYSYLANIE MAILA PRZYPOMNIENIA
+
+                }
+                else {
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
+                }
+            }
+            b7.render(this->window);
 
             b6.button_set(1000, 200, 100, 400, &font1, "Patients");
             b6.update(get_mous_pos());
@@ -341,7 +355,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Dentysta") {
                     change_site(sites::patient_history_site);
                 } else {
-                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
                 }
             }
 
@@ -353,7 +367,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::calendar_site);
                 } else {
-                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
                 }
 
             }
@@ -364,7 +378,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::magazine_site);
                 } else {
-                    text2.Textline_set(1020, 180, "No permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "No permission", 50, &font1);
                 }
 
                }
@@ -389,7 +403,7 @@ void Okno::render() {
                 if (logged_user->get_function() == "Asystentka" || logged_user->get_function() == "Dentysta") {
                     change_site(sites::finance_site);
                 } else {
-                    text2.Textline_set(1020, 180, "no permission", 50, &font1);
+                    text2.Textline_set(1020, 80, "no permission", 50, &font1);
                 }
 
                 }
