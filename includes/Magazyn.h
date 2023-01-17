@@ -10,6 +10,7 @@ public:
     Magazyn();
     void dodaj_do_magazynu(std::string nazwa,std::string id,std::string ilosc);
     std::vector<Inwentarz> get_magazyn();
+    bool ID_Exist(std::string ID);
 };
 
 

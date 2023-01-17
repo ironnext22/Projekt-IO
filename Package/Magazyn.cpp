@@ -25,5 +25,39 @@ Magazyn::Magazyn()
 std::vector<Inwentarz> Magazyn::get_magazyn() {return magazyn;}
 void Magazyn::dodaj_do_magazynu(std::string nazwa,std::string id,std::string ilosc)
 {
+    if(ID_Exist(id))
+    {
+        for(auto a : magazyn)
+        {
+            if(a.get_ID()==id)a.set_ilosc(ilosc);
+        }
+    }
+    else
+    {
+        XLDocument doc;
+        doc.open("magazyn.xlsx");
+        auto wks = doc.workbook().worksheet("Sheet1");
+        int count = 0;
+        count=wks.rowCount();
+        wks.row(count+1).values() = std::vector<std::string>{nazwa,id,ilosc};
+        Inwentarz* pom = new Inwentarz;
+        pom->set_nazwa(nazwa);
+        pom->set_id(id);
+        pom->set_ilosc(ilosc);
+        magazyn.push_back(*pom);
+        delete pom;
+        doc.save();
+        doc.close();
 
+    }
+}
+
+bool Magazyn::ID_Exist(std::string ID)
+{
+    bool pom = false;
+    for(auto a : magazyn)
+    {
+        if(a.get_ID()==ID)pom=true;
+    }
+    return pom;
 }
