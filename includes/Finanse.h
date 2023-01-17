@@ -9,7 +9,7 @@ class Finanse
     std::vector<Tranzakcja> finanse;
 public:
     Finanse();
-    void dodaj_tranzakcje(std::string nazwa,std::string kwota);
+    void dodaj_tranzakcje(std::string data,std::string kwota);
     int suma();
     std::vector<Tranzakcja> get_tranzakcje();
 };
