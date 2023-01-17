@@ -92,6 +92,7 @@ private:
     std::string login,password,password_confirm;
     std::string verification_code = "000000";
     std::string textpat = "";
+    bool added = false;
 
     Pracownik* logged_user = nullptr;
     Pacjeci pacient_list;
