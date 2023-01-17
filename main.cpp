@@ -14,6 +14,7 @@ int main()
 //      //test.dodaj_pacjeta("123432","Elo");
 //      auto x = test.find_pacjet("123432");
 //      std::cout<<x->get_tekst();
+    //test.add_tekst("11111111111","\nEllo");
     Okno menu;
     while(menu.get_window_is_open()) {
 
