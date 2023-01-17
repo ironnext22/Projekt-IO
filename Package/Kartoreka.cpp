@@ -80,3 +80,33 @@ Historia *Kartoteka::find_pacjet(std::string pesel)
     x=&kartoteka[count];
     return x;
 }
+
+void Kartoteka::add_tekst(std::string pesel, std::string tekst)
+{
+    auto x = find_pacjet(pesel);
+    x->dodaj_wizyte(tekst);
+    XLDocument doc;
+    doc.open("wizyty.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for (auto b: a.cells())
+        {
+
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if (v[0] == pesel)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+        v[1]=x->get_tekst();
+        wks.row(count).values()=v;
+        doc.save();
+        doc.close();
+    }
+
+}
