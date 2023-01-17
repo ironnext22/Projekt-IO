@@ -1614,16 +1614,7 @@ void Okno::render() {
 }
 
 
-/// to fix
-std::string Okno::set_table_line_for_admin_site(std::string login,std::string name , std::string surname ,std::string mail,std::string fun){
 
-    std::stringstream a_stream;
-    a_stream << std::setiosflags ( std::ios_base::internal)
-    << std::setw ( 30 ) <<login <<"\t"  << std::setw ( 30 )<<name<<"\t"  << std::setw ( 30 )<<surname<<"\t"  << std::setw ( 30 )<<mail<<"\t"  << std::setw ( 30 )<<fun;
-    std::string the_string = a_stream.str();
-    return the_string;
-
-}
 
 void Okno::update() { // checks for changes
     this->poll_events();

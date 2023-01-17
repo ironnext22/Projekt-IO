@@ -150,7 +150,6 @@ public:
 
 
     /// bonus functions
-    std::string set_table_line_for_admin_site(std::string login,std::string name , std::string surname ,std::string mail,std::string fun);
 
 
 };
