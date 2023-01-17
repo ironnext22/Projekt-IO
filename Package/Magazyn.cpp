@@ -11,7 +11,7 @@ Magazyn::Magazyn()
         {
             pomocniczy.push_back(static_cast<std::string>((cell.value())));
         }
-        Inwentarz* pom = new Inwentarz;
+        auto pom = new Inwentarz;
         pom->set_nazwa(pomocniczy[0]);
         pom->set_id(pomocniczy[1]);
         bool p= true;
@@ -19,7 +19,7 @@ Magazyn::Magazyn()
         {
             if(!(a>47 and a<58))p=false;
         }
-        if(p==true)pom->set_ilosc(pomocniczy[2]);
+        if(p)pom->set_ilosc(pomocniczy[2]);
         else pom->set_ilosc("0");
         magazyn.push_back(*pom);
         pomocniczy.clear();
@@ -88,4 +88,56 @@ bool Magazyn::ID_Exist(std::string ID)
         if(a.get_ID()==ID)pom=true;
     }
     return pom;
+}
+
+void Magazyn::set_nazwa(std::string nazwa,std::string ID)
+{
+    XLDocument doc;
+    doc.open("magazyn.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[1]==ID)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[0]=nazwa;
+    wks.row(count).values() = v;
+    doc.save();
+    doc.close();
+}
+
+void Magazyn::set_ilosc(std::string ilosc, std::string ID)
+{
+    XLDocument doc;
+    doc.open("magazyn.xlsx");
+    auto wks = doc.workbook().worksheet("Sheet1");
+    std::vector<std::string> v;
+    int count=1;
+    for(auto a : wks.rows())
+    {
+        for(auto b: a.cells())
+        {
+            v.push_back(static_cast<std::string>(b.value()));
+        }
+        if(v[1]==ID)
+        {
+            break;
+        }
+        count++;
+        v.clear();
+    }
+    v[2]=ilosc;
+    wks.row(count).values() = v;
+    doc.save();
+    doc.close();
 }
