@@ -341,9 +341,9 @@ void Okno::render() {
                     text2.Textline_set(1020, 80, "Reminder emails sent!", 50, &font1);
 
                     for(auto a: kalendarz.get_wizyty()){
-                    //    if(timer.Yesterday() == a.get_data()){
-                         //   mailbox.send_mail_with_reminder(a.get_data(),a.get_pacjent().get_mail());
-                      //  }
+                        if(timer.Tomorrowday()== a.get_data()){
+                            mailbox.send_mail_with_reminder(a.get_data(),a.get_pacjent().get_mail());
+                        }
                     }
 
                 }
