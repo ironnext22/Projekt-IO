@@ -1,10 +1,14 @@
 #include "gtest/gtest.h"
-
-TEST(Test2,X)
-{
-    EXPECT_EQ(1,1);
+#include "../includes/Functions.h"
+TEST(GetDayOfYear, NormalInput) {
+    int dayOfYear = 32;
+    int year = 2020;
+    Date2 expected = {1,2,2020};
+    EXPECT_EQ(expected, get_day_of_year(dayOfYear, year));
 }
-TEST(Test2,D)
-{
-    EXPECT_EQ(1,2);
+TEST(GetDayOfYear, LeapYearInput) {
+    int dayOfYear = 60;
+    int year = 2020;
+    Date2 expected = {29,2,2020};
+    EXPECT_EQ(expected, get_day_of_year(dayOfYear, year));
 }
