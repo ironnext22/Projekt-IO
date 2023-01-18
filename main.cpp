@@ -1,8 +1,6 @@
 
 #include "includes/Okno.h"
-#include "includes/Kartoteka.h"
 using namespace sf;
-Kartoteka test;
 int main()
 {
     Okno menu;
