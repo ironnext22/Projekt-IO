@@ -14,3 +14,5 @@ target_link_libraries(Projekt-IO sfml-system sfml-window sfml-graphics sfml-audi
 
 add_subdirectory(OpenXLSX)
 target_link_libraries(Projekt-IO OpenXLSX::OpenXLSX)
+
+add_subdirectory(google_test)

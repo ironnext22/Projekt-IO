@@ -33,3 +33,4 @@
 
 CMakeLists.txt
 /SFML-2.5.1/
+/google_test/googletest-main/
