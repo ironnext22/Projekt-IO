@@ -106,6 +106,11 @@ public:
     void render();
 
 
+    void clear_buttons();
+
+    void clear_textlines();
+
+    void clear_input_bars();
 };
 
 #endif

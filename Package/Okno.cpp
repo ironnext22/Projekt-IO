@@ -1647,34 +1647,11 @@ sf::Vector2f Okno::get_mous_pos()
 void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites and clears all drawable variables
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
-    b1.button_set(0,0,0,0,&font1,"");
-    b2.button_set(0,0,0,0,&font1,"");
-    b3.button_set(0,0,0,0,&font1,"");
-    b4.button_set(0,0,0,0,&font1,"");
-    b5.button_set(0,0,0,0,&font1,"");
-    b6.button_set(0,0,0,0,&font1,"");
-    b7.button_set(0,0,0,0,&font1,"");
-    b8.button_set(0,0,0,0,&font1,"");
-    b9.button_set(0,0,0,0,&font1,"");
+    clear_buttons();
+    clear_textlines();
+    clear_input_bars();
 
-    text1.Textline_set(0,0,"",0,&font1);
-    text2.Textline_set(0,0,"",0,&font1);
-    text3.Textline_set(0,0,"",0,&font1);
-    text4.Textline_set(0,0,"",0,&font1);
-    text5.Textline_set(0,0,"",0,&font1);
 
-    input_bar1.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
-    input_bar2.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
-    input_bar3.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
-    input_bar4.set_Input_bar(0,0,0,sf::Color::White,false,&font1);
-
-    input_bar1.clear();
-    input_bar2.clear();
-    input_bar3.clear();
-    input_bar4.clear();
-    input_bar5.clear();
-    input_bar6.clear();
-    input_bar7.clear();
 
     /// also changes some staff to be reseted
     verification_code = "000000";
@@ -1683,11 +1660,48 @@ void Okno::clear_site_and_wait(){ /// Makes breaks between jumping through sites
     created_ac = false;
     std::string selected_string = "";
     is_currently_changing_password = false;
+
+}
+
+void Okno::clear_input_bars() {
+    input_bar1.set_Input_bar(0, 0, 0, Color::White, false, &font1);
+    input_bar2.set_Input_bar(0, 0, 0, Color::White, false, &font1);
+    input_bar3.set_Input_bar(0, 0, 0, Color::White, false, &font1);
+    input_bar4.set_Input_bar(0, 0, 0, Color::White, false, &font1);
+    input_bar1.clear();
+    input_bar2.clear();
+    input_bar3.clear();
+    input_bar4.clear();
+    input_bar5.clear();
+    input_bar6.clear();
+    input_bar7.clear();
+}
+
+void Okno::clear_textlines() {
+    text1.Textline_set(0, 0, "", 0, &font1);
+    text2.Textline_set(0, 0, "", 0, &font1);
+    text3.Textline_set(0, 0, "", 0, &font1);
+    text4.Textline_set(0, 0, "", 0, &font1);
+    text5.Textline_set(0, 0, "", 0, &font1);
+}
+
+void Okno::clear_buttons() {
+    b1.button_set(0, 0, 0, 0, &font1, "");
+    b2.button_set(0, 0, 0, 0, &font1, "");
+    b3.button_set(0, 0, 0, 0, &font1, "");
+    b4.button_set(0, 0, 0, 0, &font1, "");
+    b5.button_set(0, 0, 0, 0, &font1, "");
+    b6.button_set(0, 0, 0, 0, &font1, "");
+    b7.button_set(0, 0, 0, 0, &font1, "");
+    b8.button_set(0, 0, 0, 0, &font1, "");
+    b9.button_set(0, 0, 0, 0, &font1, "");
 }
 
 void Okno::generate_code() { /// generates verification code
     verification_code = std::to_string( 1000+rand()%9000);
 }
+
+
 
 void Okno::make_input_bar_active(int which_one){
     switch (which_one){
