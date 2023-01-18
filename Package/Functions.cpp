@@ -209,49 +209,28 @@ std::string get_nice_looking_DDMMYYYY_format(std::string input_from_the_input_ba
     else return "";
 }
 
-std::string get_nice_looking_HHMM_format(std::string input_from_the_input_bar){
+std::string get_nice_looking_HHMM_format(std::string input_from_the_input_bar) {
 
-    std::string newstr ="",str2;
-    if(input_from_the_input_bar == ""){return "HH.MM";}
+    if (input_from_the_input_bar == "") { return "HH.MM"; }
+    std::string newstr = "", str2;
+    int j = 0;
 
-    else if(input_from_the_input_bar.length() == 1){
-        str2 = input_from_the_input_bar[0];
+    for (int i = 0; i < input_from_the_input_bar.length(); i++) {
+        if (i == 2) {
+            newstr.append(".");
+        }
+        str2 = input_from_the_input_bar[i];
         newstr.append(str2);
-        newstr.append("H.MM");
-        return newstr;
+        j++;
     }
-    else if (input_from_the_input_bar.length() == 2){
-        str2 = input_from_the_input_bar[0];
-        newstr.append(str2);
-        str2 = input_from_the_input_bar[1];
-        newstr.append(str2);
-        newstr.append(".MM");
-        return newstr;
-    }
-
-    else if (input_from_the_input_bar.length() == 3){
-        str2 = input_from_the_input_bar[0];
-        newstr.append(str2);
-        str2 = input_from_the_input_bar[1];
-        newstr.append(str2);
-        newstr.append(".");
-        str2 = input_from_the_input_bar[2];
-        newstr.append(str2);
-        newstr.append("M");
-        return newstr;
-    }
-    else if (input_from_the_input_bar.length() == 4){
-        str2 = input_from_the_input_bar[0];
-        newstr.append(str2);
-        str2 = input_from_the_input_bar[1];
-        newstr.append(str2);
-        newstr.append(".");
-        str2 = input_from_the_input_bar[2];
-        newstr.append(str2);
-        str2 = input_from_the_input_bar[3];
-        newstr.append(str2);
-        return newstr;
-    }
+    if (j == 1) { newstr.append("H.MM"); }
+    else if (j == 2) { newstr.append(".MM"); }
+    else if (j == 3) { newstr.append("M"); }
+    return newstr;
 
 }
+
+
+
+
 
