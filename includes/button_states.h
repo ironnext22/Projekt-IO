@@ -1,0 +1,8 @@
+//
+// Created by Mateusz on 18.01.2023.
+//
+
+#ifndef PROJEKT_IO_BUTTON_STATES_H
+#define PROJEKT_IO_BUTTON_STATES_H
+enum button_states{BUTTON_IDLE = 0, BUTTON_HOVER, BUTTON_ACTIVE};
+#endif //PROJEKT_IO_BUTTON_STATES_H

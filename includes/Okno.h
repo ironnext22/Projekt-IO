@@ -57,17 +57,16 @@ private:
     sf::Font font1;
     /// window objects test
     Textline text1,text2,text3,text4,text5;
-    sf::RectangleShape test;
+   // sf::RectangleShape test;
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
     sf::Texture background_photo,logo;
     sf::Image icon;
     sf::Sprite sprite,sprite2;
     Input_bar input_bar1,input_bar2,input_bar3,input_bar4,input_bar5,input_bar6,input_bar7;
     sites site;
-    std::string login,password,password_confirm;
-    std::string verification_code = "000000";
-    std::string textpat = "";
-    bool added = false;
+    std::string password,password_confirm;
+
+
 
     Pracownik* logged_user = nullptr;
     Pacjeci pacient_list;
@@ -76,33 +75,31 @@ private:
     Assistant *assistant = nullptr;
     Dentist *dentist = nullptr;
     Kalendarz kalendarz;
-    Tranzakcja tranzakcja;
     Finanse finanse;
     Magazyn mag;
     Kartoteka kartoteka2;
+    Time_app timer;
 
     /// auxiliary variables // zmienne pomocnicze
     bool email_sent = false;
     bool created_ac = false;
     bool is_currently_changing_password = false;
-    Time_app timer;
     int selected = 0;
     std::string selected_string = "";
     int current_day = 2;
     int year = 2023;
     bool is_logged = false;
     std::string ID = "XXXXXX";
+    bool added = false;
+    std::string verification_code = "000000";
+    std::string textpat = "";
 
 
 public:
 
-    /// Contructor / destructor
     Okno();
     virtual ~Okno();
-    /// accessors
     const bool get_window_is_open() const;
-
-    ///functions
     void update_mouse_position();
     void poll_events();
     void update();

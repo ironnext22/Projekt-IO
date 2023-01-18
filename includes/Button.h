@@ -9,12 +9,13 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
+#include "button_states.h"
 
 #include <iostream>
 #ifndef PROJEKT_IO_BUTTONS_H
 #define PROJEKT_IO_BUTTONS_H
 
-enum button_states{BUTTON_IDLE = 0, BUTTON_HOVER, BUTTON_ACTIVE};
+
 class Button {
 
 private:
@@ -23,9 +24,6 @@ private:
     sf::RectangleShape shape;
     sf::Font* font;
     sf::Text text;
-
-
-
     sf::Texture button_photo;
 public:
     /// contr / destr
@@ -34,9 +32,6 @@ public:
     /// Accessors
     void special_button_set(float x, float y, float height, float width, sf::Font* font,std::string text);
     const bool is_pressed() const;
-
-
-
 
     /// functions
     void update(const sf::Vector2f mousePos);
