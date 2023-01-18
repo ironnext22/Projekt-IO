@@ -15,7 +15,7 @@ private:
 std::vector<Pracownik> pracownicy;
 public:
     Pracownicy();
-    ~Pracownicy();
+    ~Pracownicy(){};
     void dodaj_pracownika(std::string imie,std::string nazwisko,std::string login, std::string haslo,std::string funkcja,std::string mail);
     std::vector<Pracownik> get_worker();
     void reload();

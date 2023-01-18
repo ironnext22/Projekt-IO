@@ -12,7 +12,7 @@ void Admin::set_function(std::string login,std::string funkcja)
         {
             v.push_back(static_cast<std::string>(b.value()));
         }
-        if(v[2]==login and v[3]==haslo)
+        if(v[2]==login)
         {
             break;
         }
