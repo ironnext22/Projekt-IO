@@ -110,3 +110,8 @@ void Button::update(const sf::Vector2f mousePos){
     }
 
 }
+
+void Button::Clear_all_buttons(){
+    
+
+}

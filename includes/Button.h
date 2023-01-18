@@ -36,7 +36,7 @@ public:
     /// functions
     void update(const sf::Vector2f mousePos);
     void render(sf::RenderTarget* target);
-
+    void Clear_all_buttons();
 
 
 };
