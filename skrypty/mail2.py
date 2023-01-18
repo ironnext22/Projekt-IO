@@ -4,7 +4,7 @@ username = 'gabinetdentystycznyiodent@gmail.com'
 password = 'ppbrnlloepwfgjau'
 def mail1(mail = "X",data=""):
     client = gmail.GMail('Klinika Dentystyczna<'+username+'>',password)
-    msg = gmail.Message('Wizyta',to='pacjent<'+mail+'>',text='Przypominamy o wizycie w dniu: '+data)
+    msg = gmail.Message('Wizyta',to='pacjent<'+mail+'>',text='Dzień dobry,\nPrzypominamy o wizycie w dniu: '+data+'\nProszę o informacię zwrotną z potwierdzeniem wizyty\n\nProzrawiamy,\nZespół IO-Dent')
     client.send(msg)
 
 # Adres e-mail odbiorcy
