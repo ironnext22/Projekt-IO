@@ -12,6 +12,9 @@ struct Date2 {
     int day;
     int month;
     int year;
+    bool operator== (const Date2 &other) const {
+        return day == other.day && month == other.month && year == other.year;
+    }
 };
 
 Date2 get_day_of_year(int dayOfYear, int year);
