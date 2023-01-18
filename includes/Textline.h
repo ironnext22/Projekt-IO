@@ -16,7 +16,6 @@ class Textline {
 private:
     int x,y;
     std::string text;
-    int Charakter_size;
     sf::Font *font;
     sf::Text text_to_be_displayed;
 

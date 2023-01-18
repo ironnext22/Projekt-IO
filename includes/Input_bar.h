@@ -30,7 +30,6 @@ public:
     void render(sf::RenderTarget* target);
     void typed_on(sf::Event input);
     bool get_is_selected();
-    void typed_on_key();
 private:
     sf::Text sf_text_inputed;
     std::ostringstream text;
