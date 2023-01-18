@@ -3,8 +3,8 @@
 #include <string>
 #include <OpenXLSX.hpp>
 #include "Osoba.h"
+#include "Funkcje.h"
 using namespace OpenXLSX;
-enum class Funkcje {Asystentka=0,Dentysta=1,Administrator=2,No_function=3};
 class Pracownik:public Osoba
 {
 protected:

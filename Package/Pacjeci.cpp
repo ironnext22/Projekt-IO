@@ -25,9 +25,9 @@ Pacjeci::Pacjeci()
 
 std::vector<Pacjent> Pacjeci::get_pacjeci() {return pacjęci;}
 
-void Pacjeci::dodaj_pacjęt(std::string imie, std::string nazwisko, std::string pesel, std::string email)
+void Pacjeci::dodaj_pacjent(std::string imie, std::string nazwisko, std::string pesel, std::string email)
 {
-    if(pacjet_exist(pesel))return;
+    if(pacjent_exist(pesel))return;
     XLDocument doc;
     doc.open("pacjeci.xlsx");
     auto wks = doc.workbook().worksheet("Sheet1");
@@ -43,7 +43,7 @@ void Pacjeci::dodaj_pacjęt(std::string imie, std::string nazwisko, std::string 
     doc.close();
 }
 
-bool Pacjeci::pacjet_exist(std::string pesel)
+bool Pacjeci::pacjent_exist(std::string pesel)
 {
     bool pom= false;
     XLDocument doc;

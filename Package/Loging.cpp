@@ -38,10 +38,10 @@ bool Loging::log_in(std::string login,std::string password)
 {
     return check_if_password_is_correct(login,password);
 }
-std::string Loging::register_new_user(std::string mail,std::string login, std::string haslo)
+std::string Loging::register_new_user(std::string mail,std::string login, std::string password)
 {
     if(check_if_email_is_in_data_base(mail))return "Mail already exist";
     if(check_if_login_exists(login))return "Login already exist";
-    login_list.dodaj_pracownika("unknown","unknown",login,haslo,"brak",mail);
+    login_list.dodaj_pracownika("unknown","unknown",login,password,"brak",mail);
 return "Poprawne";
 }

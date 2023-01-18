@@ -20,7 +20,7 @@ public:
 
     bool log_in(std::string login,std::string password);
 
-    std::string register_new_user(std::string mail,std::string login, std::string haslo);
+    std::string register_new_user(std::string mail,std::string login, std::string password);
 };
 
 

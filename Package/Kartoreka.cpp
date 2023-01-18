@@ -21,7 +21,7 @@ Kartoteka::Kartoteka()
 }
 void Kartoteka::dodaj_pacjeta(std::string pesel, std::string historia)
 {
-    if(!pacjet_exist(pesel))
+    if(!pacjent_exist(pesel))
     {
         XLDocument doc;
         doc.open("historia.xlsx");
@@ -38,10 +38,10 @@ void Kartoteka::dodaj_pacjeta(std::string pesel, std::string historia)
     }
     else
     {
-        find_pacjet(pesel)->dodaj_wizyte(historia);
+        find_pacjent(pesel)->dodaj_wizyte(historia);
     }
 }
-bool Kartoteka::pacjet_exist(std::string pesel)
+bool Kartoteka::pacjent_exist(std::string pesel)
 {
     bool pom= false;
     XLDocument doc;
@@ -65,7 +65,7 @@ bool Kartoteka::pacjet_exist(std::string pesel)
     return pom;
 }
 
-Historia *Kartoteka::find_pacjet(std::string pesel)
+Historia *Kartoteka::find_pacjent(std::string pesel)
 {
     Historia* x = new Historia;
     int count=0;
@@ -83,7 +83,7 @@ Historia *Kartoteka::find_pacjet(std::string pesel)
 
 void Kartoteka::add_tekst(std::string pesel, std::string tekst)
 {
-    Historia* x = find_pacjet(pesel);
+    Historia* x = find_pacjent(pesel);
     x->dodaj_wizyte(tekst);
     XLDocument doc;
     doc.open("historia.xlsx");

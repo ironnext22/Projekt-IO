@@ -11,8 +11,8 @@ public:
     Kartoteka();
     void dodaj_pacjeta(std::string pesel, std::string historia);
     Historia get_historia(std::string pesel);
-    bool pacjet_exist(std::string pesel);
-    Historia* find_pacjet(std::string pesel);
+    bool pacjent_exist(std::string pesel);
+    Historia* find_pacjent(std::string pesel);
     std::vector<Historia> get_kartoteka(){return kartoteka;}
     void add_tekst(std::string pesel, std::string tekst);
 };

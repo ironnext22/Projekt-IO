@@ -1205,9 +1205,9 @@ void Okno::render() {
                                                           get_nice_looking_HHMM_format(input_bar6.get_text()),
                                                           input_bar3.get_text());
 
-                    pacient_list.dodaj_pacjęt(input_bar1.get_text(), input_bar2.get_text(), input_bar4.get_text(),
-                                              input_bar3.get_text());
-                    if(!kartoteka2.pacjet_exist(input_bar4.get_text())){
+                    pacient_list.dodaj_pacjent(input_bar1.get_text(), input_bar2.get_text(), input_bar4.get_text(),
+                                               input_bar3.get_text());
+                    if(!kartoteka2.pacjent_exist(input_bar4.get_text())){
 
                         kartoteka2.dodaj_pacjeta(input_bar4.get_text(),"Data dodania pacjenta do systemu:" +get_nice_looking_DDMMYYYY_format(input_bar5.get_text()) + "\n");
 
@@ -1223,13 +1223,13 @@ void Okno::render() {
                                                             get_nice_looking_HHMM_format(input_bar6.get_text()),
                                                             input_bar3.get_text());
 
-                    if(!kartoteka2.pacjet_exist(input_bar4.get_text())){
+                    if(!kartoteka2.pacjent_exist(input_bar4.get_text())){
 
                         kartoteka2.dodaj_pacjeta(input_bar4.get_text(),"Data dodania pacjenta do systemu:" +get_nice_looking_DDMMYYYY_format(input_bar5.get_text()) + "\n");
 
                     }
-                    pacient_list.dodaj_pacjęt(input_bar1.get_text(), input_bar2.get_text(),
-                                              input_bar4.get_text(), input_bar3.get_text());
+                    pacient_list.dodaj_pacjent(input_bar1.get_text(), input_bar2.get_text(),
+                                               input_bar4.get_text(), input_bar3.get_text());
                     assistant->get_finanse().dodaj_tranzakcje(get_nice_looking_DDMMYYYY_format(input_bar5.get_text()),input_bar7.get_text());
 
                 }
@@ -1570,9 +1570,9 @@ void Okno::render() {
             b3.button_set(600, 100, 100, 750, &font1, "Search");
             b3.update(get_mous_pos());
             if (b3.is_pressed()) {
-                if(kartoteka2.pacjet_exist(input_bar1.get_text())) {
+                if(kartoteka2.pacjent_exist(input_bar1.get_text())) {
 
-                    textpat = kartoteka2.find_pacjet(input_bar1.get_text())->get_tekst();
+                    textpat = kartoteka2.find_pacjent(input_bar1.get_text())->get_tekst();
                     text2.Textline_set(100,30,"" , 50, &font1);
                 }
                 else{

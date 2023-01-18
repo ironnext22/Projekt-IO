@@ -4,17 +4,9 @@
 #include "vector"
 #include <iostream>
 #include <OpenXLSX.hpp>
+#include "user_data_type.h"
 using namespace OpenXLSX;
 
-enum class user_data_type{
-    name = 1,
-    surname = 2,
-    mail = 3,
-    password = 4,
-    position = 5,
-    login =6
-
-};
 
 
 class Pracownicy

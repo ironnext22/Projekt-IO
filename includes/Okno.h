@@ -27,38 +27,13 @@
 #include "Finanse.h"
 #include "Magazyn.h"
 #include "Kartoteka.h"
+#include "Sites.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <fstream>
 #define PROJEKT_IO_MENU_H
-enum class sites{
-    start_site = 0,
-    login_screen_site = 1,
-    credits_site = 2,
-    register_site = 3,
-    logged_in_site = 4,
-    calendar_site =5,
-    magazine_site=6,
-    password_reset_site =7,
-    finance_site=8,
-    account_management_site =9,
-    admin_start_site = 11,
-    admin_site_employee_managent_site = 12,
-    magazin_site_add = 13,
-    calendar_visit_edit_site =14,
-    calendar_add_visit_site = 15,
-    admin_edit_visit_site = 16,
-    patient_history_site = 17,
 
-
-
-
-
-
-
-
-};
 
 using namespace sf;
 class Okno {
@@ -110,7 +85,6 @@ private:
     bool email_sent = false;
     bool created_ac = false;
     bool is_currently_changing_password = false;
-    bool is_currently_choosing_data = false;
     Time_app timer;
     int selected = 0;
     std::string selected_string = "";

@@ -6,6 +6,7 @@
 #include "Magazyn.h"
 class Assistant:public Pracownik
 {
+protected:
 Kalendarz kalendarz;
 Finanse finanse;
 public:
