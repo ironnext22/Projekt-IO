@@ -55,9 +55,9 @@ private:
     VideoMode video_mode;
     sf::Vector2i MousePosWindow;
     sf::Font font1;
-    /// window objects test
+
     Textline text1,text2,text3,text4,text5;
-   // sf::RectangleShape test;
+
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
     sf::Texture background_photo,logo;
     sf::Image icon;
